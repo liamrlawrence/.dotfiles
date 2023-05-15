@@ -1,11 +1,12 @@
 #!/bin/bash
 
 
-directories=(
-    "$HOME/.config/nvim"
-    "$HOME/.config/tmux"
-)
-
+directories=()
+while read -r line; do
+    if [ ! -z "$line" ]; then
+        directories+=("$(eval echo "$line")")
+    fi
+done < "directories.txt"
 
 
 for dir in "${directories[@]}"; do
