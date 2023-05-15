@@ -9,6 +9,6 @@ directories=(
 
 
 for dir in "${directories[@]}"; do
-    rsync -av --delete ./"$(basename $dir)" "$dir"/ 
+    rsync -av --delete ./"$(basename $dir)" "$(dirname $dir)"
 done
 
