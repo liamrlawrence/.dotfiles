@@ -17,6 +17,9 @@ return require('packer').startup(function(use)
     -- Syntax coloring
     use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 
+    -- TODO Highlighting
+    use('folke/todo-comments.nvim')
+
     -- Undo tree
     use('mbbill/undotree')
 
@@ -53,7 +56,7 @@ return require('packer').startup(function(use)
         branch = "v2.x",
         requires = { 
             "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "nvim-tree/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
         }
     }
@@ -62,6 +65,7 @@ return require('packer').startup(function(use)
     use('theprimeagen/harpoon')
 
     -- Themes
+    use({'catppuccin/nvim', as = 'catppuccin'})
     use({'rose-pine/neovim', as = 'rose-pine'})
     use('folke/tokyonight.nvim')
     use('EdenEast/nightfox.nvim')
