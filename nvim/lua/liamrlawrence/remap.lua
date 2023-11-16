@@ -39,4 +39,5 @@ vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>zz")
 
 -- Text replace
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>S", [[:.s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
