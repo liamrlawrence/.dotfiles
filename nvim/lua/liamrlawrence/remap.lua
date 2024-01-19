@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 
+
 -- Explorer
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
@@ -12,6 +13,9 @@ vim.keymap.set("n", "J", "mzJ`z")
 
 -- Disable Q
 vim.keymap.set("n", "Q", "<nop>")
+
+-- No Highlights binding
+vim.keymap.set("n", "<leader>/", vim.cmd.noh)
 
 -- Jumps put the cursor to the middle of the screen
 --   Half-page jumps
