@@ -15,7 +15,7 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "Q", "<nop>")
 
 -- No Highlights binding
-vim.keymap.set("n", "<leader>/", vim.cmd.noh)
+vim.keymap.set("n", "<leader>/h", vim.cmd.noh)
 
 -- Jumps put the cursor to the middle of the screen
 --   Half-page jumps
