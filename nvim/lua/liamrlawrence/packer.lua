@@ -10,8 +10,9 @@ return require("packer").startup(function(use)
         "nvim-telescope/telescope.nvim", tag = "0.1.4"
     }
 
-    -- Git wrapper
+    -- Git
     use("tpope/vim-fugitive")
+    use("airblade/vim-gitgutter")
 
     -- Syntax coloring
     use("nvim-treesitter/nvim-treesitter", {run = ":TSUpdate"})
