@@ -1,5 +1,3 @@
--- This file can be loaded by calling `lua require("plugins")` from your init.vim
-
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
@@ -12,17 +10,11 @@ return require("packer").startup(function(use)
         "nvim-telescope/telescope.nvim", tag = "0.1.4"
     }
 
-    -- Syntax coloring
-    use("nvim-treesitter/nvim-treesitter", {run = ":TSUpdate"})
-
-    -- 'TODO' Highlighting
-    use("folke/todo-comments.nvim")
-
-    -- Undo tree
-    use("mbbill/undotree")
-
     -- Git wrapper
     use("tpope/vim-fugitive")
+
+    -- Syntax coloring
+    use("nvim-treesitter/nvim-treesitter", {run = ":TSUpdate"})
 
     -- LSP
     use {
@@ -60,6 +52,9 @@ return require("packer").startup(function(use)
         }
     }
 
+    -- Undo tree
+    use("mbbill/undotree")
+
     -- Harpoon
     use("theprimeagen/harpoon")
 
@@ -69,6 +64,5 @@ return require("packer").startup(function(use)
     use("folke/tokyonight.nvim")
     use("EdenEast/nightfox.nvim")
     use("rebelot/kanagawa.nvim")
-
 end)
 

@@ -1,3 +1,4 @@
+-- The holiest of leader keys
 vim.g.mapleader = " "
 
 
