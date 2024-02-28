@@ -7,7 +7,7 @@ local Themes = {
         default = "kanagawa-wave",
         light   = "kanagawa-lotus",
         dark    = "kanagawa-dragon",
-        darkest = "kanagawa-wave"
+        darkest = "kanagawa-wave",
     },
     {
         default = "rose-pine-moon",
@@ -25,14 +25,16 @@ function SetHighlights()
     vim.api.nvim_set_hl(0, 'CyanHighlight',         {ctermfg='Cyan',        bold=true, fg='#00ffff', bg='#002222'})
     vim.api.nvim_set_hl(0, 'BlueHighlight',         {ctermfg='LightBlue',   bold=true, fg='#0096ff', bg='#002222'})
     vim.api.nvim_set_hl(0, 'DarkOrangeHighlight',   {ctermfg='LightRed',    bold=true, fg='#cc5000', bg='#221111'})
+    vim.api.nvim_set_hl(0, 'RedHighlight',          {ctermfg='LightRed',    bold=true, fg='#dc1423', bg='#221111'})
 
     -- Highlight keywords
     vim.fn.matchadd('GoldHighlight',        'TODO:')
-    vim.fn.matchadd('CyanHighlight',        'BUG:')
+    vim.fn.matchadd('DarkOrangeHighlight',  'WARNING:')
+    vim.fn.matchadd('RedHighlight',         'ERROR:')
+    vim.fn.matchadd('RedHighlight',         'BUG:')
     vim.fn.matchadd('CyanHighlight',        'BUGFIX:')
     vim.fn.matchadd('BlueHighlight',        'NOTE:')
     vim.fn.matchadd('BlueHighlight',        'DOC:')
-    vim.fn.matchadd('DarkOrangeHighlight',  'WARN:')
 
     -- Highlight current parmeter when looking at a Signature
     local marked = vim.api.nvim_get_hl(0, { name = 'PMenu' })
@@ -61,9 +63,9 @@ function SetTheme(theme, transparent)
         vim.api.nvim_set_hl(0, "GitGutterDelete",   { bg = "none", fg = "#ff2222" })
     end
 
-
     SetHighlights()
 end
+
 
 
 

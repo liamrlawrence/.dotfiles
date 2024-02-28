@@ -53,6 +53,7 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>lrr", function() vim.lsp.buf.references() end, opts)
   vim.keymap.set("n", "<leader>lrn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("n", "<leader>lws", function() vim.lsp.buf.workspace_symbol() end, opts)
+  vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
@@ -61,4 +62,5 @@ lsp.setup()
 vim.diagnostic.config({
     virtual_text = true
 })
+
 
