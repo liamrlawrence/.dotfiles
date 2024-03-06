@@ -5,10 +5,23 @@ return require("packer").startup(function(use)
     -- Packer can manage itself
     use "wbthomason/packer.nvim"
 
+    -- Surround
+    use {
+        "kylechui/nvim-surround",
+        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+        config = function()
+            require("nvim-surround").setup({})
+        end
+    } 
+
     -- Fuzzy searching
     use {
-        "nvim-telescope/telescope.nvim", tag = "0.1.4"
+        "nvim-telescope/telescope.nvim",
+        tag = "0.1.4"
     }
+
+    -- Harpoon
+    use("theprimeagen/harpoon")
 
     -- Git
     use("tpope/vim-fugitive")
@@ -55,9 +68,6 @@ return require("packer").startup(function(use)
 
     -- Undo tree
     use("mbbill/undotree")
-
-    -- Harpoon
-    use("theprimeagen/harpoon")
 
     -- Themes
     use({"catppuccin/nvim", as = "catppuccin"})
