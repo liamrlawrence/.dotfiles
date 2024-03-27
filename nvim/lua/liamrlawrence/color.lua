@@ -1,7 +1,10 @@
+-- Theme selection
+--------------------------------------------
 -- Default  | Standard theme
 -- Light    | Light theme
 -- Dark     | Dark theme
 -- Darkest  | Dark theme + dark background
+--------------------------------------------
 local Themes = {
     {
         default = "kanagawa-wave",
@@ -10,17 +13,39 @@ local Themes = {
         darkest = "kanagawa-wave",
     },
     {
+        default = "solarized",
+        light   = "solarized",
+        dark    = "solarized",
+        darkest = "solarized",
+    },
+    {
+        default = "catppuccin-frappe",
+        light   = "catppuccin-latte",
+        dark    = "catppuccin-mocha",
+        darkest = "catppuccin-mocha",
+    },
+    {
         default = "rose-pine-moon",
         light   = "rose-pine-dawn",
         dark    = "rose-pine-main",
         darkest = "rose-pine-main",
-    }
+    },
 }
 
+for index = 1, #Themes do
+    vim.keymap.set("n", "<leader>TT" .. index, string.format(':lua SetTheme("%s", "dark")<CR>', Themes[index]["default"]))
+    vim.keymap.set("n", "<leader>TL" .. index, string.format(':lua SetTheme("%s", "light")<CR>', Themes[index]["light"]))
+    vim.keymap.set("n", "<leader>TD" .. index, string.format(':lua SetTheme("%s", "dark")<CR>', Themes[index]["dark"]))
+    vim.keymap.set("n", "<leader>Td" .. index, string.format(':lua SetTheme("%s", "dark", true)<CR>', Themes[index]["darkest"]))
+end
 
+-- Special theme for code reviews with coworkers
+vim.keymap.set("n", "<leader>TTv", string.format(':lua SetTheme("vscode")<CR>'))
 
+-- Set custom highlighting rules
 function SetHighlights()
     -- Color groups
+    vim.api.nvim_set_hl(0, 'GreenHighlight',        {ctermfg='Green',       bold=true, fg='#00a36c', bg='#443000'})
     vim.api.nvim_set_hl(0, 'GoldHighlight',         {ctermfg='Yellow',      bold=true, fg='#ffbf00', bg='#443000'})
     vim.api.nvim_set_hl(0, 'CyanHighlight',         {ctermfg='Cyan',        bold=true, fg='#00ffff', bg='#002222'})
     vim.api.nvim_set_hl(0, 'BlueHighlight',         {ctermfg='LightBlue',   bold=true, fg='#0096ff', bg='#002222'})
@@ -28,6 +53,7 @@ function SetHighlights()
     vim.api.nvim_set_hl(0, 'RedHighlight',          {ctermfg='LightRed',    bold=true, fg='#dc1423', bg='#221111'})
 
     -- Highlight keywords
+    vim.fn.matchadd('GreenHighlight',       'DONE:')
     vim.fn.matchadd('GoldHighlight',        'TODO:')
     vim.fn.matchadd('DarkOrangeHighlight',  'WARNING:')
     vim.fn.matchadd('RedHighlight',         'ERROR:')
@@ -36,21 +62,26 @@ function SetHighlights()
     vim.fn.matchadd('BlueHighlight',        'NOTE:')
     vim.fn.matchadd('BlueHighlight',        'DOC:')
 
-    -- Highlight current parmeter when looking at a Signature
+    -- Highlight current parameter when looking at a Signature
     local marked = vim.api.nvim_get_hl(0, { name = 'PMenu' })
     vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', {
         fg = marked.fg,
         bg = marked.bg,
         ctermfg = marked.ctermfg,
         ctermbg = marked.ctermbg,
-        bold = true 
+        bold = true
     })
 end
 
-
-
-function SetTheme(theme, transparent)
-    vim.cmd.colorscheme(theme or Themes[1]["default"])
+-- Set a theme, and then apply highlight rules
+function SetTheme(theme, themeMode, transparent)
+    theme = theme or Themes[1]["default"]
+    themeMode = themeMode or "dark"
+    if themeMode ~= "light" and themeMode ~= "dark" then
+        error("Invalid theme mode. Expected 'light' or 'dark'.")
+    end
+    vim.o.background = themeMode
+    vim.cmd.colorscheme(theme)
 
     -- Apply highlights after setting the theme
     if transparent == true then
@@ -62,25 +93,8 @@ function SetTheme(theme, transparent)
         vim.api.nvim_set_hl(0, "GitGutterChange",   { bg = "none", fg = "#bbbb00" })
         vim.api.nvim_set_hl(0, "GitGutterDelete",   { bg = "none", fg = "#ff2222" })
     end
-
     SetHighlights()
 end
-
-
-
-
-vim.keymap.set("n", "<leader>TT1", string.format(':lua SetTheme("%s")<CR>', Themes[1]["default"]))
-vim.keymap.set("n", "<leader>TL1", string.format(':lua SetTheme("%s")<CR>', Themes[1]["light"]))
-vim.keymap.set("n", "<leader>TD1", string.format(':lua SetTheme("%s")<CR>', Themes[1]["dark"]))
-vim.keymap.set("n", "<leader>Td1", string.format(':lua SetTheme("%s", true)<CR>', Themes[1]["darkest"]))
-
-vim.keymap.set("n", "<leader>TT2", string.format(':lua SetTheme("%s")<CR>', Themes[2]["default"]))
-vim.keymap.set("n", "<leader>TL2", string.format(':lua SetTheme("%s")<CR>', Themes[2]["light"]))
-vim.keymap.set("n", "<leader>TD2", string.format(':lua SetTheme("%s")<CR>', Themes[2]["dark"]))
-vim.keymap.set("n", "<leader>Td2", string.format(':lua SetTheme("%s", true)<CR>', Themes[2]["darkest"]))
-
-
-
 
 -- Apply the default theme
 SetTheme()

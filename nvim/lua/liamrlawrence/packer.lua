@@ -70,10 +70,12 @@ return require("packer").startup(function(use)
     use("mbbill/undotree")
 
     -- Themes
+    use("Mofiqul/vscode.nvim")
     use({"catppuccin/nvim", as = "catppuccin"})
     use({"rose-pine/neovim", as = "rose-pine"})
     use("folke/tokyonight.nvim")
     use("EdenEast/nightfox.nvim")
     use("rebelot/kanagawa.nvim")
+    use("shaunsingh/solarized.nvim")
 end)
 

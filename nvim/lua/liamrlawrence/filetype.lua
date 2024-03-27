@@ -1,6 +1,6 @@
 vim.filetype.add({
     extension = {
-        templ = "templ",
+        templ = "templ",    -- Golang templ files
     },
     filename = {
         [".dockerignore"] = "gitignore",
