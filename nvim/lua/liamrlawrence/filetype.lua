@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
--- Use tabs for Go files
+-- Use hard-tabs for Go files
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "go",
     callback = function()

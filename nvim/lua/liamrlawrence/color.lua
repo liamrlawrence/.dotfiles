@@ -13,13 +13,7 @@ local Themes = {
         darkest = "kanagawa-wave",
     },
     {
-        default = "solarized",
-        light   = "solarized",
-        dark    = "solarized",
-        darkest = "solarized",
-    },
-    {
-        default = "catppuccin-frappe",
+        default = "catppuccin-macchiato",
         light   = "catppuccin-latte",
         dark    = "catppuccin-mocha",
         darkest = "catppuccin-mocha",
@@ -29,6 +23,12 @@ local Themes = {
         light   = "rose-pine-dawn",
         dark    = "rose-pine-main",
         darkest = "rose-pine-main",
+    },
+    {
+        default = "solarized",
+        light   = "solarized",
+        dark    = "solarized",
+        darkest = "solarized",
     },
 }
 
