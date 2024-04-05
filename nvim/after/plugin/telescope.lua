@@ -9,8 +9,23 @@ require("telescope").setup{
 }
 
 local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>pf", builtin.find_files, {desc = "Find files"})
+
+
+
+-- Git file search
 vim.keymap.set("n", "<C-p>", builtin.git_files, {desc = "Git files"})
+
+-- File search
+vim.keymap.set("n", "<leader>pf", builtin.find_files, {desc = "Find files"})
+
+-- File search, including hidden files
+vim.keymap.set("n", "<leader>pF", function()
+    builtin.find_files({
+        hidden = true,
+        no_ignore = false,
+    })
+end, {desc = "Find files"})
+
 
 -- Case-sensitive grep
 vim.keymap.set("n", "<leader>ps", function()
