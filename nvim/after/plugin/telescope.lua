@@ -22,9 +22,9 @@ vim.keymap.set("n", "<leader>pf", builtin.find_files, {desc = "Find files"})
 vim.keymap.set("n", "<leader>pF", function()
     builtin.find_files({
         hidden = true,
-        no_ignore = false,
+        no_ignore = true,
     })
-end, {desc = "Find files"})
+end, {desc = "Find files (including hidden)"})
 
 
 -- Case-sensitive grep
