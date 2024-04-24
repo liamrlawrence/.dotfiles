@@ -1,6 +1,6 @@
-require("liamrlawrence.packer")
-require("liamrlawrence.remap")
 require("liamrlawrence.set")
-require("liamrlawrence.filetype")
-require("liamrlawrence.color")
+require("liamrlawrence.remap")
+require("liamrlawrence.lazy_init")
+require("liamrlawrence.files")
+require("liamrlawrence.colors")
 

@@ -13,6 +13,13 @@ vim.filetype.add({
 })
 
 
+-- Remove trailing whitespace from files
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    command = [[%s/\s\+$//e]],
+})
+
+
 -- Smaller tabs for HTML files
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "html",

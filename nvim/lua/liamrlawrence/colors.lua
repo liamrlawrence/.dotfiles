@@ -44,24 +44,6 @@ vim.keymap.set("n", "<leader>TTv", string.format(':lua SetTheme("vscode")<CR>'))
 
 -- Set custom highlighting rules
 function SetHighlights()
-    -- Color groups
-    vim.api.nvim_set_hl(0, 'GreenHighlight',        {ctermfg='Green',       bold=true, fg='#00a36c', bg='#443000'})
-    vim.api.nvim_set_hl(0, 'GoldHighlight',         {ctermfg='Yellow',      bold=true, fg='#ffbf00', bg='#443000'})
-    vim.api.nvim_set_hl(0, 'CyanHighlight',         {ctermfg='Cyan',        bold=true, fg='#00ffff', bg='#002222'})
-    vim.api.nvim_set_hl(0, 'BlueHighlight',         {ctermfg='LightBlue',   bold=true, fg='#0096ff', bg='#002222'})
-    vim.api.nvim_set_hl(0, 'DarkOrangeHighlight',   {ctermfg='LightRed',    bold=true, fg='#cc5000', bg='#221111'})
-    vim.api.nvim_set_hl(0, 'RedHighlight',          {ctermfg='LightRed',    bold=true, fg='#dc1423', bg='#221111'})
-
-    -- Highlight keywords
-    vim.fn.matchadd('GreenHighlight',       'DONE:')
-    vim.fn.matchadd('GoldHighlight',        'TODO:')
-    vim.fn.matchadd('DarkOrangeHighlight',  'WARNING:')
-    vim.fn.matchadd('RedHighlight',         'ERROR:')
-    vim.fn.matchadd('RedHighlight',         'BUG:')
-    vim.fn.matchadd('CyanHighlight',        'BUGFIX:')
-    vim.fn.matchadd('BlueHighlight',        'NOTE:')
-    vim.fn.matchadd('BlueHighlight',        'DOC:')
-
     -- Highlight current parameter when looking at a Signature
     local marked = vim.api.nvim_get_hl(0, { name = 'PMenu' })
     vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', {

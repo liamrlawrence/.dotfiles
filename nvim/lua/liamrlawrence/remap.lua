@@ -3,7 +3,7 @@ vim.g.mapleader = " "
 
 
 -- Explorer
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, {desc = "Explorer"})
 
 -- Moves lines in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -16,7 +16,7 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "Q", "<nop>")
 
 -- Clear highlights
-vim.keymap.set("n", "<leader>/h", vim.cmd.noh)
+vim.keymap.set("n", "<leader>/h", vim.cmd.noh, {desc = "Clear highlights"})
 
 -- Jumps put the cursor to the middle of the screen
 --   Half-page jumps

@@ -6,9 +6,7 @@
 
 ## Setup
 1. Neovim
-  - Install from GitHub
   - `alias vim='nvim'`
-  - Install Neovim Packer - `https://github.com/wbthomason/packer.nvim`
   - Install packages
 
 2. Tmux
