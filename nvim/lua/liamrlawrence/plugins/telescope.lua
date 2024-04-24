@@ -23,9 +23,9 @@ return {
 
 
         -- File search
-        vim.keymap.set("n", "<leader>pf", builtin.find_files, {desc = "Find files"})
+        vim.keymap.set("n", "<leader>/f", builtin.find_files, {desc = "Find files"})
 
-        vim.keymap.set("n", "<leader>pF", function()
+        vim.keymap.set("n", "<leader>/F", function()
             builtin.find_files({
                 hidden = true,
                 no_ignore = true,
@@ -34,19 +34,19 @@ return {
 
 
         -- Search for a specific word
-        vim.keymap.set("n", "<leader>pws", function()
+        vim.keymap.set("n", "<leader>/ws", function()
             local word = vim.fn.expand("<cword>")
             builtin.grep_string({ search = word })
         end, {desc = "Find word"})
 
-        vim.keymap.set("n", "<leader>pWs", function()
+        vim.keymap.set("n", "<leader>/Ws", function()
             local word = vim.fn.expand("<cWORD>")
             builtin.grep_string({ search = word })
         end, {desc = "Find capital Word"})
 
 
         -- Grep search
-        vim.keymap.set("n", "<leader>ps", function()
+        vim.keymap.set("n", "<leader>/s", function()
             vim.ui.input({prompt = "Grep > "}, function(input)
                 if not input or input == "" then
                     print("Grep canceled")
@@ -56,7 +56,7 @@ return {
             end)
         end, {desc = "Grep string"})
 
-        vim.keymap.set("n", "<leader>pS", function()
+        vim.keymap.set("n", "<leader>/S", function()
             vim.ui.input({prompt = "Grep (ignore case) > "}, function(input)
                 if not input or input == "" then
                     print("Grep canceled")
