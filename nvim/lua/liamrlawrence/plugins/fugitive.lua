@@ -1,10 +1,9 @@
 return {
     "tpope/vim-fugitive",
     config = function()
-        local fugitiveGroup = vim.api.nvim_create_augroup("liamrlawrence_Fugitive", {})
 
         vim.api.nvim_create_autocmd("BufWinEnter", {
-            group = fugitiveGroup,
+            group = vim.api.nvim_create_augroup("fugitive-group", {}),
             pattern = "*",
             callback = function()
                 if vim.bo.ft ~= "fugitive" then

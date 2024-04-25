@@ -93,11 +93,8 @@ return {
 
 
         -- Custom keybinds
-        local augroup = vim.api.nvim_create_augroup
-        local lspGroup = augroup("liamrlawrence_lsp", {})
-
         vim.api.nvim_create_autocmd("LspAttach", {
-            group = lspGroup,
+            group = vim.api.nvim_create_augroup("lsp-group", {}),
             callback = function(e)
                 local opts = { buffer = e.buf }
                 vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)

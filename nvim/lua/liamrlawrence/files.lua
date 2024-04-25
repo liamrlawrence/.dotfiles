@@ -1,3 +1,10 @@
+local augroup = vim.api.nvim_create_augroup
+local allFilesGroup = augroup("all-files-group", {})
+local goFilesGroup = augroup("go-files-group", {})
+local htmlFilesGroup = augroup("html-files-group", {})
+
+
+
 vim.filetype.add({
     extension = {
         templ = "templ",    -- Golang templ files
@@ -13,15 +20,18 @@ vim.filetype.add({
 })
 
 
--- Remove trailing whitespace from files
+
 vim.api.nvim_create_autocmd("BufWritePre", {
+    desc = "Remove trailing whitespace from files",
+    group = allFilesGroup,
     pattern = "*",
     command = [[%s/\s\+$//e]],
 })
 
 
--- Smaller tabs for HTML files
 vim.api.nvim_create_autocmd("FileType", {
+    desc = "Smaller tabs for HTML files",
+    group = htmlFilesGroup,
     pattern = "html",
     callback = function()
         vim.opt_local.shiftwidth = 2
@@ -30,8 +40,9 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
--- Use hard-tabs for Go files
 vim.api.nvim_create_autocmd("FileType", {
+    desc = "Use hard-tabs for Go files",
+    group = goFilesGroup,
     pattern = "go",
     callback = function()
         vim.bo.expandtab = false
@@ -40,8 +51,9 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
--- Run 'go fmt' (or LSP format) after saving Go files
 vim.api.nvim_create_autocmd("BufWritePre", {
+    desc = "Run 'go fmt' after saving Go files",
+    group = goFilesGroup,
     pattern = "*.go",
     command = "silent! lua vim.lsp.buf.format()"
 })
