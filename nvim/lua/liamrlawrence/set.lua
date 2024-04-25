@@ -25,12 +25,3 @@ vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
 vim.opt.termguicolors = true
 
-
-vim.api.nvim_create_autocmd("TextYankPost", {
-    desc = "Highlight when yanking text",
-    group = vim.api.nvim_create_augroup("highlight-group", { clear = true }),
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-})
-

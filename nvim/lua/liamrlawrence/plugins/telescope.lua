@@ -12,6 +12,7 @@ return {
                     "%.git$",
                     "venv",
                     "node_modules",
+                    "static/vendor"
                 }
             }
         }
