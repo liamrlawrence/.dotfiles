@@ -2,6 +2,7 @@ local augroup = vim.api.nvim_create_augroup
 local allFilesGroup = augroup("all-files-group", {})
 local goFilesGroup = augroup("go-files-group", {})
 local htmlFilesGroup = augroup("html-files-group", {})
+local cssFilesGroup = augroup("css-files-group", {})
 
 
 
@@ -29,25 +30,39 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 
+-- Web
 vim.api.nvim_create_autocmd("FileType", {
-    desc = "Smaller tabs for HTML files",
+    desc = "Tabs for HTML files",
     group = htmlFilesGroup,
     pattern = "html",
-    callback = function()
-        vim.opt_local.shiftwidth = 4
-        vim.opt_local.tabstop = 4
-    end
-})
-
-
-vim.api.nvim_create_autocmd("FileType", {
-    desc = "Use hard-tabs for Go files",
-    group = goFilesGroup,
-    pattern = "go",
     callback = function()
         vim.bo.expandtab = false
         vim.bo.tabstop = 4
         vim.bo.shiftwidth = 4
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Tabs for CSS files",
+    group = cssFilesGroup,
+    pattern = "css",
+    callback = function()
+        vim.bo.expandtab = false
+        vim.bo.tabstop = 4
+        vim.bo.shiftwidth = 4
+    end
+})
+
+
+-- Go
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Tabs for Go files",
+    group = goFilesGroup,
+    pattern = "go",
+    callback = function()
+        vim.bo.expandtab = false
+        vim.bo.tabstop = 8
+        vim.bo.shiftwidth = 8
     end
 })
 
