@@ -25,6 +25,12 @@ local Themes = {
         darkest = "rose-pine-main",
     },
     {
+        default = "tokyonight-storm",
+        light   = "tokyonight-day",
+        dark    = "tokyonight-night",
+        darkest = "tokyonight-night",
+    },
+    {
         default = "solarized",
         light   = "solarized",
         dark    = "solarized",
