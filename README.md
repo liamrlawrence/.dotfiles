@@ -1,14 +1,13 @@
 # .dotfiles
 
-## Scripts
-1. `grab_files.sh` - Copies local files to `.dotfiles/`
-2. `sync.sh` - Copies files from `.dotfiles/` to local directories
-
 ## Setup
-1. Neovim
-  - `alias vim='nvim'`
-  - Install packages
+1. Create symlinks
+  - Run `create_links.sh`
 
-2. Tmux
+2. Neovim
+  - `alias vim='nvim'`
+  - Install system packages `nvim/packages.sh`
+
+3. Tmux
   - `tmux source-file ~/.config/tmux/tmux.conf`
 

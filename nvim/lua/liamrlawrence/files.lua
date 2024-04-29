@@ -34,8 +34,8 @@ vim.api.nvim_create_autocmd("FileType", {
     group = htmlFilesGroup,
     pattern = "html",
     callback = function()
-        vim.opt_local.shiftwidth = 2
-        vim.opt_local.tabstop = 2
+        vim.opt_local.shiftwidth = 4
+        vim.opt_local.tabstop = 4
     end
 })
 
@@ -56,5 +56,12 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = goFilesGroup,
     pattern = "*.go",
     command = "silent! lua vim.lsp.buf.format()"
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    desc = "Rebuild Go templ files on save",
+    group = goFilesGroup,
+    pattern = "*.templ",
+    command = "silent! templ generate"
 })
 

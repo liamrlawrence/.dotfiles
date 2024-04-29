@@ -15,7 +15,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 
-
 function ToggleQuickfix()
     local is_quickfix_open = false
     for _, win in pairs(vim.fn.getwininfo()) do
