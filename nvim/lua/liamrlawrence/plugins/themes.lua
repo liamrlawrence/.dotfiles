@@ -1,11 +1,11 @@
 return {
-    {"rebelot/kanagawa.nvim"},
+    { "rebelot/kanagawa.nvim" },
 
-    {"catppuccin/nvim", as = "catppuccin"},
+    { "catppuccin/nvim", as = "catppuccin" },
 
-    {"rose-pine/neovim", as = "rose-pine"},
+    { "rose-pine/neovim", as = "rose-pine" },
 
-    {"folke/tokyonight.nvim"},
+    { "folke/tokyonight.nvim" },
 
     { "shaunsingh/solarized.nvim" },
 

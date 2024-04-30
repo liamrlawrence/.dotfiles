@@ -20,30 +20,30 @@ return {
 
 
         -- Git file search
-        vim.keymap.set("n", "<C-p>", builtin.git_files, {desc = "Git files"})
+        vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Git files" })
 
 
         -- File search
-        vim.keymap.set("n", "<leader>/f", builtin.find_files, {desc = "Find files"})
+        vim.keymap.set("n", "<leader>/f", builtin.find_files, { desc = "Find files" })
 
         vim.keymap.set("n", "<leader>/F", function()
             builtin.find_files({
                 hidden = true,
                 no_ignore = true,
             })
-        end, {desc = "Find files (including hidden)"})
+        end, { desc = "Find files (including hidden)" })
 
 
         -- Search for a specific word
         vim.keymap.set("n", "<leader>/ws", function()
             local word = vim.fn.expand("<cword>")
             builtin.grep_string({ search = word })
-        end, {desc = "Find word"})
+        end, { desc = "Find word" })
 
         vim.keymap.set("n", "<leader>/Ws", function()
             local word = vim.fn.expand("<cWORD>")
             builtin.grep_string({ search = word })
-        end, {desc = "Find capital Word"})
+        end, { desc = "Find capital Word" })
 
 
         -- Grep search
@@ -55,7 +55,7 @@ return {
                 end
                 builtin.grep_string({search = input, ignore_case = false})
             end)
-        end, {desc = "Grep string"})
+        end, { desc = "Grep string" })
 
         vim.keymap.set("n", "<leader>/S", function()
             vim.ui.input({prompt = "Grep (ignore case) > "}, function(input)
@@ -65,12 +65,12 @@ return {
                 end
                 builtin.grep_string({search = input, ignore_case = true})
             end)
-        end, {desc = "Grep string (ignore case)"})
+        end, { desc = "Grep string (ignore case)" })
 
 
         -- Vim search
-        vim.keymap.set("n", "<leader>vh", builtin.help_tags, {desc = "Vim help"})
-        vim.keymap.set("n", "<leader>vk", builtin.keymaps, {desc = "Vim keymaps"})
+        vim.keymap.set("n", "<leader>vh", builtin.help_tags, { desc = "Vim help" })
+        vim.keymap.set("n", "<leader>vk", builtin.keymaps, { desc = "Vim keymaps" })
     end
 }
 

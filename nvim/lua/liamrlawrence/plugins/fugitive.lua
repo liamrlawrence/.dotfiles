@@ -1,7 +1,7 @@
 return {
     "tpope/vim-fugitive",
-    config = function()
 
+    config = function()
         vim.api.nvim_create_autocmd("BufWinEnter", {
             group = vim.api.nvim_create_augroup("fugitive-group", {}),
             pattern = "*",
@@ -27,8 +27,9 @@ return {
         })
 
 
-        vim.keymap.set("n", "<leader>gs", vim.cmd.Git, {desc = "Git Status"})
+        vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git Status" })
         vim.keymap.set("n", "gu", "<cmd>diffget //2<CR>")
         vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
     end
 }
+
