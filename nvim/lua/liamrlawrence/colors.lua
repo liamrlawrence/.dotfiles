@@ -48,31 +48,10 @@ end
 -- Special theme for code reviews with coworkers
 vim.keymap.set("n", "<leader>TTv", string.format(':lua SetTheme("vscode")<CR>'))
 
--- Set custom highlighting rules
-function SetHighlights()
-    -- Highlight current parameter when looking at a Signature
-    local marked = vim.api.nvim_get_hl(0, { name = 'PMenu' })
-    vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', {
-        fg = marked.fg,
-        bg = marked.bg,
-        ctermfg = marked.ctermfg,
-        ctermbg = marked.ctermbg,
-        bold = true
-    })
-end
 
--- Set a theme, and then apply highlight rules
-function SetTheme(theme, themeMode, transparent)
-    theme = theme or Themes[1]["default"]
-    themeMode = themeMode or "dark"
-    if themeMode ~= "light" and themeMode ~= "dark" then
-        error("Invalid theme mode. Expected 'light' or 'dark'.")
-    end
-    vim.o.background = themeMode
-    vim.cmd.colorscheme(theme)
 
-    -- Apply highlights after setting the theme
-    if transparent == true then
+function SetHighlights(transparency)
+    if transparency == true then
         vim.api.nvim_set_hl(0, "LineNr",            { bg = "none" })
         vim.api.nvim_set_hl(0, "SignColumn",        { bg = "none" })
         vim.api.nvim_set_hl(0, "Normal",            { bg = "none" })
@@ -81,9 +60,64 @@ function SetTheme(theme, themeMode, transparent)
         vim.api.nvim_set_hl(0, "GitGutterChange",   { bg = "none", fg = "#bbbb00" })
         vim.api.nvim_set_hl(0, "GitGutterDelete",   { bg = "none", fg = "#ff2222" })
     end
-    SetHighlights()
+
+    -- Highlight current parameter when looking at a Signature
+    local marked = vim.api.nvim_get_hl(0, { name = "PMenu" })
+    vim.api.nvim_set_hl(0, "LspSignatureActiveParameter", {
+        fg = marked.fg,
+        bg = marked.bg,
+        ctermfg = marked.ctermfg,
+        ctermbg = marked.ctermbg,
+        bold = true
+    })
 end
 
--- Apply the default theme
+
+function SetTheme(theme_name, theme_mode, theme_transparency)
+    -- Load configuration
+    local config = require("cabinet").config_manager
+    if not theme_name then
+        local loaded_config = config.load("theme_config")
+        if loaded_config then
+            theme_name = loaded_config.theme_name
+            theme_mode = loaded_config.theme_mode
+            theme_transparency = loaded_config.theme_transparency
+        else
+            -- Fallback if config file doesn't exist
+            theme_name = Themes[1]["default"]
+            theme_mode = "dark"
+            theme_transparency = false
+        end
+    end
+
+    -- Default params
+    if not theme_mode then
+        theme_mode = "dark"
+    elseif theme_mode ~= "light" and theme_mode ~= "dark" then
+        error("Invalid theme mode. Expected 'light' or 'dark'.")
+    end
+    if not theme_transparency then
+        theme_transparency = false
+    end
+
+    -- Set theme
+    vim.o.background = theme_mode
+    vim.cmd.colorscheme(theme_name)
+
+    -- Apply highlights
+    SetHighlights(theme_transparency)
+
+    -- Save settings
+    local config_data = {
+        theme_name = theme_name,
+        theme_mode = theme_mode,
+        theme_transparency = theme_transparency
+    }
+    config.save("theme_config", config_data)
+end
+
+
+
+-- Apply theme on startup
 SetTheme()
 
