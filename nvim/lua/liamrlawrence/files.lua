@@ -21,7 +21,7 @@ vim.filetype.add({
 })
 
 
-
+-- All files
 vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "Remove trailing whitespace from files",
     group = allFilesGroup,

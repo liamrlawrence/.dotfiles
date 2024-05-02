@@ -27,6 +27,7 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
+                "dockerls",
                 "clangd",
                 "gopls", "templ",
                 "pyright",

@@ -2,12 +2,24 @@ require("liamrlawrence.set")
 require("liamrlawrence.remap")
 require("liamrlawrence.files")
 require("liamrlawrence.lazy_init")
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+local augroup = vim.api.nvim_create_augroup
+
+
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Line numbers for netrw",
+    group = augroup("netrw-group", {}),
+    pattern = "netrw",
+    callback = function()
+        vim.wo.relativenumber = true
+    end
+})
 
 
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking text",
-    group = vim.api.nvim_create_augroup("highlight-group", { clear = true }),
+    group = augroup("highlight-group", { clear = true }),
     callback = function()
         vim.highlight.on_yank()
     end,
