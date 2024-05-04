@@ -1,5 +1,6 @@
 local augroup = vim.api.nvim_create_augroup
 local allFilesGroup = augroup("all-files-group", {})
+local makeFilesGroup = augroup("make-files-group", {})
 local goFilesGroup = augroup("go-files-group", {})
 local htmlFilesGroup = augroup("html-files-group", {})
 local cssFilesGroup = augroup("css-files-group", {})
@@ -27,6 +28,18 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = allFilesGroup,
     pattern = "*",
     command = [[%s/\s\+$//e]],
+})
+
+-- Makefiles
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Tabs for Makefiles",
+    group = htmlFilesGroup,
+    pattern = "make",
+    callback = function()
+        vim.bo.expandtab = false
+        vim.bo.tabstop = 8
+        vim.bo.shiftwidth = 8
+    end
 })
 
 
@@ -71,6 +84,17 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = goFilesGroup,
     pattern = "*.go",
     command = "silent! lua vim.lsp.buf.format()"
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Tabs for Templ files",
+    group = goFilesGroup,
+    pattern = "templ",
+    callback = function()
+        vim.bo.expandtab = false
+        vim.bo.tabstop = 4
+        vim.bo.shiftwidth = 4
+    end
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {

@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 
-function ToggleQuickfix()
+vim.keymap.set("n", "<leader>q", function()
     local is_quickfix_open = false
     for _, win in pairs(vim.fn.getwininfo()) do
         if win["quickfix"] == 1 then
@@ -39,6 +39,11 @@ function ToggleQuickfix()
     else
         vim.cmd("copen")
     end
-end
-vim.api.nvim_set_keymap("n", "<leader>q", ":lua ToggleQuickfix()<CR>", { silent = true })
+end, { silent = true })
+
+
+vim.keymap.set("n", "<leader>er", function()
+    vim.wo.nu = true
+    vim.wo.relativenumber = not vim.wo.relativenumber
+end, { silent = true })
 

@@ -35,12 +35,12 @@ return {
 
 
         -- Search for a specific word
-        vim.keymap.set("n", "<leader>/ws", function()
+        vim.keymap.set("n", "<leader>/w", function()
             local word = vim.fn.expand("<cword>")
             builtin.grep_string({ search = word })
         end, { desc = "Find word" })
 
-        vim.keymap.set("n", "<leader>/Ws", function()
+        vim.keymap.set("n", "<leader>/W", function()
             local word = vim.fn.expand("<cWORD>")
             builtin.grep_string({ search = word })
         end, { desc = "Find capital Word" })
