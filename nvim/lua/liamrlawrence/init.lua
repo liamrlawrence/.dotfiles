@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     group = augroup("highlight-group", { clear = true }),
     callback = function()
         vim.highlight.on_yank()
-    end,
+    end
 })
 
 
@@ -39,11 +39,15 @@ vim.keymap.set("n", "<leader>q", function()
     else
         vim.cmd("copen")
     end
-end, { silent = true })
+end, { silent = true, desc = "Toggle quickfix list" })
 
 
 vim.keymap.set("n", "<leader>er", function()
     vim.wo.nu = true
     vim.wo.relativenumber = not vim.wo.relativenumber
-end, { silent = true })
+end, { desc = "Toggle relative line numbers", silent = true })
+
+vim.keymap.set("n", "<leader>ew", function()
+    vim.wo.wrap = not vim.wo.wrap
+end, { desc = "Toggle line wrapping", silent = true })
 
