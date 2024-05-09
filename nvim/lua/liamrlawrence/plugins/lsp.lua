@@ -108,7 +108,7 @@ return {
                 vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
                 vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
                 vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-                vim.keymap.set({"n", "i", "v"}, "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+                vim.keymap.set({ "n", "i", "v" }, "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
             end
         })
     end

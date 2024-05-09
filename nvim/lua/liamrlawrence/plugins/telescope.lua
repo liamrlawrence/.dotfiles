@@ -48,24 +48,31 @@ return {
 
         -- Grep search
         vim.keymap.set("n", "<leader>/s", function()
-            vim.ui.input({prompt = "Grep > "}, function(input)
-                if not input or input == "" then
-                    print("Grep canceled")
+            vim.ui.input({ prompt = "Grep > " }, function(input)
+                if not input then
                     return
                 end
-                builtin.grep_string({search = input, ignore_case = false})
+                builtin.grep_string({ search = input, ignore_case = false })
             end)
         end, { desc = "Grep string" })
 
         vim.keymap.set("n", "<leader>/S", function()
-            vim.ui.input({prompt = "Grep (ignore case) > "}, function(input)
-                if not input or input == "" then
-                    print("Grep canceled")
+            vim.ui.input({ prompt = "Grep (ignore case) > " }, function(input)
+                if not input then
                     return
                 end
-                builtin.grep_string({search = input, ignore_case = true})
+                builtin.grep_string({ search = input, ignore_case = true })
             end)
         end, { desc = "Grep string (ignore case)" })
+
+        vim.keymap.set("n", "<leader>/r", function()
+            vim.ui.input({ prompt = "Grep (regex) > " }, function(input)
+                if not input then
+                    return
+                end
+                builtin.live_grep({ default_text = input })
+            end)
+        end, { desc = "Grep string (regex)" })
 
 
         -- Vim search

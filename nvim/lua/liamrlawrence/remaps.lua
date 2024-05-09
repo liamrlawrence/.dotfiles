@@ -18,6 +18,7 @@ vim.api.nvim_create_autocmd("FileType", {
     group = explorerGroup,
     pattern = "netrw",
     callback = function()
+        vim.wo.nu = true
         vim.wo.relativenumber = true
     end
 })
@@ -47,18 +48,18 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 
+-- Yanks
+vim.keymap.set("n", "<leader>y", "\"+y",        { desc = "Yank to clipboard" })
+vim.keymap.set("v", "<leader>y", "\"+y",        { desc = "Yank to clipboard" })
+vim.keymap.set("n", "<leader>Y", "\"+yg_",      { desc = "Yank to clipboard" })
+vim.keymap.set("n", "<leader>yY", ":%y+<CR>",   { desc = "Yank entire file to clipboard" })
+vim.keymap.set("n", "yY",         ":%y<CR>",    { desc = "Yank entire file" })
+
+
 -- Deletes
 vim.keymap.set("x", "<leader>p", "\"_dP",   { desc = "Don't save deleted text to buffer" })
 vim.keymap.set("n", "<leader>d", "\"_d",    { desc = "Don't save deleted text to buffer" })
 vim.keymap.set("v", "<leader>d", "\"_d",    { desc = "Don't save deleted text to buffer" })
-
-
--- Yanks
-vim.keymap.set("n", "<leader>y", "\"+y",        { desc = "Yank to clipboard" })
-vim.keymap.set("v", "<leader>y", "\"+y",        { desc = "Yank to clipboard" })
-vim.keymap.set("n", "<leader>Y", "\"+Y",        { desc = "Yank to clipboard" })
-vim.keymap.set("n", "<leader>yY", ":%y+<CR>",   { desc = "Yank entire file to clipboard" })
-vim.keymap.set("n", "yY",         ":%y<CR>",    { desc = "Yank entire file" })
 
 
 -- Quickfix list
