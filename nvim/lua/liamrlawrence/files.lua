@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- Makefiles
 vim.api.nvim_create_autocmd("FileType", {
     desc = "Tabs for Makefiles",
-    group = htmlFilesGroup,
+    group = makeFilesGroup,
     pattern = "make",
     callback = function()
         vim.bo.expandtab = false
