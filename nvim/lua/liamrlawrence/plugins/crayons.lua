@@ -1,5 +1,6 @@
 return {
     "liamrlawrence/crayons.nvim",
+    event = "VeryLazy",
     dependencies = {
         "liamrlawrence/cabinet.nvim",
         "rebelot/kanagawa.nvim",

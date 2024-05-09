@@ -3,12 +3,9 @@ local explorerGroup = augroup("explorer-group", {})
 local highlightGroup = augroup("highlight-group", { clear = true })
 
 
--- The holiest of leader keys
-vim.g.mapleader = " "
-
 
 -- Disabled
-vim.keymap.set("n", "Q", "<nop>", { desc = "nop" })
+vim.keymap.set("n", "Q", "<nop>", { desc = "<Nop>" })
 
 
 -- Explorer
@@ -63,21 +60,16 @@ vim.keymap.set("v", "<leader>d", "\"_d",    { desc = "Don't save deleted text to
 
 
 -- Quickfix list
-vim.keymap.set("n", "<C-k>",     "<cmd>cnext<CR>zz",    { desc = "Next quickfix" })
-vim.keymap.set("n", "<C-j>",     "<cmd>cprev<CR>zz",    { desc = "Prev quickfix" })
+vim.keymap.set("n", "<C-k>",     "<cmd>cprev<CR>zz",    { desc = "Prev quickfix" })
+vim.keymap.set("n", "<C-j>",     "<cmd>cnext<CR>zz",    { desc = "Next quickfix" })
+vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz",    { desc = "Prev location list fix" })
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz",    { desc = "Next location list fix" })
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz",    { desc = "Prev location list fix" })
 vim.keymap.set("n", "<leader>q", function()
-    local is_quickfix_open = false
     for _, win in pairs(vim.fn.getwininfo()) do
         if win["quickfix"] == 1 then
-            is_quickfix_open = true
-            break
+            vim.cmd("cclose")
+            return
         end
-    end
-    if is_quickfix_open then
-        vim.cmd("cclose")
-    else
         vim.cmd("copen")
     end
 end, { desc = "Toggle quickfix list", silent = true })
@@ -90,8 +82,15 @@ vim.keymap.set("n", "<leader>S", [[:.s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- Editor
 vim.keymap.set("n", "<leader>ew", function() vim.wo.wrap = not vim.wo.wrap end, { desc = "Toggle line wrapping", silent = true })
+
 vim.keymap.set("n", "<leader>er", function()
     vim.wo.nu = true
     vim.wo.relativenumber = not vim.wo.relativenumber
 end, { desc = "Toggle relative line numbers", silent = true })
+
+vim.keymap.set("n", "<leader>e=", function()
+    local saved_pos = vim.fn.getpos(".")
+    vim.cmd(":normal! ggVG=<CR>")
+    vim.fn.setpos(".", saved_pos)
+end, { desc = "Reindent file", silent = true })
 

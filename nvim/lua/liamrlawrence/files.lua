@@ -15,9 +15,10 @@ vim.filetype.add({
         [".dockerignore"] = "gitignore",
     },
     pattern = {
-        ["*%.env.*"] = "sh",
-        [".*%.gitignore.*"] = "gitignore",
-        [".*Dockerfile.*"] = "dockerfile",
+        ["*%.env.*"]        = "sh",
+        [".*%.gitignore$"]  = "gitignore",
+        [".*%.ignore$"]     = "gitignore",
+        [".*Dockerfile.*"]  = "dockerfile",
     },
 })
 
@@ -29,6 +30,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
     command = [[%s/\s\+$//e]],
 })
+
 
 -- Makefiles
 vim.api.nvim_create_autocmd("FileType", {

@@ -2,7 +2,7 @@ return {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.6",
     dependencies = {
-        "nvim-lua/plenary.nvim"
+        "nvim-lua/plenary.nvim",
     },
 
     config = function()
@@ -12,7 +12,7 @@ return {
                     "%.git$",
                     "venv",
                     "node_modules",
-                    "static/vendor"
+                    "static/vendor",
                 }
             }
         }
@@ -20,7 +20,7 @@ return {
 
 
         -- Git file search
-        vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Git files" })
+        vim.keymap.set("n", "<leader>/g", builtin.git_files, { desc = "Git files" })
 
 
         -- File search
@@ -52,32 +52,31 @@ return {
                 if not input then
                     return
                 end
-                builtin.grep_string({ search = input, ignore_case = false })
+                builtin.grep_string({ search = input })
             end)
         end, { desc = "Grep string" })
 
         vim.keymap.set("n", "<leader>/S", function()
-            vim.ui.input({ prompt = "Grep (ignore case) > " }, function(input)
-                if not input then
-                    return
-                end
-                builtin.grep_string({ search = input, ignore_case = true })
-            end)
-        end, { desc = "Grep string (ignore case)" })
+            builtin.live_grep()
+        end, { desc = "Live Grep search" })
 
         vim.keymap.set("n", "<leader>/r", function()
             vim.ui.input({ prompt = "Grep (regex) > " }, function(input)
                 if not input then
                     return
                 end
-                builtin.live_grep({ default_text = input })
+                builtin.grep_string({ search = input, use_regex = true })
             end)
         end, { desc = "Grep string (regex)" })
 
+        vim.keymap.set("n", "<leader>/R", function()
+            builtin.live_grep({ use_regex = true })
+        end, { desc = "Live Grep search (regex)" })
+
 
         -- Vim search
-        vim.keymap.set("n", "<leader>vh", builtin.help_tags, { desc = "Vim help" })
-        vim.keymap.set("n", "<leader>vk", builtin.keymaps, { desc = "Vim keymaps" })
+        vim.keymap.set("n", "<leader>/vh", builtin.help_tags,   { desc = "Vim help" })
+        vim.keymap.set("n", "<leader>/vk", builtin.keymaps,     { desc = "Vim keymaps" })
     end
 }
 
