@@ -3,6 +3,7 @@ local allFilesGroup = augroup("all-files-group", {})
 local makeFilesGroup = augroup("make-files-group", {})
 local goFilesGroup = augroup("go-files-group", {})
 local htmlFilesGroup = augroup("html-files-group", {})
+local jsonFilesGroup = augroup("json-files-group", {})
 local cssFilesGroup = augroup("css-files-group", {})
 
 
@@ -58,6 +59,17 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
+    desc = "Tabs for JSON files",
+    group = jsonFilesGroup,
+    pattern = "json",
+    callback = function()
+        vim.bo.expandtab = false
+        vim.bo.tabstop = 2
+        vim.bo.shiftwidth = 2
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
     desc = "Tabs for CSS files",
     group = cssFilesGroup,
     pattern = "css",
@@ -96,6 +108,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = false
         vim.bo.tabstop = 4
         vim.bo.shiftwidth = 4
+        vim.bo.commentstring = "<!--%s-->"
     end
 })
 

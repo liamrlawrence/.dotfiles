@@ -60,8 +60,8 @@ vim.keymap.set("v", "<leader>d", "\"_d",    { desc = "Don't save deleted text to
 
 
 -- Quickfix list
-vim.keymap.set("n", "<C-k>",     "<cmd>cprev<CR>zz",    { desc = "Prev quickfix" })
-vim.keymap.set("n", "<C-j>",     "<cmd>cnext<CR>zz",    { desc = "Next quickfix" })
+vim.keymap.set("n", "<C-j>",     "<cmd>cprev<CR>zz",    { desc = "Prev quickfix" })
+vim.keymap.set("n", "<C-k>",     "<cmd>cnext<CR>zz",    { desc = "Next quickfix" })
 vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz",    { desc = "Prev location list fix" })
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz",    { desc = "Next location list fix" })
 vim.keymap.set("n", "<leader>q", function()

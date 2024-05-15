@@ -1,10 +1,12 @@
 return {
     "liamrlawrence/crayons.nvim",
     event = "VeryLazy",
+    keys = { "<leader>t" },
     dependencies = {
         "liamrlawrence/cabinet.nvim",
         "rebelot/kanagawa.nvim",
         "folke/tokyonight.nvim",
+        "projekt0n/github-nvim-theme",
         "Mofiqul/vscode.nvim",
     },
 
@@ -29,6 +31,15 @@ return {
                         darkest  = "tokyonight-night",
                     }
                 },
+                {   -- 3
+                    name = "github",
+                    variants = {
+                        standard = "github_dark",
+                        light    = "github_light",
+                        dark     = "github_dark_dimmed",
+                        darkest  = "github_dark_high_contrast",
+                    }
+                },
             },
 
             special_themes = {
@@ -36,7 +47,7 @@ return {
                     name = "vscode",
                     mode = "dark",
                     transparency = false,
-                    keybinding = "<leader>TTv",
+                    keybinding = "<leader>ttv",
                 },
             }
         })

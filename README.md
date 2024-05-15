@@ -10,4 +10,5 @@
 
 3. Tmux
   - `tmux source-file ~/.config/tmux/tmux.conf`
+  - Start a tmux session and press `<leader>I`
 
