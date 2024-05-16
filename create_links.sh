@@ -2,8 +2,8 @@
 
 
 directories=(
-    "$HOME/.config/nvim"
     "$HOME/.config/tmux"
+    "$HOME/.config/nvim"
 )
 
 

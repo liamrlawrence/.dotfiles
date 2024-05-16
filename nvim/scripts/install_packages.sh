@@ -5,5 +5,5 @@ packages=(
     ripgrep fd-find         # Telescope (Grep + file search)
 )
 
-sudo apt-get install "${packages[@]}"
+sudo apt-get install -y "${packages[@]}"
 

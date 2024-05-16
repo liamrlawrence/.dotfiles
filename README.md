@@ -4,11 +4,12 @@
 1. Create symlinks
   - Run `create_links.sh`
 
-2. Neovim
-  - `alias vim='nvim'`
-  - Install system packages `nvim/packages.sh`
+2. Tmux
+  - `tmux/scripts/install_tmux.sh`
+  - Start a tmux session and press `<leader>I` to install plugins
 
-3. Tmux
-  - `tmux source-file ~/.config/tmux/tmux.conf`
-  - Start a tmux session and press `<leader>I`
+3. Neovim
+  - `nvim/scripts/install_packages.sh`
+  - `nvim/scripts/install_neovim.sh`
+  - Start a vim session to install plugins
 
