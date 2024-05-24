@@ -12,7 +12,7 @@ return {
             org_default_notes_file = "~/Notes/refile.org",
             mappings = {
                 org = {
-                    org_toggle_checkbox = "<C-c>",
+                    org_toggle_checkbox = "<C-t>",
                 },
             },
         })

@@ -1,5 +1,6 @@
 local augroup = vim.api.nvim_create_augroup
 local allFilesGroup = augroup("all-files-group", {})
+local orgFilesGroup = augroup("org-files-group", {})
 local makeFilesGroup = augroup("make-files-group", {})
 local goFilesGroup = augroup("go-files-group", {})
 local htmlFilesGroup = augroup("html-files-group", {})
@@ -30,6 +31,19 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = allFilesGroup,
     pattern = "*",
     command = [[%s/\s\+$//e]],
+})
+
+
+-- Org files
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Tabs for Org files",
+    group = orgFilesGroup,
+    pattern = "org",
+    callback = function()
+        vim.bo.expandtab = true
+        vim.bo.tabstop = 2
+        vim.bo.shiftwidth = 2
+    end
 })
 
 
