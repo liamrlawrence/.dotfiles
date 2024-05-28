@@ -1,7 +1,5 @@
 return {
     "liamrlawrence/crayons.nvim",
-    event = "VeryLazy",
-    keys = { "<leader>t" },
     dependencies = {
         "liamrlawrence/cabinet.nvim",
         "rebelot/kanagawa.nvim",
@@ -44,12 +42,27 @@ return {
 
             special_themes = {
                 {
-                    name = "vscode",
-                    mode = "dark",
+                    colorscheme = "vscode",
+                    background = "dark",
                     transparency = false,
                     keybinding = "<leader>ttv",
                 },
-            }
+            },
+
+            filetype_themes = {
+                {
+                    colorscheme = "tokyonight-night",
+                    background = "dark",
+                    transparency = false,
+                    pattern = "fugitive://*",
+                },
+                {
+                    colorscheme = "tokyonight-night",
+                    background = "dark",
+                    transparency = false,
+                    pattern = "*.org",
+                },
+            },
         })
     end
 }
