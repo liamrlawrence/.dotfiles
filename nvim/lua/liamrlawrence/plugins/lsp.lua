@@ -27,11 +27,12 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
-                "dockerls",
+                "bashls",
+                "pyright",
                 "clangd",
                 "gopls", "templ",
-                "pyright",
                 "tsserver",
+                "dockerls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
