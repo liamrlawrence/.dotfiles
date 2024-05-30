@@ -46,11 +46,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 
 -- Yanks
+vim.keymap.set("n", "yY",         ":%y<CR>",    { desc = "Yank entire file" })
+vim.keymap.set("n", "<leader>yY", ":%y+<CR>",   { desc = "Yank entire file to clipboard" })
 vim.keymap.set("n", "<leader>y", "\"+y",        { desc = "Yank to clipboard" })
 vim.keymap.set("v", "<leader>y", "\"+y",        { desc = "Yank to clipboard" })
 vim.keymap.set("n", "<leader>Y", "\"+yg_",      { desc = "Yank to clipboard" })
-vim.keymap.set("n", "<leader>yY", ":%y+<CR>",   { desc = "Yank entire file to clipboard" })
-vim.keymap.set("n", "yY",         ":%y<CR>",    { desc = "Yank entire file" })
 vim.keymap.set("n", "<leader>yd", function()
     local diagnostics = vim.diagnostic.get(0)
     local current_line = vim.api.nvim_win_get_cursor(0)[1] - 1
@@ -106,7 +106,9 @@ vim.keymap.set("n", "<leader>S", [[:.s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 
 -- Editor
-vim.keymap.set("n", "<leader>ew", function() vim.wo.wrap = not vim.wo.wrap end, { desc = "Toggle line wrapping", silent = true })
+vim.keymap.set("n", "<leader>ew", function()
+    vim.wo.wrap = not vim.wo.wrap
+end, { desc = "Toggle line wrapping", silent = true })
 
 vim.keymap.set("n", "<leader>er", function()
     vim.wo.nu = true

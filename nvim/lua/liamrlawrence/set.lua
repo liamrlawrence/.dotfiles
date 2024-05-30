@@ -3,7 +3,7 @@ vim.g.mapleader = " "
 
 
 vim.opt.guicursor = ""
-vim.opt.fillchars="eob:~"
+vim.opt.fillchars = { vert = " ", eob = "~" }
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
