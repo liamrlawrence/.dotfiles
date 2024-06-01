@@ -1,18 +1,42 @@
 #!/bin/bash
 
 
-SOFTWARE_DIR="$HOME/Software"
-ASSET_NAME="nvim-linux64"
-ASSET_TAR="$ASSET_NAME.tar.gz"
-CHECKSUM="$ASSET_TAR.sha256sum"
+
+DEFAULT_DIR="$HOME/Software"
+
+show_help() {
+    echo "Usage: $0 [OPTION] [DIR]"
+    echo
+    echo "Install the latest version of Neovim."
+    echo
+    echo "Options:"
+    echo "  -h, --help    Show this help message and exit"
+    echo
+    echo "DIR:"
+    echo "  Optional pathstring to specify the installation directory."
+    echo "  Default is '$DEFAULT_DIR' if not provided."
+    echo
+    echo "Example:"
+    echo "sudo -E $0 /usr/local"
+}
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    show_help
+    exit 0
+fi
+
+installation_dir="${1:-$DEFAULT_DIR}"
 
 
-TMP_DIR=$(mktemp -d)
-LATEST_RELEASE_URL="https://api.github.com/repos/neovim/neovim/releases/latest"
-LATEST_RELEASE=$(wget -qO- "$LATEST_RELEASE_URL")
+# Files
+asset_name="nvim-linux64"
+asset_tar="$asset_name.tar.gz"
+checksum="$asset_tar.sha256sum"
 
-ASSET_URL=$(echo $LATEST_RELEASE | jq -r '.assets[] | select(.name == "'$ASSET_TAR'") | .browser_download_url')
-SUM_URL=$(echo $LATEST_RELEASE | jq -r '.assets[] | select(.name == "'$CHECKSUM'") | .browser_download_url')
+# URLs
+latest_release_url="https://api.github.com/repos/neovim/neovim/releases/latest"
+latest_release=$(wget -qO- "$latest_release_url")
+asset_url=$(echo $latest_release | jq -r '.assets[] | select(.name == "'$asset_tar'") | .browser_download_url')
+sum_url=$(echo $latest_release | jq -r '.assets[] | select(.name == "'$checksum'") | .browser_download_url')
 
 
 download_file() {
@@ -31,28 +55,42 @@ download_file() {
         exit 1
     fi
 }
+tmp_dir=$(mktemp -d)
+cd $tmp_dir
+download_file "$sum_url" "$checksum"
+download_file "$asset_url" "$asset_tar"
 
-cd $TMP_DIR
-download_file "$ASSET_URL" "$ASSET_TAR"
-download_file "$SUM_URL" "$CHECKSUM"
 
-if sha256sum -c "$CHECKSUM"; then
-    echo "Checksum verification passed for $ASSET_TAR"
+if sha256sum -c "$checksum"; then
+    echo "Checksum verification passed for $asset_tar"
 else
-    echo "Checksum verification failed for $ASSET_TAR"
+    echo "Checksum verification failed for $asset_tar"
     exit 1
 fi
 
-mkdir -p "$SOFTWARE_DIR"
-if [ -d "$SOFTWARE_DIR/$ASSET_NAME" ]; then     # Remove old version if exists
-    mv "$SOFTWARE_DIR/$ASSET_NAME" $TMP_DIR/
-else
-    echo "# Neovim" >> ~/.bashrc
-    echo "alias vim=\"$SOFTWARE_DIR/$ASSET_NAME/bin/nvim\"" >> ~/.bashrc
-    echo "export SUDO_EDITOR=\"$SOFTWARE_DIR/$ASSET_NAME/bin/nvim\"" >> ~/.bashrc
-    echo "" >> ~/.bashrc
-    echo "~/.bashrc has been updated"
+
+mkdir -p "$installation_dir"
+if [ -d "$installation_dir/$asset_name" ]; then
+    mv "$installation_dir/$asset_name" $tmp_dir/
+fi
+tar xfz "$asset_tar" -C "$installation_dir"
+
+
+if [ -z "$NEOVIM_PATH" ]; then
+    if [ -n "$SUDO_USER" ]; then
+        USER_HOME="$(eval echo ~$SUDO_USER)"
+    else
+        USER_HOME="$HOME"
+    fi
+    bashrc_path="$USER_HOME/.bashrc"
+    echo "# Neovim" >> "$bashrc_path"
+    echo "export NEOVIM_PATH=\"$installation_dir/$asset_name/bin/nvim\"" >> "$bashrc_path"
+    echo 'alias vim="$NEOVIM_PATH"' >> "$bashrc_path"
+    echo 'export SUDO_EDITOR="$NEOVIM_PATH"' >> "$bashrc_path"
+    echo "" >> "$bashrc_path"
+    echo "$bashrc_path has been updated"
 fi
 
-tar xfz $ASSET_TAR -C $SOFTWARE_DIR
+
+echo "Neovim installed, run with 'vim'"
 

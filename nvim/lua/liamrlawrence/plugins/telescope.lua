@@ -25,7 +25,6 @@ return {
 
         -- File search
         vim.keymap.set("n", "<leader>/f", builtin.find_files, { desc = "Find files" })
-
         vim.keymap.set("n", "<leader>/F", function()
             builtin.find_files({
                 hidden = true,

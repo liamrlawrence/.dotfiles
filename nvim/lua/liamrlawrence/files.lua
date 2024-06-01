@@ -1,11 +1,11 @@
 local augroup = vim.api.nvim_create_augroup
-local allFilesGroup = augroup("all-files-group", {})
-local orgFilesGroup = augroup("org-files-group", {})
-local makeFilesGroup = augroup("make-files-group", {})
-local goFilesGroup = augroup("go-files-group", {})
-local htmlFilesGroup = augroup("html-files-group", {})
-local jsonFilesGroup = augroup("json-files-group", {})
-local cssFilesGroup = augroup("css-files-group", {})
+local allFilesGroup = augroup("LL_all-files-group", {})
+local goFilesGroup = augroup("LL_go-files-group", {})
+local htmlFilesGroup = augroup("LL_html-files-group", {})
+local cssFilesGroup = augroup("LL_css-files-group", {})
+local jsonFilesGroup = augroup("LL_json-files-group", {})
+local orgFilesGroup = augroup("LL_org-files-group", {})
+local makeFilesGroup = augroup("LL_make-files-group", {})
 
 
 
@@ -34,76 +34,15 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 
--- Org files
-vim.api.nvim_create_autocmd("FileType", {
-    desc = "Tabs for Org files",
-    group = orgFilesGroup,
-    pattern = "org",
-    callback = function()
-        vim.bo.expandtab = true
-        vim.bo.tabstop = 2
-        vim.bo.shiftwidth = 2
-    end
-})
-
-
--- Makefiles
-vim.api.nvim_create_autocmd("FileType", {
-    desc = "Tabs for Makefiles",
-    group = makeFilesGroup,
-    pattern = "make",
-    callback = function()
-        vim.bo.expandtab = false
-        vim.bo.tabstop = 8
-        vim.bo.shiftwidth = 8
-    end
-})
-
-
--- Web
-vim.api.nvim_create_autocmd("FileType", {
-    desc = "Tabs for HTML files",
-    group = htmlFilesGroup,
-    pattern = "html",
-    callback = function()
-        vim.bo.expandtab = false
-        vim.bo.tabstop = 4
-        vim.bo.shiftwidth = 4
-    end
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    desc = "Tabs for JSON files",
-    group = jsonFilesGroup,
-    pattern = "json",
-    callback = function()
-        vim.bo.expandtab = false
-        vim.bo.tabstop = 2
-        vim.bo.shiftwidth = 2
-    end
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    desc = "Tabs for CSS files",
-    group = cssFilesGroup,
-    pattern = "css",
-    callback = function()
-        vim.bo.expandtab = false
-        vim.bo.tabstop = 4
-        vim.bo.shiftwidth = 4
-    end
-})
-
-
 -- Go
 vim.api.nvim_create_autocmd("FileType", {
-    desc = "Tabs for Go files",
+    desc = "Go file settings",
     group = goFilesGroup,
     pattern = "go",
     callback = function()
         vim.bo.expandtab = false
-        vim.bo.tabstop = 8
         vim.bo.shiftwidth = 8
+        vim.bo.tabstop = 8
     end
 })
 
@@ -115,13 +54,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    desc = "Tabs for Templ files",
+    desc = "Templ file settings",
     group = goFilesGroup,
     pattern = "templ",
     callback = function()
         vim.bo.expandtab = false
-        vim.bo.tabstop = 4
         vim.bo.shiftwidth = 4
+        vim.bo.tabstop = 4
         vim.bo.commentstring = "<!--%s-->"
     end
 })
@@ -131,5 +70,73 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = goFilesGroup,
     pattern = "*.templ",
     command = "silent! templ generate"
+})
+
+
+-- Web
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "HTML file settings",
+    group = htmlFilesGroup,
+    pattern = "html",
+    callback = function()
+        vim.bo.expandtab = false
+        vim.bo.shiftwidth = 4
+        vim.bo.tabstop = 4
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "CSS file settings",
+    group = cssFilesGroup,
+    pattern = "css",
+    callback = function()
+        vim.bo.expandtab = false
+        vim.bo.shiftwidth = 4
+        vim.bo.tabstop = 4
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "JSON file settings",
+    group = jsonFilesGroup,
+    pattern = "json",
+    callback = function()
+        vim.bo.expandtab = false
+        vim.bo.shiftwidth = 2
+        vim.bo.tabstop = 2
+    end
+})
+
+
+-- Org files
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Org file settings",
+    group = orgFilesGroup,
+    pattern = "org",
+    callback = function()
+        vim.bo.expandtab = true
+        vim.bo.shiftwidth = 2
+        vim.bo.tabstop = 2
+    end
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    desc = "Format org files on save",
+    group = goFilesGroup,
+    pattern = "*.org",
+    command = ":normal! <space>e=",
+})
+
+
+-- Makefiles
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Makefile settings",
+    group = makeFilesGroup,
+    pattern = "make",
+    callback = function()
+        vim.bo.expandtab = false
+        vim.bo.shiftwidth = 8
+        vim.bo.tabstop = 8
+    end
 })
 

@@ -3,7 +3,7 @@ return {
 
     config = function()
         vim.api.nvim_create_autocmd("BufWinEnter", {
-            group = vim.api.nvim_create_augroup("fugitive-group", {}),
+            group = vim.api.nvim_create_augroup("LL_fugitive-group", {}),
             pattern = "*",
             callback = function()
                 if vim.bo.ft ~= "fugitive" then

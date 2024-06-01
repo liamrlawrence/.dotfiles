@@ -1,6 +1,6 @@
 local augroup = vim.api.nvim_create_augroup
-local explorerGroup = augroup("explorer-group", {})
-local highlightGroup = augroup("highlight-group", { clear = true })
+local explorerGroup = augroup("LL_explorer-group", {})
+local highlightGroup = augroup("LL_highlight-group", { clear = true })
 
 
 
@@ -85,10 +85,10 @@ vim.keymap.set("v", "<leader>d", "\"_d",    { desc = "Don't save deleted text to
 
 
 -- Quickfix list
-vim.keymap.set("n", "<C-j>",     "<cmd>cprev<CR>zz",    { desc = "Prev quickfix" })
-vim.keymap.set("n", "<C-k>",     "<cmd>cnext<CR>zz",    { desc = "Next quickfix" })
+vim.keymap.set("n", "<C-j>",     "<cmd>cnext<CR>zz",    { desc = "Next quickfix" })
+vim.keymap.set("n", "<C-k>",     "<cmd>cprev<CR>zz",    { desc = "Prev quickfix" })
+vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>zz",    { desc = "Next location list fix" })
 vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz",    { desc = "Prev location list fix" })
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz",    { desc = "Next location list fix" })
 vim.keymap.set("n", "<leader>q", function()
     for _, win in pairs(vim.fn.getwininfo()) do
         if win["quickfix"] == 1 then

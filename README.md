@@ -6,7 +6,7 @@
 
 2. Tmux
   - `tmux/scripts/install_tmux.sh`
-  - Start a tmux session and press `<leader>I` to install plugins
+  - Start a tmux session and press `<prefix>I` to install plugins
 
 3. Neovim
   - `nvim/scripts/install_packages.sh`

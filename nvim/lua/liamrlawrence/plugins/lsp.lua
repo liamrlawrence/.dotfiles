@@ -25,15 +25,15 @@ return {
         require("fidget").setup({})
         require("mason").setup()
         require("mason-lspconfig").setup({
-            ensure_installed = {
-                "lua_ls",
-                "bashls",
-                "pyright",
-                "clangd",
-                "gopls", "templ",
-                "tsserver",
-                "dockerls",
-            },
+            -- ensure_installed = {
+            --     "lua_ls",
+            --     "bashls",
+            --     "pyright",
+            --     "gopls", "templ",
+            --     "clangd",
+            --     "tsserver",
+            --     "dockerls",
+            -- },
             handlers = {
                 function(server_name) -- default handler (optional)
                     require("lspconfig")[server_name].setup {
@@ -96,7 +96,7 @@ return {
 
         -- Custom keybinds
         vim.api.nvim_create_autocmd("LspAttach", {
-            group = vim.api.nvim_create_augroup("lsp-group", {}),
+            group = vim.api.nvim_create_augroup("LL_lsp-group", {}),
             callback = function(e)
                 local opts = { buffer = e.buf }
                 vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)

@@ -16,11 +16,11 @@ return {
                 done    = {                                 "#00A36C" },
             },
             keywords = {
-                -- FIX: Fixme, Fixit, Bug, Issue
+                -- FIX: Fixme, Fixit, Bug, Bugfix, Issue
                 FIX = {
                     icon = " ",
                     color = "error",
-                    alt = { "FIXME", "FIXIT", "BUG", "ISSUE" },
+                    alt = { "FIXME", "FIXIT", "BUG", "BUGFIX", "ISSUE" },
                 },
                 -- TODO:
                 TODO = {

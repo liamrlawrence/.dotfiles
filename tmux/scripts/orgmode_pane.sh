@@ -1,8 +1,8 @@
 #!/bin/bash
 # When the keybind is pressed:
 #   - If it does not exist, create a new pane and start an orgmode vim session
-#   - If the orgmode pane exists and is focused, save and quit the buffer (which causes the pane to close as well)
 #   - If the orgmode pane exists and is not focused, jump to it
+#   - If the orgmode pane exists and is focused, swap focus back to the previous pane
 
 
 file_name=".notes.org"
@@ -23,15 +23,14 @@ if [ ! -z "$pane_ids" ]; then
 fi
 
 
-# Open, focus, or kill the orgmode pane
+# Open or focus the orgmode pane
 if [ -z "$target_pane_id" ]; then
     current_pane_dir=$(tmux display-message -p '#{pane_current_path}')
     tmux split-window -p 35 -h -c "$current_pane_dir" "bash -i -c '$run_cmd'"
 else
     current_pane_id=$(tmux display-message -p '#{pane_id}')
     if [ "$current_pane_id" == "$target_pane_id" ]; then
-        tmux send-keys -t "$current_pane_id" C-c
-        tmux send-keys -t "$current_pane_id" :x! Enter
+        tmux last-pane
     else
         tmux select-pane -t "$target_pane_id"
     fi
