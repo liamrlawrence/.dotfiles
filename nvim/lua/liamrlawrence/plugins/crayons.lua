@@ -1,5 +1,7 @@
 return {
     "liamrlawrence/crayons.nvim",
+    event = "VeryLazy",
+    ft = { "org" },
     dependencies = {
         "liamrlawrence/cabinet.nvim",
         "rebelot/kanagawa.nvim",

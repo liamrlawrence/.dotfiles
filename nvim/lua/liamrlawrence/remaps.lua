@@ -79,9 +79,9 @@ end, { desc = "Yank diagnostics from current line to clipboard" })
 
 
 -- Deletes
-vim.keymap.set("x", "<leader>p", "\"_dP",   { desc = "Don't save deleted text to buffer" })
 vim.keymap.set("n", "<leader>d", "\"_d",    { desc = "Don't save deleted text to buffer" })
 vim.keymap.set("v", "<leader>d", "\"_d",    { desc = "Don't save deleted text to buffer" })
+vim.keymap.set("x", "<leader>p", "\"_dP",   { desc = "Don't save deleted text to buffer" })
 
 
 -- Quickfix list
@@ -117,7 +117,7 @@ end, { desc = "Toggle relative line numbers", silent = true })
 
 vim.keymap.set("n", "<leader>e=", function()
     local saved_pos = vim.fn.getpos(".")
-    vim.cmd(":normal! ggVG=<CR>")
+    vim.cmd(":normal! =lggVG=")                 -- NOTE: =l prevents undo/redo from jumping to the top of the file
     vim.fn.setpos(".", saved_pos)
 end, { desc = "Reindent file", silent = true })
 
