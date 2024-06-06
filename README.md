@@ -1,7 +1,7 @@
 # .dotfiles
 
 ## Setup
-1. Create symlinks
+1. Create symlinks & backup old configs
   - Run `create_links.sh`
 
 2. Tmux
@@ -12,4 +12,8 @@
   - `nvim/scripts/install_packages.sh`
   - `nvim/scripts/install_neovim.sh`
   - Start a vim session to install plugins
+
+## Teardown
+1. Remove symlinks & restore old files / directories
+  - Run `remove_links.sh`
 

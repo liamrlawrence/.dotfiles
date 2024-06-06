@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.wo.nu = true
         vim.wo.relativenumber = true
-    end
+    end,
 })
 
 
@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     group = highlightGroup,
     callback = function()
         vim.highlight.on_yank()
-    end
+    end,
 })
 
 

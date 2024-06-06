@@ -43,14 +43,14 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = false
         vim.bo.shiftwidth = 8
         vim.bo.tabstop = 8
-    end
+    end,
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "Run 'go fmt' after saving Go files",
     group = goFilesGroup,
     pattern = "*.go",
-    command = "silent! lua vim.lsp.buf.format()"
+    command = "silent! lua vim.lsp.buf.format()",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -61,16 +61,15 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = false
         vim.bo.shiftwidth = 4
         vim.bo.tabstop = 4
-        vim.bo.commentstring = "<!--%s-->"
-    end
+    end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-    desc = "Rebuild Go templ files on save",
-    group = goFilesGroup,
-    pattern = "*.templ",
-    command = "silent! templ generate"
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--     desc = "Rebuild Go templ files on save",
+--     group = goFilesGroup,
+--     pattern = "*.templ",
+--     command = "silent! templ generate",
+-- })
 
 
 -- Web
@@ -82,7 +81,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = false
         vim.bo.shiftwidth = 4
         vim.bo.tabstop = 4
-    end
+    end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -93,7 +92,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = false
         vim.bo.shiftwidth = 4
         vim.bo.tabstop = 4
-    end
+    end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -104,7 +103,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = false
         vim.bo.shiftwidth = 2
         vim.bo.tabstop = 2
-    end
+    end,
 })
 
 
@@ -117,7 +116,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = true
         vim.bo.shiftwidth = 2
         vim.bo.tabstop = 2
-    end
+    end,
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -137,6 +136,6 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = false
         vim.bo.shiftwidth = 8
         vim.bo.tabstop = 8
-    end
+    end,
 })
 

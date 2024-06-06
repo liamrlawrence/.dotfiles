@@ -7,7 +7,7 @@
 
 file_name=".notes.org"
 run_cmd="vim $file_name"
-pane_ids=$(tmux list-panes -F '#{pane_pid} #{pane_id}')
+pane_ids="$(tmux list-panes -F '#{pane_pid} #{pane_id}')"
 target_pane_id=""
 
 
@@ -25,7 +25,7 @@ fi
 
 # Open or toggle focus of the orgmode pane
 if [ -z "$target_pane_id" ]; then
-    current_pane_dir=$(tmux display-message -p '#{pane_current_path}')
+    current_pane_dir="$(tmux display-message -p '#{pane_current_path}')"
     tmux split-window -p 35 -h -c "$current_pane_dir" "bash -i -c '$run_cmd'"
 else
     current_pane_id=$(tmux display-message -p '#{pane_id}')
