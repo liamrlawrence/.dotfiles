@@ -48,9 +48,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Yanks
 vim.keymap.set("n", "yY",         ":%y<CR>",    { desc = "Yank entire file" })
 vim.keymap.set("n", "<leader>yY", ":%y+<CR>",   { desc = "Yank entire file to clipboard" })
-vim.keymap.set("n", "<leader>y", "\"+y",        { desc = "Yank to clipboard" })
-vim.keymap.set("v", "<leader>y", "\"+y",        { desc = "Yank to clipboard" })
-vim.keymap.set("n", "<leader>Y", "\"+yg_",      { desc = "Yank to clipboard" })
+vim.keymap.set("n", "<leader>y",  [["+y]],      { desc = "Yank to clipboard" })
+vim.keymap.set("v", "<leader>y",  [["+y]],      { desc = "Yank to clipboard" })
+vim.keymap.set("n", "<leader>Y",  [["+yg_]],    { desc = "Yank to clipboard" })
 vim.keymap.set("n", "<leader>yd", function()
     local diagnostics = vim.diagnostic.get(0)
     local current_line = vim.api.nvim_win_get_cursor(0)[1] - 1
@@ -79,9 +79,9 @@ end, { desc = "Yank diagnostics from current line to clipboard" })
 
 
 -- Deletes
-vim.keymap.set("n", "<leader>d", "\"_d",    { desc = "Don't save deleted text to buffer" })
-vim.keymap.set("v", "<leader>d", "\"_d",    { desc = "Don't save deleted text to buffer" })
-vim.keymap.set("x", "<leader>p", "\"_dP",   { desc = "Don't save deleted text to buffer" })
+vim.keymap.set("n", "<leader>d", [["_d]],   { desc = "Don't save deleted text to buffer" })
+vim.keymap.set("v", "<leader>d", [["_d]],   { desc = "Don't save deleted text to buffer" })
+vim.keymap.set("x", "<leader>p", [["_dP]],  { desc = "Don't save deleted text to buffer" })
 
 
 -- Quickfix list

@@ -64,12 +64,12 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- vim.api.nvim_create_autocmd("BufWritePre", {
---     desc = "Rebuild Go templ files on save",
---     group = goFilesGroup,
---     pattern = "*.templ",
---     command = "silent! templ generate",
--- })
+vim.api.nvim_create_autocmd("BufWritePre", {
+    desc = "Rebuild Go templ files on save",
+    group = goFilesGroup,
+    pattern = "*.templ",
+    command = "silent! templ generate",
+})
 
 
 -- Web
@@ -123,7 +123,9 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "Format org files on save",
     group = goFilesGroup,
     pattern = "*.org",
-    command = ":normal! <space>e=",
+    callback = function()
+        vim.cmd(":normal! =lggVG=")     -- TODO: Why can't I use '<leader>e='?
+    end,
 })
 
 

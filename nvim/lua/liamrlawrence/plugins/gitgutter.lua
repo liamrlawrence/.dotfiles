@@ -3,7 +3,7 @@ return {
 
     config = function()
         vim.cmd("GitGutterDisable")     -- Disabled by default
-        vim.keymap.set("n", "<leader>gg", vim.cmd.GitGutterToggle);
+        vim.keymap.set("n", "<leader>gg", vim.cmd.GitGutterToggle, { desc = "Toggle GitGutter" })
     end
 }
 
