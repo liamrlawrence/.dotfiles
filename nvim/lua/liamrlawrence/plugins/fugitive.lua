@@ -3,7 +3,7 @@ return {
 
     config = function()
         vim.api.nvim_create_autocmd("BufWinEnter", {
-            group = vim.api.nvim_create_augroup("LL_fugitive-group", {}),
+            group = vim.api.nvim_create_augroup("LL.plugins_fugitive-group", { clear = true }),
             pattern = "*",
             callback = function()
                 if vim.bo.ft ~= "fugitive" then
@@ -22,7 +22,7 @@ return {
                 end, opts)
 
                 -- NOTE: Allows me to easily set the branch I am pushing and any tracking needed
-                vim.keymap.set("n", "<leader>t", ":Git push -u origin ", opts);
+                vim.keymap.set("n", "<leader>t", ":Git push -u origin ", opts)
             end,
         })
 

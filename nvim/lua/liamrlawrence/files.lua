@@ -1,11 +1,11 @@
 local augroup = vim.api.nvim_create_augroup
-local allFilesGroup = augroup("LL_all-files-group", {})
-local goFilesGroup = augroup("LL_go-files-group", {})
-local htmlFilesGroup = augroup("LL_html-files-group", {})
-local cssFilesGroup = augroup("LL_css-files-group", {})
-local jsonFilesGroup = augroup("LL_json-files-group", {})
-local orgFilesGroup = augroup("LL_org-files-group", {})
-local makeFilesGroup = augroup("LL_make-files-group", {})
+local all_files_group = augroup("LL.files_all-group", { clear = true })
+local go_files_group = augroup("LL.files_go-group", { clear = true })
+local html_files_group = augroup("LL.files_html-group", { clear = true })
+local css_files_group = augroup("LL.files_css-group", { clear = true })
+local json_files_group = augroup("LL.files_json-group", { clear = true })
+local org_files_group = augroup("LL.files_org-group", { clear = true })
+local make_files_group = augroup("LL.files_make-group", { clear = true })
 
 
 
@@ -28,7 +28,7 @@ vim.filetype.add({
 -- All files
 vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "Remove trailing whitespace from files",
-    group = allFilesGroup,
+    group = all_files_group,
     pattern = "*",
     command = [[%s/\s\+$//e]],
 })
@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- Go
 vim.api.nvim_create_autocmd("FileType", {
     desc = "Go file settings",
-    group = goFilesGroup,
+    group = go_files_group,
     pattern = "go",
     callback = function()
         vim.bo.expandtab = false
@@ -48,14 +48,14 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "Run 'go fmt' after saving Go files",
-    group = goFilesGroup,
+    group = go_files_group,
     pattern = "*.go",
     command = "silent! lua vim.lsp.buf.format()",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
     desc = "Templ file settings",
-    group = goFilesGroup,
+    group = go_files_group,
     pattern = "templ",
     callback = function()
         vim.bo.expandtab = false
@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "Rebuild Go templ files on save",
-    group = goFilesGroup,
+    group = go_files_group,
     pattern = "*.templ",
     command = "silent! templ generate",
 })
@@ -75,7 +75,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- Web
 vim.api.nvim_create_autocmd("FileType", {
     desc = "HTML file settings",
-    group = htmlFilesGroup,
+    group = html_files_group,
     pattern = "html",
     callback = function()
         vim.bo.expandtab = false
@@ -86,7 +86,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
     desc = "CSS file settings",
-    group = cssFilesGroup,
+    group = css_files_group,
     pattern = "css",
     callback = function()
         vim.bo.expandtab = false
@@ -97,7 +97,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
     desc = "JSON file settings",
-    group = jsonFilesGroup,
+    group = json_files_group,
     pattern = "json",
     callback = function()
         vim.bo.expandtab = false
@@ -110,7 +110,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Org files
 vim.api.nvim_create_autocmd("FileType", {
     desc = "Org file settings",
-    group = orgFilesGroup,
+    group = org_files_group,
     pattern = "org",
     callback = function()
         vim.bo.expandtab = true
@@ -121,7 +121,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "Format org files on save",
-    group = goFilesGroup,
+    group = org_files_group,
     pattern = "*.org",
     callback = function()
         vim.cmd(":normal! =lggVG=")     -- TODO: Why can't I use '<leader>e='?
@@ -132,7 +132,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- Makefiles
 vim.api.nvim_create_autocmd("FileType", {
     desc = "Makefile settings",
-    group = makeFilesGroup,
+    group = make_files_group,
     pattern = "make",
     callback = function()
         vim.bo.expandtab = false

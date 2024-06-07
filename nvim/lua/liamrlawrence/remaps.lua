@@ -1,6 +1,6 @@
 local augroup = vim.api.nvim_create_augroup
-local explorerGroup = augroup("LL_explorer-group", {})
-local highlightGroup = augroup("LL_highlight-group", { clear = true })
+local explorer_group = augroup("LL.remaps_explorer-group", { clear = true })
+local highlight_group = augroup("LL.remaps_highlight-group", { clear = true })
 
 
 
@@ -8,11 +8,15 @@ local highlightGroup = augroup("LL_highlight-group", { clear = true })
 vim.keymap.set("n", "Q", "<nop>", { desc = "<Nop>" })
 
 
+-- Remaps
+vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "<C-c> is just better <Esc>" })
+
+
 -- Explorer
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Explorer" })
 vim.api.nvim_create_autocmd("FileType", {
     desc = "Line numbers for netrw",
-    group = explorerGroup,
+    group = explorer_group,
     pattern = "netrw",
     callback = function()
         vim.wo.nu = true
@@ -38,7 +42,7 @@ vim.keymap.set("n", "N", "Nzzzv",       { desc = "Center on search jumps" })
 vim.keymap.set("n", "<leader>/h", vim.cmd.noh, { desc = "Clear highlights" })
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking text",
-    group = highlightGroup,
+    group = highlight_group,
     callback = function()
         vim.highlight.on_yank()
     end,
