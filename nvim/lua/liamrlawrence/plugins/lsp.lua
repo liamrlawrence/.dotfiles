@@ -106,9 +106,9 @@ return {
                 vim.keymap.set("n", "[d",           function() vim.diagnostic.goto_prev()       end, { buffer = e.buf, desc = "LSP Goto prev diagnostic" })
                 vim.keymap.set("n", "]d",           function() vim.diagnostic.goto_next()       end, { buffer = e.buf, desc = "LSP Goto next diagnostic" })
                 vim.keymap.set("n", "K",            function() vim.lsp.buf.hover()              end, { buffer = e.buf, desc = "LSP display hover" })
-                vim.keymap.set("n", "<C-h>",        function() vim.lsp.buf.signature_help()     end, { buffer = e.buf, desc = "LSP display signature help" })
-                vim.keymap.set("i", "<C-h>",        function() vim.lsp.buf.signature_help()     end, { buffer = e.buf, desc = "LSP display signature help" })
-                vim.keymap.set("v", "<C-h>",        function() vim.lsp.buf.signature_help()     end, { buffer = e.buf, desc = "LSP display signature help" })
+                vim.keymap.set("n", "<C-p>",        function() vim.lsp.buf.signature_help()     end, { buffer = e.buf, desc = "LSP display signature help" })
+                vim.keymap.set("i", "<C-p>",        function() vim.lsp.buf.signature_help()     end, { buffer = e.buf, desc = "LSP display signature help" })
+                vim.keymap.set("v", "<C-p>",        function() vim.lsp.buf.signature_help()     end, { buffer = e.buf, desc = "LSP display signature help" })
             end
         })
     end

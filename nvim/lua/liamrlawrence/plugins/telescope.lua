@@ -13,14 +13,14 @@ return {
                     "venv",
                     "node_modules",
                     "static/vendor",
-                }
-            }
+                },
+            },
         }
         local builtin = require("telescope.builtin")
 
 
         -- Git file search
-        vim.keymap.set("n", "<leader>/g", builtin.git_files, { desc = "Git files" })
+        vim.keymap.set("n", "<leader>/g", builtin.git_files, { desc = "Find git files" })
 
 
         -- File search
@@ -53,7 +53,7 @@ return {
                 end
                 builtin.grep_string({ search = input })
             end)
-        end, { desc = "Grep string" })
+        end, { desc = "Grep search" })
 
         vim.keymap.set("n", "<leader>/S", function()
             builtin.live_grep()
@@ -66,16 +66,31 @@ return {
                 end
                 builtin.grep_string({ search = input, use_regex = true })
             end)
-        end, { desc = "Grep string (regex)" })
+        end, { desc = "Grep search (regex)" })
 
         vim.keymap.set("n", "<leader>/R", function()
             builtin.live_grep({ use_regex = true })
         end, { desc = "Live Grep search (regex)" })
 
 
+        -- Themes
+        vim.keymap.set("n", "<leader>/c", function()
+            builtin.colorscheme({
+                enable_preview = true,
+                layout_config = {
+                    preview_cutoff = 0,
+                    width = 0.9,
+                    horizontal = {
+                        preview_width = 0.70,
+                    },
+                },
+            })
+        end, { desc = "Search colorschemes" })
+
+
         -- Vim search
-        vim.keymap.set("n", "<leader>/vh", builtin.help_tags,   { desc = "Vim help" })
-        vim.keymap.set("n", "<leader>/vk", builtin.keymaps,     { desc = "Vim keymaps" })
+        vim.keymap.set("n", "<leader>/vh", builtin.help_tags,   { desc = "Search vim help" })
+        vim.keymap.set("n", "<leader>/vk", builtin.keymaps,     { desc = "Search vim keymaps" })
     end
 }
 

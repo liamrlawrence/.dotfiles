@@ -124,9 +124,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = org_files_group,
     pattern = "*.org",
     callback = function()
-        -- TODO: Why can't I use '<leader>e='?
         local saved_pos = vim.fn.getpos(".")
-        vim.cmd(":normal! =lggVG=")
+        vim.cmd(":normal! =lgg=G")      -- TODO: Why can't I use '<leader>e='?
         vim.fn.setpos(".", saved_pos)
     end,
 })

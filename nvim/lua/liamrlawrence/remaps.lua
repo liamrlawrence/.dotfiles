@@ -28,7 +28,11 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Movements
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv",    { desc = "Move line down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv",    { desc = "Move line up" })
-vim.keymap.set("n", "J", "mzJ`z",               { desc = "J does not move cursor" })
+vim.keymap.set("n", "J", function() -- "mzJ`z"
+    local saved_pos = vim.fn.getpos(".")
+    vim.cmd(":normal! J")
+    vim.fn.setpos(".", saved_pos)
+end, { desc = "J does not move cursor" })
 
 
 -- Jumps
@@ -50,8 +54,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 
 -- Yanks
-vim.keymap.set("n", "yY",         ":%y<CR>",    { desc = "Yank entire file" })
-vim.keymap.set("n", "<leader>yY", ":%y+<CR>",   { desc = "Yank entire file to clipboard" })
+vim.keymap.set("n", "yY",         [[:%y<CR>]],  { desc = "Yank entire file" })
+vim.keymap.set("n", "<leader>yY", [[:%y+<CR>]], { desc = "Yank entire file to clipboard" })
 vim.keymap.set("n", "<leader>y",  [["+y]],      { desc = "Yank to clipboard" })
 vim.keymap.set("v", "<leader>y",  [["+y]],      { desc = "Yank to clipboard" })
 vim.keymap.set("n", "<leader>Y",  [["+yg_]],    { desc = "Yank to clipboard" })
@@ -101,7 +105,7 @@ vim.keymap.set("n", "<leader>q", function()
         end
         vim.cmd("copen")
     end
-end, { desc = "Toggle quickfix list", silent = true })
+end, { desc = "Toggle quickfix list" })
 
 
 -- Text replace
@@ -112,16 +116,16 @@ vim.keymap.set("n", "<leader>S", [[:.s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- Editor
 vim.keymap.set("n", "<leader>ew", function()
     vim.wo.wrap = not vim.wo.wrap
-end, { desc = "Toggle line wrapping", silent = true })
+end, { desc = "Toggle line wrapping" })
 
 vim.keymap.set("n", "<leader>er", function()
     vim.wo.nu = true
     vim.wo.relativenumber = not vim.wo.relativenumber
-end, { desc = "Toggle relative line numbers", silent = true })
+end, { desc = "Toggle relative line numbers" })
 
-vim.keymap.set("n", "<leader>e=", function()
+vim.keymap.set("n", "<leader>e=", function() -- "mzgg=G`z"
     local saved_pos = vim.fn.getpos(".")
-    vim.cmd(":normal! =lggVG=")                 -- NOTE: =l prevents undo/redo from jumping to the top of the file
+    vim.cmd(":normal! =lgg=G")              -- NOTE: =l prevents undo/redo from jumping to the top of the file
     vim.fn.setpos(".", saved_pos)
-end, { desc = "Reindent file", silent = true })
+end, { desc = "Reindent file" })
 
