@@ -5,11 +5,43 @@
 #   - If the orgmode pane exists and is focused, swap focus back to the previous pane
 
 
+show_help() {
+cat << EOF
+Usage: $0 [OPTIONS]
+
+Options:
+  --fullscreen      Open the panes in fullscreen mode
+  --help            Display this help message and exit
+EOF
+}
+
+# Flags
+fullscreen=false
+
+# Parse commandline arguments
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --fullscreen) fullscreen=true ;;
+        --help)
+            show_help
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1"
+            show_help
+            exit 1
+            ;;
+    esac
+    shift
+done
+
 
 if [ -z "$TMUX" ]; then
     echo "Error: Not in a tmux session"
     exit 1
 fi
+
+
 
 notes_dir="$HOME/Notes/drawer"
 file_ending="notes.org"
@@ -48,5 +80,9 @@ else
     else
         tmux select-pane -t "$target_pane_id"
     fi
+fi
+
+if [ "$fullscreen" == true ]; then
+    tmux resize-pane -Z
 fi
 
