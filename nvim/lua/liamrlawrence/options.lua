@@ -37,3 +37,15 @@ vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
 vim.opt.termguicolors = true
 
+vim.g.clipboard = {
+    name = "SSH Clipboard",
+    copy = {
+        ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+        ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+        ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+        ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+    },
+}
+
