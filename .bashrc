@@ -69,3 +69,8 @@ export GOPATH="$HOME/.go"
 export PATH="$PATH:$GOROOT/bin"
 export PATH="$PATH:$GOPATH/bin"
 
+
+
+# Aliases
+alias cleard='clear; date +%r'
+

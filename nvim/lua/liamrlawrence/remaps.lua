@@ -12,6 +12,20 @@ vim.keymap.set("n", "Q", "<nop>", { desc = "<Nop>" })
 vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "<C-c> is just better <Esc>" })
 
 
+-- Custom :write message
+vim.api.nvim_create_autocmd("BufWritePost", {
+    callback = function()
+        local filepath = vim.fn.expand("%:.")
+        local lines = vim.fn.line("$")
+        local timestamp = os.date("%-H:%M:%S")
+        local bytes = vim.fn.getfsize(filepath)
+        local message = string.format("\"%s\" %dL, %dB written at %s", filepath, lines, bytes, timestamp)
+        vim.api.nvim_command("redraw")  -- NOTE: Redraw avoids having to press Enter
+        vim.api.nvim_echo({{message, "None"}}, false, {})
+    end,
+})
+
+
 -- Explorer
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Explorer" })
 vim.api.nvim_create_autocmd("FileType", {
