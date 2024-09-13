@@ -56,6 +56,11 @@ vim.keymap.set("n", "n", "nzzzv",       { desc = "Center on search jumps"})
 vim.keymap.set("n", "N", "Nzzzv",       { desc = "Center on search jumps" })
 
 
+-- Folds
+vim.keymap.set("n", "zR", "zRzz", { desc = "Open all folds in file" })
+vim.keymap.set("n", "zM", "zMzz", { desc = "Close all folds in file" })
+
+
 -- Highlights
 vim.keymap.set("n", "<leader>/h", vim.cmd.noh, { desc = "Clear highlights" })
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -65,6 +70,26 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.highlight.on_yank()
     end,
 })
+
+local function highlight_visual_mode(key)
+    local original_visual_highlight = vim.api.nvim_get_hl_by_name("Visual", true)
+    local incsearch_highlight = vim.api.nvim_get_hl_by_name("IncSearch", true)
+
+    vim.api.nvim_set_hl(0, "Visual", incsearch_highlight)
+    vim.cmd("normal! " .. key)
+
+    vim.api.nvim_create_autocmd("ModeChanged", {
+        desc = "Remove custom highlighting from visual mode on exit",
+        group = highlight_group,
+        pattern = "[vV\26]:*",
+        once = true,
+        callback = function()
+            vim.api.nvim_set_hl(0, "Visual", original_visual_highlight)
+        end,
+    })
+end
+vim.keymap.set("n", "<leader>v", function() highlight_visual_mode("v") end, { desc = "Enter visual mode with highlighting" })
+vim.keymap.set("n", "<leader>V", function() highlight_visual_mode("V") end, { desc = "Enter Visual mode with highlighting" })
 
 
 -- Yanks
