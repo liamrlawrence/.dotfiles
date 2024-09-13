@@ -78,13 +78,26 @@ local function highlight_visual_mode(key)
     vim.api.nvim_set_hl(0, "Visual", incsearch_highlight)
     vim.cmd("normal! " .. key)
 
-    vim.api.nvim_create_autocmd("ModeChanged", {
+    local autocmd_id
+    autocmd_id = vim.api.nvim_create_autocmd("ModeChanged", {
         desc = "Remove custom highlighting from visual mode on exit",
         group = highlight_group,
-        pattern = "[vV\26]:*",
-        once = true,
+        pattern = "*",
         callback = function()
-            vim.api.nvim_set_hl(0, "Visual", original_visual_highlight)
+            local old_mode = vim.v.event.old_mode
+            local new_mode = vim.v.event.new_mode
+
+            local visual_modes = {
+                ['v'] = true,
+                ['V'] = true,
+                [string.char(22)] = true,   -- NOTE: Ctrl-V is char(22)
+            }
+
+            -- Check if we have left Visual mode entirely
+            if visual_modes[old_mode] and not visual_modes[new_mode] then
+                vim.api.nvim_set_hl(0, "Visual", original_visual_highlight)
+                vim.api.nvim_del_autocmd(autocmd_id)
+            end
         end,
     })
 end
