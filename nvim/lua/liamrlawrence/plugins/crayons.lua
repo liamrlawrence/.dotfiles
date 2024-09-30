@@ -1,16 +1,18 @@
 return {
     "liamrlawrence/crayons.nvim",
-    event = "VeryLazy",
-    ft = { "org" },
+    -- event = "VeryLazy",
+    -- ft = { "org" },
     dependencies = {
         "liamrlawrence/cabinet.nvim",
         "rebelot/kanagawa.nvim",
         "folke/tokyonight.nvim",
-        "projekt0n/github-nvim-theme",
+        "EdenEast/nightfox.nvim",
+        "ribru17/bamboo.nvim",
         "Mofiqul/vscode.nvim",
     },
 
     config = function()
+        require('bamboo').load()
         require("crayons").setup({
             themes = {
                 {   -- 1
@@ -32,12 +34,35 @@ return {
                     }
                 },
                 {   -- 3
-                    name = "github",
+                    name = "nightfox1",
                     variants = {
-                        standard = "github_dark",
-                        light    = "github_light",
-                        dark     = "github_dark_dimmed",
-                        darkest  = "github_dark_high_contrast",
+                        standard = "nightfox",
+                        light    = "dayfox",
+                        dark     = "carbonfox",
+                        darkest  = "terafox",
+                    }
+                },
+                {   -- 4
+                    name = "nightfox2",
+                    variants = {
+                        standard = "duskfox",
+                        light    = "dawnfox",
+                        dark     = "terafox",
+                        darkest  = "carbonfox",
+                    }
+                },
+                {}, -- 5
+                {}, -- 6
+                {}, -- 7
+                {}, -- 8
+                {}, -- 9
+                {   -- 10
+                    name = "bamboo",
+                    variants = {
+                        standard = "bamboo-vulgaris",
+                        light    = "bamboo-light",
+                        dark     = "bamboo-multiplex",
+                        darkest  = "bamboo-multiplex",
                     }
                 },
             },
@@ -56,13 +81,13 @@ return {
                     colorscheme = "tokyonight-night",
                     background = "dark",
                     transparency = false,
-                    pattern = "fugitive://*",
+                    pattern = "*.org",
                 },
                 {
                     colorscheme = "tokyonight-night",
                     background = "dark",
                     transparency = false,
-                    pattern = "*.org",
+                    pattern = "fugitive://*",
                 },
             },
         })
