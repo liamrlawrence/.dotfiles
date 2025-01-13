@@ -73,7 +73,7 @@ return {
         end, { desc = "Live Grep search (regex)" })
 
 
-        -- Themes
+        -- Theme search
         vim.keymap.set("n", "<leader>/c", function()
             builtin.colorscheme({
                 enable_preview = true,

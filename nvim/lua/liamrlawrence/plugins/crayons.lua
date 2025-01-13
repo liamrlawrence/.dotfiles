@@ -78,13 +78,13 @@ return {
 
             filetype_themes = {
                 {
-                    colorscheme = "tokyonight-night",
+                    colorscheme = "nightfox",
                     background = "dark",
                     transparency = false,
                     pattern = "*.org",
                 },
                 {
-                    colorscheme = "tokyonight-night",
+                    colorscheme = "nightfox",
                     background = "dark",
                     transparency = false,
                     pattern = "fugitive://*",

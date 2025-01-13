@@ -1,7 +1,6 @@
 return {
     "liamrlawrence/nvim-highlight-colors",
     branch = "filetype-options",
-    -- dir = "/home/watcher/Dev/neovim/nvim-highlight-colors",
 
     config = function()
         require("nvim-highlight-colors").setup({

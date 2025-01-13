@@ -2,7 +2,7 @@
 vim.g.mapleader = " "
 
 
-vim.opt.guicursor = ""
+vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 vim.opt.fillchars = { vert = " ", eob = "~" }
 
 vim.opt.nu = true
@@ -16,6 +16,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.wrap = false
+vim.opt.linebreak = true
 
 vim.opt.shadafile = "NONE"
 vim.opt.swapfile = false

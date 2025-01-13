@@ -16,7 +16,7 @@ return {
                 done    = {                                 "#00A36C" },
             },
             keywords = {
-                -- FIX: Fixme, Fixit, Bug, Bugfix, Issue
+                -- FIX: FIXME, FIXIT, BUG, BUGFIX, ISSUE
                 FIX = {
                     icon = " ",
                     color = "error",
@@ -27,7 +27,7 @@ return {
                     icon = " ",
                     color = "info",
                 },
-                -- NOTE: Info
+                -- NOTE: INFO
                 NOTE = {
                     icon = " ",
                     color = "hint",
@@ -38,31 +38,31 @@ return {
                     icon = " ",
                     color = "warning",
                 },
-                -- WARN: Warning, Caution
+                -- WARN: WARNING, CAUTION
                 WARN = {
                     icon = " ",
                     color = "warning",
                     alt = { "WARNING", "CAUTION" },
                 },
-                -- PERF: Performance, Optim, Optimize
+                -- PERF: PERFORMANCE, OPTIM, OPTIMIZE
                 PERF = {
                     icon = "󰅒 ",
                     color = "perf",
                     alt = { "PERFORMANCE", "OPTIM", "OPTIMIZE" },
                 },
-                -- TEST: Testing, Passed, Failed
+                -- TEST: TESTING, PASSED, FAILED
                 TEST = {
                     icon = "󱎫 ",
                     color = "test",
                     alt = { "TESTING", "PASSED", "FAILED" },
                 },
-                -- DOC: Documentation
+                -- DOC: DOCUMENTATION
                 DOC = {
                     icon = "󰈙 ",
                     color = "doc",
                     alt = { "DOCUMENTATION" },
                 },
-                -- DONE: Finished, Completed
+                -- DONE: FINISHED, COMPLETED
                 DONE = {
                     icon = " ",
                     color = "done",
