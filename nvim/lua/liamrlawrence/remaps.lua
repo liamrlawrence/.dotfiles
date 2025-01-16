@@ -155,8 +155,8 @@ vim.keymap.set("n", "<leader>q", function()
             vim.cmd("cclose")
             return
         end
-        vim.cmd("copen")
     end
+    vim.cmd("copen")
 end, { desc = "Toggle quickfix list" })
 
 
