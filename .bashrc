@@ -29,6 +29,13 @@ else
     PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 fi
 
+# In Tmux, show (venv-name) in the prompt whenever VIRTUAL_ENV is set
+# NOTE: New panes automatically source the first venv found
+# HACK: If manually activating a venv just make a new pane instead, else prompt shows "(new-venv) (old-venv)"
+if [[ -n "$TMUX" && -n "$VIRTUAL_ENV" ]]; then
+    PS1="($(basename "$VIRTUAL_ENV")) $PS1"
+fi
+
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
