@@ -1,5 +1,6 @@
 local augroup = vim.api.nvim_create_augroup
 local all_files_group = augroup("LL.files_all-group", { clear = true })
+local python_files_group = augroup("LL.files_python-group", { clear = true })
 local go_files_group = augroup("LL.files_go-group", { clear = true })
 local html_files_group = augroup("LL.files_html-group", { clear = true })
 local css_files_group = augroup("LL.files_css-group", { clear = true })
@@ -31,6 +32,30 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = all_files_group,
     pattern = "*",
     command = [[%s/\s\+$//e]],
+})
+
+
+-- Python
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Python file settings",
+    group = python_files_group,
+    pattern = "py",
+    callback = function()
+        vim.bo.expandtab = true
+        vim.bo.shiftwidth = 4
+        vim.bo.tabstop = 4
+    end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+    desc = "Run 'black' after saving Python files",
+    group = python_files_group,
+    pattern = "*.py",
+    callback = function()
+        local file = vim.fn.expand('%')
+        vim.fn.system("black -q " .. file)
+        vim.cmd("edit!")    -- Re-read the file to reflect the changes
+    end,
 })
 
 

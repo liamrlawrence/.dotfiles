@@ -67,8 +67,6 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 
 # Go
-export GOROOT="/usr/local/go"
-export GOPATH="$HOME/.go"
 export PATH="$PATH:$GOROOT/bin"
 export PATH="$PATH:$GOPATH/bin"
 

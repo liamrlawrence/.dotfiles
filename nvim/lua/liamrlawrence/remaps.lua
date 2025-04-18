@@ -9,7 +9,7 @@ vim.keymap.set("n", "Q", "<nop>", { desc = "<Nop>" })
 
 
 -- Remaps
-vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "<C-c> is just better <Esc>" })
+-- vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "<C-c> is just better <Esc>" })   -- NOTE: Became enlightened, started using <C-[>
 
 
 -- Custom :write message

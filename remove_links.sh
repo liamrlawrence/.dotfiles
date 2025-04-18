@@ -14,11 +14,17 @@ echo "ran $0 $(date +'%F %R')" >> "$LOGFILE"
 
 remove_symlink() {
     local link_path=$1
+    local use_sudo=$2
     link_file="$(basename $link_path)"
     if [ -L "$link_path" ]; then
-        rm "$link_path"
+        if [ "$use_sudo" -eq 1 ]; then
+            echo "[$link_file] Removing Symbolic link: $link_path"
+            sudo rm "$link_path"
+        else
+            echo "[$link_file] Removing symbolic link: $link_path"
+            rm "$link_path"
+        fi
         echo "removed $link_path" >> "$LOGFILE"
-        echo "[$link_file] Removing symbolic link: $link_path"
     else
         echo "[$link_file] No symbolic link found: $link_path"
     fi
@@ -36,9 +42,10 @@ restore_file() {
 
 
 tac "$LOGFILE" | while IFS= read -r line; do
-    if [[ $line == symlink* ]]; then
+    if [[ $line == [sS]ymlink* ]]; then
         symlink_path=$(echo $line | awk '{print $2}')
-        remove_symlink "$symlink_path"
+        used_sudo=$([[ ${line:0:1} == "S" ]] && echo 1 || echo 0 )
+        remove_symlink "$symlink_path" "$used_sudo"
     elif [[ $line == moved* ]]; then
         original_path=$(echo $line | awk '{print $2}')
         backup_path=$(echo $line | awk '{print $3}')
