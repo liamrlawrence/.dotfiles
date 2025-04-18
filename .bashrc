@@ -49,10 +49,6 @@ fi
 
 
 
-# System
-export PATH="$PATH:$HOME/bin"
-
-
 # Neovim
 export NEOVIM_PATH="/usr/local/nvim-linux64/bin/nvim"
 alias vim="$NEOVIM_PATH"
@@ -70,7 +66,11 @@ export PATH="$PATH:$GOROOT/bin"
 export PATH="$PATH:$GOPATH/bin"
 
 
-
 # Aliases
 alias cleard='clear; date +%r'
+
+
+# System
+export MANPAGER="$NEOVIM_PATH +Man!"
+export PATH="$PATH:$HOME/bin"
 
