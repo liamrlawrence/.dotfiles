@@ -57,9 +57,8 @@ fi
 
 
 # Neovim
-export NEOVIM_PATH="/usr/local/nvim-linux64/bin/nvim"
+export NEOVIM_PATH="/usr/local/nvim-linux/bin/nvim"
 alias vim="$NEOVIM_PATH"
-export SUDO_EDITOR="$NEOVIM_PATH"
 
 
 # C
@@ -76,6 +75,7 @@ alias cleard='clear; date +%r'
 
 
 # System
-export MANPAGER="$NEOVIM_PATH +Man!"
 export PATH="$PATH:$HOME/bin"
+export SUDO_EDITOR="$NEOVIM_PATH"
+export MANPAGER="$NEOVIM_PATH +Man!"
 

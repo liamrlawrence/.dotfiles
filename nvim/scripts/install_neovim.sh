@@ -10,7 +10,7 @@ show_help() {
     echo "Install the latest version of Neovim."
     echo
     echo "Options:"
-    echo "  -h, --help    Show this help message and exit"
+    echo "  -h, --help      Show this help message and exit"
     echo
     echo "DIR:"
     echo "  Optional pathstring to specify the installation directory."
@@ -25,12 +25,13 @@ if [[ "$1" == "-h" || "$1" == "--help" ]]; then
 fi
 
 installation_dir="${1:-$DEFAULT_DIR}"
+installation_name="nvim-linux"
 
 
 # Files
-asset_name="nvim-linux64"
+asset_name="nvim-linux-x86_64"
 asset_tar="$asset_name.tar.gz"
-checksum="$asset_tar.sha256sum"
+checksum="shasum.txt"
 
 # URLs
 latest_release_url="https://api.github.com/repos/neovim/neovim/releases/latest"
@@ -57,10 +58,10 @@ download_file() {
 }
 tmp_dir=$(mktemp -d)
 cd $tmp_dir
-download_file "$sum_url" "$checksum"
 download_file "$asset_url" "$asset_tar"
+download_file "$sum_url" "$checksum"
 
-
+# if sha256sum --ignore-missing -c "$checksum"; then
 if sha256sum -c "$checksum"; then
     echo "Checksum verification passed for $asset_tar"
 else
@@ -74,6 +75,7 @@ if [ -d "$installation_dir/$asset_name" ]; then
     mv "$installation_dir/$asset_name" $tmp_dir/
 fi
 tar xfz "$asset_tar" -C "$installation_dir"
+mv "$installation_dir/$asset_name" "$installation_dir/$installation_name"
 
 
 if [ -z "$NEOVIM_PATH" ]; then
@@ -84,7 +86,7 @@ if [ -z "$NEOVIM_PATH" ]; then
     fi
     bashrc_path="$USER_HOME/.bashrc"
     echo "# Neovim" >> "$bashrc_path"
-    echo "export NEOVIM_PATH=\"$installation_dir/$asset_name/bin/nvim\"" >> "$bashrc_path"
+    echo "export NEOVIM_PATH=\"$installation_dir/$installation_name/bin/nvim\"" >> "$bashrc_path"
     echo 'alias vim="$NEOVIM_PATH"' >> "$bashrc_path"
     echo 'export SUDO_EDITOR="$NEOVIM_PATH"' >> "$bashrc_path"
     echo "" >> "$bashrc_path"

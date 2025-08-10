@@ -62,7 +62,7 @@ vim.keymap.set("n", "zM", "zMzz", { desc = "Close all folds in file" })
 
 
 -- Highlights
-vim.keymap.set("n", "<leader>/h", vim.cmd.noh, { desc = "Clear highlights" })
+-- vim.keymap.set("n", "<leader>/h", vim.cmd.noh, { desc = "Clear highlights" })    -- NOTE: Can use <C-l> instead
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking text",
     group = highlight_group,
