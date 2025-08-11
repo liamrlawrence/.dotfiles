@@ -1,5 +1,5 @@
 #!/bin/bash
-# New panes will activate the first venv found at ./*/bin/activate
+# New panes will activate the first venv where ./*/pyvenv.cfg exists
 
 
 if [[ "$1" == "-h" ]]; then
@@ -9,9 +9,10 @@ else
 fi
 
 PANE_DIR=$(tmux display-message -p -t "${TMUX_PANE}" "#{pane_current_path}")
-VENV=$(find "$PANE_DIR" -maxdepth 3 -type f -path "*/bin/activate" | head -n1)
+VENV_CFG=$(find "$PANE_DIR" -maxdepth 2 -type f -name "pyvenv.cfg" | head -n1)
 
-if [[ -n "$VENV" ]]; then
+if [[ -n "$VENV_CFG" ]]; then
+    VENV="${VENV_CFG%/pyvenv.cfg}/bin/activate"
     tmux split-window "$SPLIT_DIRECTION" -c "$PANE_DIR" \
         ". ${VENV}; $SHELL"
 else
