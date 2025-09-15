@@ -47,16 +47,16 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-    desc = "Run 'black' after saving Python files",
-    group = python_files_group,
-    pattern = "*.py",
-    callback = function()
-        local file = vim.fn.expand('%')
-        vim.fn.system("black -q " .. file)
-        vim.cmd("edit!")    -- Re-read the file to reflect the changes
-    end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+--     desc = "Run 'black' after saving Python files",
+--     group = python_files_group,
+--     pattern = "*.py",
+--     callback = function()
+--         local file = vim.fn.expand('%')
+--         vim.fn.system("black -q " .. file)
+--         vim.cmd("edit!")    -- Re-read the file to reflect the changes
+--     end,
+-- })
 
 
 -- Go
