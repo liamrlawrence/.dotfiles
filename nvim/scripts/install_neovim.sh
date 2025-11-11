@@ -1,98 +1,150 @@
 #!/bin/bash
 
-
+set -euo pipefail
 
 DEFAULT_DIR="$HOME/Software"
 
 show_help() {
-    echo "Usage: $0 [OPTION] [DIR]"
+    echo "Usage: $0 [OPTIONS]"
     echo
     echo "Install the latest version of Neovim."
     echo
     echo "Options:"
-    echo "  -h, --help      Show this help message and exit"
+    echo "  -h, --help         Show this help message and exit"
+    echo "      --dir PATH     Installation directory (default: '$DEFAULT_DIR')"
     echo
-    echo "DIR:"
-    echo "  Optional pathstring to specify the installation directory."
-    echo "  Default is '$DEFAULT_DIR' if not provided."
-    echo
-    echo "Example:"
-    echo "sudo -E $0 /usr/local"
+    echo "Examples:"
+    echo "  $0"
+    echo "  $0 --dir /usr/local"
+    echo "  sudo -E $0 --dir /usr/local"
 }
-if [[ "$1" == "-h" || "$1" == "--help" ]]; then
-    show_help
-    exit 0
+
+# ---- Parse args --------------------------------------------------------------
+installation_dir="$DEFAULT_DIR"
+
+if [[ $# -gt 0 ]]; then
+    while [[ $# -gt 0 ]]; do
+        case "${1-}" in
+            -h|--help)
+                show_help
+                exit 0
+                ;;
+            --dir)
+                shift
+                if [[ $# -eq 0 ]]; then
+                    echo "Error: --dir requires a PATH argument." >&2
+                    exit 1
+                fi
+                installation_dir="$1"
+                shift
+                ;;
+            --)
+                shift
+                break
+                ;;
+            -*)
+                echo "Error: unknown option '$1'" >&2
+                echo "Try: $0 --help" >&2
+                exit 1
+                ;;
+            *)
+                echo "Error: positional arguments are not supported. Use --dir PATH." >&2
+                exit 1
+                ;;
+        esac
+    done
 fi
 
-installation_dir="${1:-$DEFAULT_DIR}"
-installation_name="nvim-linux"
+
+# ---- Requirements ------------------------------------------------------------
+need() {
+    command -v "$1" >/dev/null 2>&1 || {
+        echo "Error: required command '$1' not found." >&2
+        exit 1
+    }
+}
+need curl
+need jq
+need sha256sum
+need tar
 
 
-# Files
+# ---- Config -----------------------------------------------------------------
+installation_name="nvim-linux"                 # final folder name after install
 asset_name="nvim-linux-x86_64"
 asset_tar="$asset_name.tar.gz"
-checksum="shasum.txt"
 
-# URLs
 latest_release_url="https://api.github.com/repos/neovim/neovim/releases/latest"
-latest_release=$(wget -qO- "$latest_release_url")
-asset_url=$(echo $latest_release | jq -r '.assets[] | select(.name == "'$asset_tar'") | .browser_download_url')
-sum_url=$(echo $latest_release | jq -r '.assets[] | select(.name == "'$checksum'") | .browser_download_url')
 
 
-download_file() {
-    local url=$1
-    local output=$2
-    if [ -n "$url" ]; then
-        wget -q -O "$output" "$url"
-        if [ $? -eq 0 ]; then
-            echo "Downloaded $output from $url"
-        else
-            echo "Failed to download $output from $url"
-            exit 1
-        fi
-    else
-        echo "URL for $output not found"
-        exit 1
-    fi
-}
-tmp_dir=$(mktemp -d)
-cd $tmp_dir
-download_file "$asset_url" "$asset_tar"
-download_file "$sum_url" "$checksum"
+# ---- Fetch release JSON -----------------------------------------------------
+echo "Fetching latest Neovim release metadata..."
+latest_json="$(curl --fail --silent --show-error -H "Accept: application/vnd.github+json" -L "$latest_release_url")"
 
-# if sha256sum --ignore-missing -c "$checksum"; then
-if sha256sum -c "$checksum"; then
-    echo "Checksum verification passed for $asset_tar"
-else
-    echo "Checksum verification failed for $asset_tar"
+asset_url="$(echo "$latest_json" \
+    | jq -r --arg asset "$asset_tar" '.assets[] | select(.name==$asset) | .browser_download_url // empty')"
+
+if [[ -z "$asset_url" ]]; then
+    echo "Error: could not find asset '$asset_tar' in the latest release." >&2
     exit 1
 fi
 
+checksum="$(echo "$latest_json" \
+    | jq -r --arg asset "$asset_tar" '.assets[] | select(.name==$asset) | .digest // empty')"
 
-mkdir -p "$installation_dir"
-if [ -d "$installation_dir/$asset_name" ]; then
-    mv "$installation_dir/$asset_name" $tmp_dir/
+if [[ -n "$checksum" && "$checksum" != sha256:* ]]; then
+    echo "Warning: unexpected digest format: '$checksum' (expected 'sha256:<hex>')" >&2
 fi
+
+
+# ---- Download ---------------------------------------------------------------
+tmp_dir="$(mktemp -d)"
+cleanup() {
+    rm -rf "$tmp_dir"
+}
+trap cleanup EXIT
+
+cd "$tmp_dir"
+echo "Downloading: $asset_url"
+curl --fail --silent --show-error -L -o "$asset_tar" "$asset_url"
+
+
+# ---- Verify (if digest available) -------------------------------------------
+if [[ -n "${checksum:-}" && "$checksum" == sha256:* ]]; then
+    expected="${checksum#sha256:}"
+    echo "Verifying checksum (sha256)..."
+    # Use --check format: "<hash><two spaces><filename>"
+    if printf '%s  %s\n' "$expected" "$asset_tar" | sha256sum --check --status -; then
+        echo "Checksum verification passed for $asset_tar"
+    else
+        echo "Checksum verification FAILED for $asset_tar" >&2
+        exit 1
+    fi
+else
+    echo "Note: No GitHub-provided digest available for this asset. Skipping verification."
+fi
+
+
+# ---- Install ---------------------------------------------------------------
+echo "Installing to: $installation_dir"
+mkdir -p "$installation_dir"
+
+# Backup any existing extracted dir before untar
+if [[ -d "$installation_dir/$asset_name" ]]; then
+    backup_dir="$installation_dir/${asset_name}.bak.$(date +%s)"
+    echo "Found existing $installation_dir/$asset_name — moving to $backup_dir"
+    mv "$installation_dir/$asset_name" "$backup_dir"
+fi
+
 tar xfz "$asset_tar" -C "$installation_dir"
+
+# Normalize directory name to a stable path
+if [[ -d "$installation_dir/$installation_name" ]]; then
+    backup_install="$installation_dir/${installation_name}.bak.$(date +%s)"
+    echo "Found existing $installation_dir/$installation_name — moving to $backup_install"
+    mv "$installation_dir/$installation_name" "$backup_install"
+fi
 mv "$installation_dir/$asset_name" "$installation_dir/$installation_name"
 
-
-if [ -z "$NEOVIM_PATH" ]; then
-    if [ -n "$SUDO_USER" ]; then
-        USER_HOME="$(eval echo ~$SUDO_USER)"
-    else
-        USER_HOME="$HOME"
-    fi
-    bashrc_path="$USER_HOME/.bashrc"
-    echo "# Neovim" >> "$bashrc_path"
-    echo "export NEOVIM_PATH=\"$installation_dir/$installation_name/bin/nvim\"" >> "$bashrc_path"
-    echo 'alias vim="$NEOVIM_PATH"' >> "$bashrc_path"
-    echo 'export SUDO_EDITOR="$NEOVIM_PATH"' >> "$bashrc_path"
-    echo "" >> "$bashrc_path"
-    echo "$bashrc_path has been updated"
-fi
-
-
-echo "Neovim installed, run with 'vim'"
+echo "Neovim installed."
 

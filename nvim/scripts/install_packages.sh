@@ -3,7 +3,7 @@
 
 packages=(
     # Required for install_neovim.sh
-    wget jq
+    curl jq tar coreutils
 
     # Neovim
     ripgrep fd-find         # Telescope (Grep + file search)
