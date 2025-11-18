@@ -70,6 +70,10 @@ export PATH="$PATH:$GOROOT/bin"
 export PATH="$PATH:$GOPATH/bin"
 
 
+# Rust
+. "$HOME/.cargo/env"
+
+
 # Aliases
 alias cleard='clear; date +%r'
 
