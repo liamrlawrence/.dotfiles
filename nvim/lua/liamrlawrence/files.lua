@@ -2,6 +2,7 @@ local augroup = vim.api.nvim_create_augroup
 local all_files_group = augroup("LL.files_all-group", { clear = true })
 local python_files_group = augroup("LL.files_python-group", { clear = true })
 local go_files_group = augroup("LL.files_go-group", { clear = true })
+local rust_files_group = augroup("LL.files_rust-group", { clear = true })
 local html_files_group = augroup("LL.files_html-group", { clear = true })
 local css_files_group = augroup("LL.files_css-group", { clear = true })
 local json_files_group = augroup("LL.files_json-group", { clear = true })
@@ -39,11 +40,17 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("FileType", {
     desc = "Python file settings",
     group = python_files_group,
-    pattern = "py",
+    pattern = "python",
     callback = function()
         vim.bo.expandtab = true
         vim.bo.shiftwidth = 4
         vim.bo.tabstop = 4
+
+        vim.keymap.set("n", "<leader>lip", "oprint(f'{}')<Esc>hhi", {
+            desc = "Insert a print in Python",
+            buffer = true,
+            silent = true,
+        })
     end,
 })
 
@@ -94,6 +101,25 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = go_files_group,
     pattern = "*.templ",
     command = "silent! templ generate",
+})
+
+
+-- Rust
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Rust file settings",
+    group = rust_files_group,
+    pattern = "rust",
+    callback = function()
+        vim.bo.expandtab = false
+        vim.bo.shiftwidth = 8
+        vim.bo.tabstop = 8
+
+        vim.keymap.set("n", "<leader>lip", 'oprintln!("{}", );<Esc>hi', {
+            desc = "Insert a println! in Rust",
+            buffer = true,
+            silent = true,
+        })
+    end,
 })
 
 
