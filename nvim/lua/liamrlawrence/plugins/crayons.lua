@@ -9,6 +9,7 @@ return {
         "EdenEast/nightfox.nvim",
         "ribru17/bamboo.nvim",
         "Mofiqul/vscode.nvim",
+        "chaserensberger/christmas.nvim",
     },
 
     config = function()
@@ -73,6 +74,12 @@ return {
                     background = "dark",
                     transparency = false,
                     keybinding = "<leader>ttv",
+                },
+                {
+                    colorscheme = "christmas",
+                    background = "dark",
+                    transparency = false,
+                    keybinding = "<leader>thc",
                 },
             },
 

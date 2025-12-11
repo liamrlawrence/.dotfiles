@@ -32,7 +32,7 @@ vim.opt.smartcase = true
 vim.opt.ignorecase = true
 
 vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "80,120"
 
 vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
