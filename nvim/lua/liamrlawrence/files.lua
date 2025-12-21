@@ -1,5 +1,6 @@
 local augroup = vim.api.nvim_create_augroup
 local all_files_group = augroup("LL.files_all-group", { clear = true })
+local git_files_group = augroup("LL.files_git-group", { clear = true })
 local python_files_group = augroup("LL.files_python-group", { clear = true })
 local go_files_group = augroup("LL.files_go-group", { clear = true })
 local rust_files_group = augroup("LL.files_rust-group", { clear = true })
@@ -191,6 +192,17 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = false
         vim.bo.shiftwidth = 8
         vim.bo.tabstop = 8
+    end,
+})
+
+
+-- Git commits
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Highlight from col 51 onward on line 1",
+    group = git_files_group,
+    pattern = "gitcommit",
+    callback = function()
+        vim.fn.matchadd("WarningMsg", [[\%1l\%>50v.*]])
     end,
 })
 

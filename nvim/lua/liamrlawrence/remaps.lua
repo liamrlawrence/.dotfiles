@@ -142,6 +142,10 @@ end, { desc = "Yank diagnostics from current line to clipboard" })
 vim.keymap.set("n", "<leader>d", [["_d]],   { desc = "Don't save deleted text to buffer" })
 vim.keymap.set("v", "<leader>d", [["_d]],   { desc = "Don't save deleted text to buffer" })
 vim.keymap.set("x", "<leader>p", [["_dP]],  { desc = "Don't save deleted text to buffer" })
+vim.keymap.set("n", "<leader>x", [["_x]],   { desc = "Don't save deleted text to buffer" })
+vim.keymap.set("v", "<leader>x", [["_x]],   { desc = "Don't save deleted text to buffer" })
+vim.keymap.set("n", "<leader>c", [["_c]],   { desc = "Don't save deleted text to buffer" })
+vim.keymap.set("v", "<leader>c", [["_c]],   { desc = "Don't save deleted text to buffer" })
 
 
 -- Quickfix list
