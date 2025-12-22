@@ -11,11 +11,11 @@ fi
 usage() {
     cat >&2 <<'EOF'
 Usage:
-  sendkey_pane.sh --x {left|right} --y {top|bottom} command [args...]
+    sendkey_pane.sh --x {left|right} --y {top|bottom} command [args...]
 
 Examples:
-  sendkey_pane.sh --x left  --y top    htop
-  sendkey_pane.sh --x right --y bottom tail -f /var/log/syslog
+    sendkey_pane.sh --x left  --y top    htop
+    sendkey_pane.sh --x right --y bottom tail -f /var/log/syslog
 EOF
 }
 
@@ -62,28 +62,28 @@ active_pane_id="$(tmux display-message -p '#{pane_id}')"
 zoomed_flag="$(tmux display-message -p '#{window_zoomed_flag}')"
 
 if [[ "$zoomed_flag" == "1" ]]; then
-  tmux resize-pane -Z -t "$active_pane_id"
-  trap 'tmux resize-pane -Z -t "'"$active_pane_id"'" >/dev/null 2>&1 || true' EXIT
+    tmux resize-pane -Z -t "$active_pane_id"
+    trap 'tmux resize-pane -Z -t "'"$active_pane_id"'" >/dev/null 2>&1 || true' EXIT
 fi
 
 pane_count="$(tmux list-panes -t "$window_id" | wc -l | tr -d ' ')"
 if [[ "$pane_count" == "1" ]]; then
-  tmux split-window -h -d -t "$active_pane_id"
+    tmux split-window -h -d -t "$active_pane_id" -c "#{pane_current_path}"
 fi
 
 
 target_pane="$(
-  tmux list-panes -t "$window_id" -F '#{pane_id} #{pane_left} #{pane_right} #{pane_top} #{pane_bottom}' \
-  | awk -v x="$x_dir" -v y="$y_dir" '
-      {
-        id=$1; l=$2; r=$3; t=$4; b=$5;
-        xm = (x=="left") ? l : -r;
-        ym = (y=="top")  ? t : -b;
-        print id, xm, ym;
-      }
+    tmux list-panes -t "$window_id" -F '#{pane_id} #{pane_left} #{pane_right} #{pane_top} #{pane_bottom}' \
+    | awk -v x="$x_dir" -v y="$y_dir" '
+        {
+            id=$1; l=$2; r=$3; t=$4; b=$5;
+            xm = (x=="left") ? l : -r;
+            ym = (y=="top")  ? t : -b;
+            print id, xm, ym;
+        }
     ' \
-  | sort -k2,2n -k3,3n \
-  | awk 'NR==1 {print $1}'
+    | sort -k2,2n -k3,3n \
+    | awk 'NR==1 {print $1}'
 )"
 
 tmux send-keys -t "$target_pane" "${cmd[@]}" C-m
