@@ -57,9 +57,23 @@ if [ $# -eq 0 ]; then
 fi
 
 cmd=( "$@" )
+window_id="$(tmux display-message -p '#{window_id}')"
+active_pane_id="$(tmux display-message -p '#{pane_id}')"
+zoomed_flag="$(tmux display-message -p '#{window_zoomed_flag}')"
+
+if [[ "$zoomed_flag" == "1" ]]; then
+  tmux resize-pane -Z -t "$active_pane_id"
+  trap 'tmux resize-pane -Z -t "'"$active_pane_id"'" >/dev/null 2>&1 || true' EXIT
+fi
+
+pane_count="$(tmux list-panes -t "$window_id" | wc -l | tr -d ' ')"
+if [[ "$pane_count" == "1" ]]; then
+  tmux split-window -h -d -t "$active_pane_id"
+fi
+
 
 target_pane="$(
-  tmux list-panes -F '#{pane_id} #{pane_left} #{pane_right} #{pane_top} #{pane_bottom}' \
+  tmux list-panes -t "$window_id" -F '#{pane_id} #{pane_left} #{pane_right} #{pane_top} #{pane_bottom}' \
   | awk -v x="$x_dir" -v y="$y_dir" '
       {
         id=$1; l=$2; r=$3; t=$4; b=$5;
