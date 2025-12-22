@@ -12,20 +12,6 @@ vim.keymap.set("n", "Q", "<nop>", { desc = "<Nop>" })
 -- vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "<C-c> is just better <Esc>" })   -- NOTE: Became enlightened, started using <C-[>
 
 
--- -- Custom :write message
--- vim.api.nvim_create_autocmd("BufWritePost", {
---     callback = function()
---         local filepath = vim.fn.expand("%:.")
---         local lines = vim.fn.line("$")
---         local timestamp = os.date("%-H:%M:%S")
---         local bytes = vim.fn.getfsize(filepath)
---         local message = string.format("\"%s\" %dL, %dB written at %s", filepath, lines, bytes, timestamp)
---         vim.api.nvim_command("redraw")  -- NOTE: Redraw avoids having to press Enter
---         vim.api.nvim_echo({{message, "None"}}, false, {})
---     end,
--- })
-
-
 -- Explorer
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Explorer" })
 vim.api.nvim_create_autocmd("FileType", {
@@ -165,8 +151,8 @@ end, { desc = "Toggle quickfix list" })
 
 
 -- Text replace
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Global text replace" })
-vim.keymap.set("n", "<leader>S", [[:.s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Line text replace" })
+vim.keymap.set("n", "<leader>s", [[:.s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Line text replace" })
+vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Global text replace" })
 
 
 -- Editor
