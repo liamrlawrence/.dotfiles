@@ -34,8 +34,8 @@ while [ $# -gt 0 ]; do
     shift
 done
 
-x_dir="${x_dir,,}"  # to lower
-y_dir="${y_dir,,}"  # to lower
+x_dir=$(echo "$x_dir" | tr '[:upper:]' '[:lower:]')
+y_dir=$(echo "$y_dir" | tr '[:upper:]' '[:lower:]')
 
 if [[ -z "$x_dir" || -z "$y_dir" ]]; then
     echo "Error: you must provide both --x and --y." >&2
@@ -86,5 +86,5 @@ target_pane="$(
     | awk 'NR==1 {print $1}'
 )"
 
-tmux send-keys -t "$target_pane" "${cmd[@]}" C-m
+tmux send-keys -t "$target_pane" "${cmd[*]}" C-m
 
