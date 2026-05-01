@@ -9,7 +9,7 @@ return {
             distance_stop_animation = 0.5,
         })
 
-        vim.keymap.set("n", "<leader>es", ":SmearCursorToggle<CR>")
+        vim.keymap.set("n", "<leader>es", "<cmd>SmearCursorToggle<CR>", { desc = "Toggle Smear" })
     end
 }
 

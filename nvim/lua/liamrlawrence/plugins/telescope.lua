@@ -14,6 +14,14 @@ return {
                     "node_modules",
                     "static/vendor",
                 },
+                mappings = {
+                    n = {
+                        ["<M-q>"] = require("telescope.actions").send_to_loclist + require("telescope.actions").open_loclist,
+                    },
+                    i = {
+                        ["<M-q>"] = require("telescope.actions").send_to_loclist + require("telescope.actions").open_loclist,
+                    },
+                },
             },
         }
         local builtin = require("telescope.builtin")

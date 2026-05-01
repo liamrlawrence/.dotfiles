@@ -101,6 +101,7 @@ return {
                 -- vim.keymap.set("n", "gr",           vim.lsp.buf.references,         { buffer = e.buf, desc = "LSP Get references" })         -- grr
                 vim.keymap.set("n", "<leader>lws",  vim.lsp.buf.workspace_symbol,   { buffer = e.buf, desc = "LSP workspace symbol" })
                 vim.keymap.set("n", "<leader>ld",   vim.diagnostic.open_float,      { buffer = e.buf, desc = "LSP open diagnostics" })
+                vim.keymap.set("n", "<leader>lD",   vim.diagnostic.setloclist,      { buffer = e.buf, desc = "LSP diagnostics to location list" })
                 -- vim.keymap.set("n", "<leader>lca",  vim.lsp.buf.code_action,        { buffer = e.buf, desc = "LSP code action" })            -- gra
                 -- vim.keymap.set("n", "<leader>lrn",  vim.lsp.buf.rename,             { buffer = e.buf, desc = "LSP rename" })                 -- grn
                 vim.keymap.set("n", "K",            vim.lsp.buf.hover,              { buffer = e.buf, desc = "LSP display hover" })          -- K

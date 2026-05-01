@@ -8,12 +8,12 @@ vim.api.nvim_create_autocmd("VimEnter", {
     nested = true,
     callback = function()
         local session_file = nil
-        local shada_file = vim.fn.stdpath("data") .. "/sessions/global_data.shada"
+        local shada_file = vim.fn.stdpath("data") .. "/sessions/global.shada"
 
         -- Load session if 'vim .' was run in a directory containing a git project
         if (vim.fn.isdirectory(".git") == 1) and (vim.fn.argc() == 1 and vim.fn.argv(0) == ".") then
             session_file = ".git/session.vim"
-            shada_file = ".git/data.shada"
+            shada_file = ".git/session.shada"
 
             if vim.fn.filereadable(session_file) == 1 then
                 vim.cmd("source " .. session_file)

@@ -137,9 +137,7 @@ vim.keymap.set("v", "<leader>c", [["_c]],   { desc = "Don't save deleted text to
 -- Quickfix list
 vim.keymap.set("n", "<C-j>",     "<cmd>cnext<CR>zz",    { desc = "Next quickfix" })
 vim.keymap.set("n", "<C-k>",     "<cmd>cprev<CR>zz",    { desc = "Prev quickfix" })
-vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>zz",    { desc = "Next location list fix" })
-vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz",    { desc = "Prev location list fix" })
-vim.keymap.set("n", "<leader>q", function()
+vim.keymap.set("n", "<C-q>", function()
     for _, win in pairs(vim.fn.getwininfo()) do
         if win["quickfix"] == 1 then
             vim.cmd("cclose")
@@ -148,6 +146,22 @@ vim.keymap.set("n", "<leader>q", function()
     end
     vim.cmd("copen")
 end, { desc = "Toggle quickfix list" })
+
+
+-- Location list
+vim.keymap.set("n", "<M-j>", "<cmd>lnext<CR>zz",    { desc = "Next location list" })
+vim.keymap.set("n", "<M-k>", "<cmd>lprev<CR>zz",    { desc = "Prev location list" })
+vim.keymap.set("n", "<M-q>", function()
+    for _, win in pairs(vim.fn.getwininfo()) do
+        if win["loclist"] == 1 then
+            vim.cmd("lclose")
+            return
+        end
+    end
+    if vim.fn.getloclist(0, { nr = 0 }).nr ~= 0 then
+        vim.cmd("lopen")
+    end
+end, { desc = "Toggle location list" })
 
 
 -- Text replace
