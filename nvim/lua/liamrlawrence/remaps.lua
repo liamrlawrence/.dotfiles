@@ -185,3 +185,12 @@ vim.keymap.set("n", "<leader>e=", function() -- "mzgg=G`z"
     vim.fn.setpos(".", saved_pos)
 end, { desc = "Reindent file" })
 
+vim.keymap.set("n", "<leader>et", function()
+    local char = vim.fn.getcharstr()
+    local num = tonumber(char)
+    if num and num >= 1 and num <= 9 then
+        vim.opt.tabstop = num
+        vim.notify("tabstop=" .. num, vim.log.levels.INFO)
+    end
+end, { desc = "Set tabstop" })
+
