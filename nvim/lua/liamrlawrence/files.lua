@@ -64,6 +64,15 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+    desc = "Format C++ files with 'clang-format' before saving",
+    group = cpp_files_group,
+    pattern = { "*.cc", "*.cpp", "*.hh", "*.hpp" },
+    callback = function()
+        vim.lsp.buf.format({ async = false, name = "clangd" })
+    end,
+})
+
 
 -- Python
 vim.api.nvim_create_autocmd("FileType", {
@@ -108,10 +117,12 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-    desc = "Run 'go fmt' after saving Go files",
+    desc = "Format go files with 'go fmt' before saving",
     group = go_files_group,
     pattern = "*.go",
-    command = "silent! lua vim.lsp.buf.format()",
+    callback = function()
+        vim.lsp.buf.format({ async = false })
+    end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {

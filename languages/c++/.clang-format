@@ -1,0 +1,59 @@
+# .clang-format
+
+ColumnLimit: 100
+MaxEmptyLinesToKeep: 3
+InsertNewlineAtEOF: true
+KeepEmptyLinesAtEOF: true
+
+
+# Indentation
+UseTab: ForIndentation
+TabWidth: 8
+IndentWidth: 8
+AccessModifierOffset: -8    # public:private:/ sit flush with class brace, not indented
+IndentPPDirectives: None    #ifdef / #else / #endif are not indented
+NamespaceIndentation: None
+
+
+# Braces
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterFunction: true
+  AfterClass: false
+  AfterControlStatement: Never
+  AfterEnum: false
+  AfterNamespace: false
+  AfterStruct: false
+  AfterUnion: false
+  BeforeCatch: false
+  BeforeElse: false
+
+
+# Operators
+BreakBeforeBinaryOperators: NonAssignment
+
+
+## Switch statement
+IndentCaseLabels: true   # indent "case:" relative to "switch"
+IndentCaseBlocks: false  # indent the block body under each case
+
+
+# Alignment
+AlignConsecutiveAssignments:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+
+PointerAlignment: Left
+
+SpaceBeforeParens: Never
+
+
+# Comments
+## Trailing comments
+SpacesBeforeTrailingComments: 2
+AlignTrailingComments:
+  Kind: Always
+  OverEmptyLines: 0
+
+
