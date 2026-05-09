@@ -1,6 +1,7 @@
 -- The holiest of leader keys
 vim.g.mapleader = " "
 
+vim.opt.statusline = "%<%f %h%m%r%=%-20(0x%B | %l,%c%V%) %P"
 
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 vim.opt.fillchars = { vert = " ", eob = "~" }
