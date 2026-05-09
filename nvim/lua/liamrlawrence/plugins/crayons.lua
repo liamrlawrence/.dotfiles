@@ -1,9 +1,8 @@
 return {
     "liamrlawrence/crayons.nvim",
-    -- event = "VeryLazy",
-    -- ft = { "org" },
     dependencies = {
         "liamrlawrence/cabinet.nvim",
+        "folke/styler.nvim",
         "rebelot/kanagawa.nvim",
         "folke/tokyonight.nvim",
         "EdenEast/nightfox.nvim",
@@ -84,17 +83,23 @@ return {
             },
 
             filetype_themes = {
+                -- Git
                 {
-                    colorscheme = "nightfox",
+                    filetype = "fugitive",
+                    colorscheme = "carbonfox",
                     background = "dark",
-                    transparency = false,
-                    pattern = "*.org",
+                },
+
+                -- C / C++
+                {
+                    filetype = { "c", "cpp" },
+                    colorscheme = "kanagawa-wave",
+                    background = "dark",
                 },
                 {
-                    colorscheme = "nightfox",
+                    pattern = { "*.h", "*.hh" },
+                    colorscheme = "kanagawa-dragon",
                     background = "dark",
-                    transparency = false,
-                    pattern = "fugitive://*",
                 },
             },
         })
