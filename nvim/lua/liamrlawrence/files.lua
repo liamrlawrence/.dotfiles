@@ -2,8 +2,7 @@ local augroup = vim.api.nvim_create_augroup
 local all_files_group = augroup("LL.files_all-group", { clear = true })
 local git_files_group = augroup("LL.files_git-group", { clear = true })
 local python_files_group = augroup("LL.files_python-group", { clear = true })
-local c_files_group = augroup("LL.files_c-group", { clear = true })
-local cpp_files_group = augroup("LL.files_cpp-group", { clear = true })
+local cc_files_group = augroup("LL.files_cc-group", { clear = true })
 local go_files_group = augroup("LL.files_go-group", { clear = true })
 local rust_files_group = augroup("LL.files_rust-group", { clear = true })
 local html_files_group = augroup("LL.files_html-group", { clear = true })
@@ -39,24 +38,12 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 
--- C
+-- C/C++
+local cc_file_patterns = { "*.c", "*.h", "*.cc", "*.hh", "*.cpp", "*.hpp" }
 vim.api.nvim_create_autocmd("FileType", {
-    desc = "C file settings",
-    group = c_files_group,
-    pattern = "c",
-    callback = function()
-        vim.bo.expandtab = false
-        vim.bo.shiftwidth = 8
-        vim.bo.tabstop = 8
-    end,
-})
-
-
--- C++
-vim.api.nvim_create_autocmd("FileType", {
-    desc = "C++ file settings",
-    group = cpp_files_group,
-    pattern = "cpp",
+    desc = "C/C++ file settings",
+    group = cc_files_group,
+    pattern = cc_file_patterns,
     callback = function()
         vim.bo.expandtab = false
         vim.bo.shiftwidth = 8
@@ -65,12 +52,29 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-    desc = "Format C++ files with 'clang-format' before saving",
-    group = cpp_files_group,
-    pattern = { "*.cc", "*.cpp", "*.hh", "*.hpp" },
+    desc = "Format C/C++ files with 'clang-format' before saving",
+    group = cc_files_group,
+    pattern = cc_file_patterns,
     callback = function()
         vim.lsp.buf.format({ async = false, name = "clangd" })
     end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    desc = "Update 'Updated:' date in C/C++ file header comments",
+    group = cc_files_group,
+    pattern = cc_file_patterns,
+    callback = function()
+        local lines = vim.api.nvim_buf_get_lines(0, 0, 15, false)   -- Only look at first 15 lines
+        for i, line in ipairs(lines) do
+            if line:match("^// Updated%s*:") then
+                local today = os.date("%B %-d, %Y")
+                local new_line = line:gsub("(// Updated%s*:%s*).*", "%1" .. today)
+                vim.api.nvim_buf_set_lines(0, i - 1, i, false, { new_line })
+                break
+            end
+        end
+    end
 })
 
 
@@ -92,16 +96,16 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- vim.api.nvim_create_autocmd("BufWritePost", {
---     desc = "Run 'black' after saving Python files",
---     group = python_files_group,
---     pattern = "*.py",
---     callback = function()
---         local file = vim.fn.expand('%')
---         vim.fn.system("black -q " .. file)
---         vim.cmd("edit!")    -- Re-read the file to reflect the changes
---     end,
--- })
+vim.api.nvim_create_autocmd("BufWritePost", {
+    desc = "Run 'black' after saving Python files",
+    group = python_files_group,
+    pattern = "*.py",
+    callback = function()
+        -- local file = vim.fn.expand('%')
+        -- vim.fn.system("black -q " .. file)
+        -- vim.cmd("edit!")    -- Re-read the file to reflect the changes
+    end,
+})
 
 
 -- Go
@@ -153,7 +157,6 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = false
         vim.bo.shiftwidth = 8
         vim.bo.tabstop = 8
-
         vim.keymap.set("n", "<leader>lip", 'oprintln!("{}", );<Esc>hi', {
             desc = "Insert a println! in Rust",
             buffer = true,
@@ -235,7 +238,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
--- Git commits
+-- Git
 vim.api.nvim_create_autocmd("FileType", {
     desc = "Highlight from col 51 onward on line 1",
     group = git_files_group,

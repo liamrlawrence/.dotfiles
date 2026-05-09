@@ -16,7 +16,7 @@ Flags:
     --tmux
     --nvim
     --bashrc
-    --lang-cpp
+    --lang-cc
     --lang-go
     --lang-python
     -h, --help
@@ -102,8 +102,8 @@ setup_bashrc() {
     create_symlink "$HOME/.bashrc"
 }
 
-setup_lang_cpp() {
-    create_symlink "$HOME/.clang-format" "$(pwd)/languages/c++/.clang-format"
+setup_lang_cc() {
+    create_symlink "$HOME/.clang-format" "$(pwd)/languages/cc/clang-format"
 }
 
 setup_lang_go() {
@@ -135,7 +135,7 @@ else
             --tmux)         DO_TMUX=true ;;
             --nvim)         DO_NVIM=true ;;
             --bashrc)       DO_BASHRC=true ;;
-            --lang-cpp)     DO_LANG_CPP=true ;;
+            --lang-cc)      DO_LANG_CC=true ;;
             --lang-go)      DO_LANG_GO=true ;;
             --lang-python)  DO_LANG_PY=true ;;
             -h|--help)
@@ -157,7 +157,7 @@ fi
 $DO_TMUX        && setup_tmux
 $DO_NVIM        && setup_nvim
 $DO_BASHRC      && setup_bashrc
-$DO_LANG_CPP    && setup_lang_cpp
+$DO_LANG_CC     && setup_lang_cc
 $DO_LANG_GO     && setup_lang_go
 $DO_LANG_PY     && setup_lang_python
 

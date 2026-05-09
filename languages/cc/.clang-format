@@ -1,18 +1,24 @@
 # .clang-format
 
+
+# Line limit
 ColumnLimit: 100
+
+
+# Indentation
 MaxEmptyLinesToKeep: 3
+UseTab: ForIndentation
+TabWidth: 8
+IndentWidth: 8
+AccessModifierOffset: -8    # public:/private: sit flush with class brace, not indented
+IndentPPDirectives: None    #ifdef / #else / #endif are not indented
+NamespaceIndentation: None
 InsertNewlineAtEOF: true
 KeepEmptyLinesAtEOF: true
 
 
-# Indentation
-UseTab: ForIndentation
-TabWidth: 8
-IndentWidth: 8
-AccessModifierOffset: -8    # public:private:/ sit flush with class brace, not indented
-IndentPPDirectives: None    #ifdef / #else / #endif are not indented
-NamespaceIndentation: None
+# Spacing
+SpaceBeforeParens: Never
 
 
 # Braces
@@ -34,19 +40,19 @@ BreakBeforeBinaryOperators: NonAssignment
 
 
 ## Switch statement
-IndentCaseLabels: true   # indent "case:" relative to "switch"
-IndentCaseBlocks: false  # indent the block body under each case
+IndentCaseLabels: false
 
 
 # Alignment
+PointerAlignment: Left
 AlignConsecutiveAssignments:
   Enabled: true
   AcrossEmptyLines: false
   AcrossComments: false
-
-PointerAlignment: Left
-
-SpaceBeforeParens: Never
+## Long function definitions have each parameter on its own line
+AlignAfterOpenBracket: BlockIndent
+BinPackParameters: false
+AllowAllParametersOfDeclarationOnNextLine: false
 
 
 # Comments
@@ -55,5 +61,4 @@ SpacesBeforeTrailingComments: 2
 AlignTrailingComments:
   Kind: Always
   OverEmptyLines: 0
-
 
