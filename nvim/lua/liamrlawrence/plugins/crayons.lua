@@ -93,12 +93,12 @@ return {
                 -- C / C++
                 {
                     filetype = { "c", "cpp" },
-                    colorscheme = "kanagawa-wave",
+                    colorscheme = "tokyonight-storm",
                     background = "dark",
                 },
                 {
                     pattern = { "*.h", "*.hh" },
-                    colorscheme = "kanagawa-dragon",
+                    colorscheme = "tokyonight-night",
                     background = "dark",
                 },
             },

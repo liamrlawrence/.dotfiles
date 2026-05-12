@@ -80,6 +80,7 @@ alias cleard='clear; date +%r'
 
 # System
 export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.local/bin"
 export SUDO_EDITOR="$NEOVIM_PATH"
 export MANPAGER="$NEOVIM_PATH +Man!"
 
