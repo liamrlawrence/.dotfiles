@@ -97,7 +97,7 @@ return {
                     background = "dark",
                 },
                 {
-                    pattern = { "*.h", "*.hh" },
+                    pattern = { "*.h", "*.hh", "*.hpp" },
                     colorscheme = "tokyonight-night",
                     background = "dark",
                 },

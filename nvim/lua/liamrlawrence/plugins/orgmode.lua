@@ -18,6 +18,8 @@ return {
         })
 
         require("org-bullets").setup()
+
+        vim.lsp.enable("org")
     end
 }
 
