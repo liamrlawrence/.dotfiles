@@ -65,6 +65,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = cc_files_group,
     pattern = cc_file_patterns,
     callback = function()
+        if not vim.bo.modified then return end
         local lines = vim.api.nvim_buf_get_lines(0, 0, 15, false)   -- Only look at first 15 lines
         for i, line in ipairs(lines) do
             if line:match("^// Updated%s*:") then
