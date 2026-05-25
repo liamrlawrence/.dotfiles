@@ -241,11 +241,13 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Git
 vim.api.nvim_create_autocmd("FileType", {
-    desc = "Highlight from col 51 onward on line 1",
+    desc = "Highlight rules for git commit messages",
     group = git_files_group,
     pattern = "gitcommit",
     callback = function()
-        vim.fn.matchadd("WarningMsg", [[\%1l\%>50v.*]])
+        vim.fn.matchadd("WarningMsg", [[\%1l\%>50v.*]])         -- yellow 51+
+        vim.fn.matchadd("ErrorMsg",   [[\%1l\%>72v.*]], 11)     -- red 73+
+        vim.fn.matchadd("ErrorMsg",   [[\%2l.*]])               -- red line 2
     end,
 })
 
