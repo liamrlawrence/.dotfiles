@@ -13,6 +13,7 @@ Usage:
     ./create_links.sh [flags...]        # setup only selected components
 
 Flags:
+    --git
     --tmux
     --nvim
     --bashrc
@@ -90,6 +91,10 @@ create_symlink() {
 }
 
 # Individual setup actions
+setup_git() {
+    create_symlink "$HOME/.config/git"
+}
+
 setup_tmux() {
     create_symlink "$HOME/.config/tmux"
 }
@@ -116,6 +121,7 @@ setup_lang_python() {
 
 
 # Parse flags
+DO_GIT=false
 DO_TMUX=false
 DO_NVIM=false
 DO_BASHRC=false
@@ -124,6 +130,7 @@ DO_LANG_PY=false
 
 if [ $# -eq 0 ]; then
     # No args: do everything
+    DO_GIT=true
     DO_TMUX=true
     DO_NVIM=true
     DO_BASHRC=true
@@ -132,6 +139,7 @@ if [ $# -eq 0 ]; then
 else
     while [ $# -gt 0 ]; do
         case "$1" in
+            --git)          DO_GIT=true ;;
             --tmux)         DO_TMUX=true ;;
             --nvim)         DO_NVIM=true ;;
             --bashrc)       DO_BASHRC=true ;;
@@ -154,6 +162,7 @@ fi
 
 
 # Execute selected actions
+$DO_GIT         && setup_git
 $DO_TMUX        && setup_tmux
 $DO_NVIM        && setup_nvim
 $DO_BASHRC      && setup_bashrc

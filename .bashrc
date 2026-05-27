@@ -57,8 +57,8 @@ fi
 
 
 # Neovim
-export NEOVIM_PATH="/usr/local/nvim-linux/bin/nvim"
-alias vim="$NEOVIM_PATH"
+export NEOVIM_PATH="/usr/local/nvim-linux/bin"
+export PATH="$PATH:$NEOVIM_PATH"
 
 
 # C
