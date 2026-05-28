@@ -4,16 +4,17 @@ return {
 
     config = function()
         require("nvim-treesitter.configs").setup {
-            -- ensure_installed = {
-            --     "vim", "vimdoc", "query",
-            --     "lua",
-            --     "python",
-            --     "go", "templ",
-            --     "rust",
-            --     "c", "cpp",
-            --     "javascript", "typescript",
-            --     "org",
-            -- },
+            ensure_installed = {
+                "vim", "vimdoc", "query",
+                "bash",
+                "lua",
+                "python",
+                "go", "templ",
+                "rust",
+                "c", "cpp",
+                "javascript", "typescript",
+                -- "org",
+            },
 
             -- Install parsers synchronously (only applied to `ensure_installed`)
             sync_install = false,
@@ -28,6 +29,7 @@ return {
 
             highlight = {
                 enable = true,
+                disable = { "bash" },   -- HACK: Bash is broken for some reason
 
                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
                 -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).

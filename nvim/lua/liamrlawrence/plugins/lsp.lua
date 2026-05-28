@@ -24,6 +24,18 @@ return {
         -- Apply capabilities to all servers, then override per-server as needed
         vim.lsp.config("*", { capabilities = capabilities })
 
+        vim.diagnostic.config({
+            -- update_in_insert = true,
+            float = {
+                focusable = false,
+                style = "minimal",
+                border = "rounded",
+                source = true,
+                header = "",
+                prefix = "",
+            },
+        })
+
         require("mason-lspconfig").setup({
             -- ensure_installed = {
             --     "clangd",
@@ -38,6 +50,8 @@ return {
             },
         })
 
+
+        -- Lua
         vim.lsp.config("lua_ls", {
             capabilities = capabilities,
             settings = {
@@ -55,6 +69,23 @@ return {
         })
         vim.lsp.enable("lua_ls")
 
+
+        -- C/C++
+        local clangd_cmd = "clangd"
+
+        if vim.fn.has("mac") == 1 and vim.fn.executable("/opt/homebrew/opt/llvm/bin/clangd") == 1 then
+            clangd_cmd = "/opt/homebrew/opt/llvm/bin/clangd"
+        end
+
+        vim.lsp.config("clangd", {
+            capabilities = capabilities,
+            cmd = {
+                clangd_cmd,
+            },
+        })
+
+
+        -- Keybinds
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({
@@ -72,19 +103,6 @@ return {
             })
         })
 
-        vim.diagnostic.config({
-            -- update_in_insert = true,
-            float = {
-                focusable = false,
-                style = "minimal",
-                border = "rounded",
-                source = true,
-                header = "",
-                prefix = "",
-            },
-        })
-
-        -- LSP keybinds
         vim.api.nvim_create_autocmd("LspAttach", {
             callback = function(e)
                 vim.keymap.set("n", "gd",           vim.lsp.buf.definition,         { buffer = e.buf, desc = "LSP Goto definition" })

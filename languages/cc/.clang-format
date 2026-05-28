@@ -2,7 +2,7 @@
 
 
 # Line limit
-ColumnLimit: 100
+ColumnLimit: 110
 
 
 # Indentation
@@ -15,10 +15,11 @@ IndentPPDirectives: None    #ifdef / #else / #endif are not indented
 NamespaceIndentation: None
 InsertNewlineAtEOF: true
 KeepEmptyLinesAtEOF: true
+AllowShortIfStatementsOnASingleLine: WithoutElse
 
 
 # Spacing
-SpaceBeforeParens: Never
+SpaceBeforeParens: ControlStatements
 
 
 # Braces

@@ -39,7 +39,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 
 -- C/C++
-local cc_file_patterns = { "*.c", "*.h", "*.cc", "*.hh", "*.cpp", "*.hpp" }
+local c_file_patterns = { "*.c", "*.h", }
+local cpp_file_patterns = { "*.cc", "*.hh", "*.cpp", "*.hpp", }
+local cc_file_patterns = vim.list_extend(vim.list_extend({}, c_file_patterns), cpp_file_patterns)
+
 vim.api.nvim_create_autocmd("FileType", {
     desc = "C/C++ file settings",
     group = cc_files_group,
@@ -51,25 +54,27 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- C++
 vim.api.nvim_create_autocmd("BufWritePre", {
-    desc = "Format C/C++ files with 'clang-format' before saving",
+    desc = "Format C++ files with 'clang-format' before saving",
     group = cc_files_group,
-    pattern = cc_file_patterns,
+    pattern = cpp_file_patterns,
     callback = function()
         vim.lsp.buf.format({ async = false, name = "clangd" })
     end,
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-    desc = "Update 'Updated:' date in C/C++ file header comments",
+    desc = "Update 'Updated:' date in C++ file header comments",
     group = cc_files_group,
-    pattern = cc_file_patterns,
+    pattern = cpp_file_patterns,
     callback = function()
         if not vim.bo.modified then return end
         local lines = vim.api.nvim_buf_get_lines(0, 0, 15, false)   -- Only look at first 15 lines
         for i, line in ipairs(lines) do
             if line:match("^// Updated%s*:") then
-                local today = os.date("%B %-d, %Y")
+                local today = os.date("%B %-d, %Y") --[[@as string]]
+                if line:find(today, 1, true) then break end
                 local new_line = line:gsub("(// Updated%s*:%s*).*", "%1" .. today)
                 vim.api.nvim_buf_set_lines(0, i - 1, i, false, { new_line })
                 break
