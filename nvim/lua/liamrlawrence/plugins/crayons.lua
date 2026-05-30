@@ -3,52 +3,71 @@ return {
     dependencies = {
         "liamrlawrence/cabinet.nvim",
         "folke/styler.nvim",
+        --
         "rebelot/kanagawa.nvim",
         "folke/tokyonight.nvim",
         "EdenEast/nightfox.nvim",
-        "ribru17/bamboo.nvim",
+        "motaz-shokry/gruvbox.nvim",
+        --
         "Mofiqul/vscode.nvim",
         "chaserensberger/christmas.nvim",
     },
 
     config = function()
-        require('bamboo').load()
+        -- Theme setup
+        require("kanagawa").setup({
+            overrides = function(colors)
+                local theme = colors.theme
+                return {
+                    EndOfBuffer = { fg = theme.ui.nontext },
+                }
+            end,
+        })
+
+        require("tokyonight").setup({
+            on_highlights = function(highlights, colors)
+                highlights.EndOfBuffer = { fg = colors.dark3 }
+            end,
+        })
+
+
+        -- Plugin setup
         require("crayons").setup({
             themes = {
                 {   -- 1
                     name = "kanagawa",
                     variants = {
                         standard = "kanagawa-wave",
-                        light    = "kanagawa-lotus",
                         dark     = "kanagawa-dragon",
-                        darkest  = "kanagawa-wave",
+                        darkest  = "kanagawa-dragon",
+                        light    = "kanagawa-lotus",
                     }
                 },
                 {   -- 2
                     name = "tokyonight",
                     variants = {
-                        standard = "tokyonight-storm",
-                        light    = "tokyonight-day",
+                        standard = "tokyonight-moon",
                         dark     = "tokyonight-night",
-                        darkest  = "tokyonight-night",
+                        darkest  = "tokyonight-storm",
+                        light    = "tokyonight-day",
                     }
                 },
                 {   -- 3
                     name = "nightfox1",
                     variants = {
                         standard = "nightfox",
+                        dark     = "terafox",
+                        darkest  = "carbonfox",
                         light    = "dayfox",
-                        dark     = "carbonfox",
-                        darkest  = "terafox",
                     }
                 },
                 {   -- 4
                     name = "nightfox2",
                     variants = {
                         standard = "duskfox",
-                        light    = "dawnfox",
                         dark     = "terafox",
                         darkest  = "carbonfox",
+                        light    = "dawnfox",
                     }
                 },
                 {}, -- 5
@@ -57,12 +76,12 @@ return {
                 {}, -- 8
                 {}, -- 9
                 {   -- 10
-                    name = "bamboo",
+                    name = "gruvbox",
                     variants = {
-                        standard = "bamboo-vulgaris",
-                        light    = "bamboo-light",
-                        dark     = "bamboo-multiplex",
-                        darkest  = "bamboo-multiplex",
+                        standard = "gruvbox-soft",
+                        dark     = "gruvbox-medium",
+                        darkest  = "gruvbox-hard",
+                        light    = "gruvbox-light",
                     }
                 },
             },
@@ -71,13 +90,13 @@ return {
                 {
                     colorscheme = "vscode",
                     background = "dark",
-                    transparency = false,
+                    transparent = false,
                     keybinding = "<leader>ttv",
                 },
                 {
                     colorscheme = "christmas",
                     background = "dark",
-                    transparency = false,
+                    transparent = false,
                     keybinding = "<leader>thc",
                 },
             },
@@ -90,15 +109,15 @@ return {
                     background = "dark",
                 },
 
-                -- C / C++
+                -- C/C++
                 {
                     filetype = { "c", "cpp" },
-                    colorscheme = "tokyonight-storm",
+                    colorscheme = "kanagawa-wave",
                     background = "dark",
                 },
                 {
                     pattern = { "*.h", "*.hh", "*.hpp" },
-                    colorscheme = "tokyonight-night",
+                    colorscheme = "kanagawa-dragon",
                     background = "dark",
                 },
             },
