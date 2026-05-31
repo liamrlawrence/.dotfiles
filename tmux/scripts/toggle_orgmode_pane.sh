@@ -1,6 +1,6 @@
 #!/bin/bash
 # When the keybind is pressed:
-#   - If it does not exist, create a new pane and start an orgmode vim session
+#   - If it does not exist, create a new pane and start an orgmode nvim session
 #   - If the orgmode pane exists and is not focused, jump to it
 #   - If the orgmode pane exists and is focused, swap focus back to the previous pane
 
@@ -48,7 +48,7 @@ file_ending="notes.org"
 current_pane_dir="$(tmux display-message -p '#{pane_current_path}')"
 file_name="$(echo $current_pane_dir | sed -e 's|^/||' -e 's|/|_|g')_${file_ending}"
 file_path="${notes_dir}/${file_name}"
-run_cmd="vim $file_path"
+run_cmd="nvim $file_path"
 
 
 # Check each pane's PID to see if already open
