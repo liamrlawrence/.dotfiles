@@ -13,8 +13,8 @@ vim.cmd("packadd nvim.undotree")
 vim.keymap.set("n", "<leader>u", require("undotree").open)
 
 
--- Remaps
--- vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "<C-c> is just better <Esc>" })   -- NOTE: Became enlightened, started using <C-[>
+-- Save
+vim.keymap.set("n", "ZA", "<cmd>confirm wqa<cr>", { desc = "Write-Quit-All" })
 
 
 -- Explorer
