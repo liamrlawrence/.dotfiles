@@ -6,8 +6,8 @@ return {
 
     config = function()
         local ls = require("luasnip")
-        ls.add_snippets("org", require("liamrlawrence.plugins.snips.snips_org"))
-        ls.add_snippets("lua", require("liamrlawrence.plugins.snips.snips_lua"))
+        ls.add_snippets("org",    require("liamrlawrence.plugins.snips.snips_org"))
+        ls.add_snippets("lua",    require("liamrlawrence.plugins.snips.snips_lua"))
         ls.add_snippets("python", require("liamrlawrence.plugins.snips.snips_python"))
 
         vim.keymap.set({ "i", "s" }, "<C-j>", function() require("luasnip").jump(1) end,  { desc = "Move to next item in snippet" })
