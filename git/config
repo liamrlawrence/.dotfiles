@@ -11,4 +11,5 @@
 [alias]
     lg = log --oneline --graph --decorate
     st = status -s
+    rid = rebase -i --committer-date-is-author-date
 
