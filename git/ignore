@@ -1,3 +1,4 @@
-.session.vim
+.session*.vim
+.session*.shada
 .DS_STORE
 
