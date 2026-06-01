@@ -1,9 +1,11 @@
 return {
     "airblade/vim-gitgutter",
 
-    config = function()
-        vim.cmd("GitGutterDisable")     -- Disabled by default
+    init = function()
+        vim.g.gitgutter_enabled = 0     -- Disabled by default
+    end,
 
+    config = function()
         vim.keymap.set("n", "<leader>gg", vim.cmd.GitGutterToggle, { desc = "Toggle GitGutter" })
     end
 }
