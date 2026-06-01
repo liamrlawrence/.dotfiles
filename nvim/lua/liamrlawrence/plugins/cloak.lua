@@ -1,5 +1,12 @@
+local file_patterns = {
+    "*.env*",
+    "*.yaml",
+    "*.yml",
+}
+
 return {
     "laytan/cloak.nvim",
+    event = vim.tbl_map(function(p) return "BufReadPre " .. p end, file_patterns),
 
     config = function()
         require("cloak").setup({
@@ -7,9 +14,7 @@ return {
             cloak_length = 8,
             patterns = {
                 {
-                    file_pattern = {
-                        "*.env*",
-                    },
+                    file_pattern = file_patterns,
                     cloak_pattern = {
                         "=.+",              -- bash
                         ":.+", "-.+",       -- yaml
@@ -21,6 +26,6 @@ return {
 
         vim.keymap.set("n", "<leader>ec", vim.cmd.CloakPreviewLine, { desc = "Preview cloaked line" })
         vim.keymap.set("n", "<leader>eC", vim.cmd.CloakToggle,      { desc = "Toggle Cloak" })
-    end
+    end,
 }
 

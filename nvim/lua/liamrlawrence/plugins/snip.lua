@@ -1,8 +1,7 @@
 return {
     "L3MON4D3/LuaSnip",
-    dependencies = {
-        "saadparwaiz1/cmp_luasnip",
-    },
+    dependencies = { "saadparwaiz1/cmp_luasnip" },
+    event = "VeryLazy",
 
     config = function()
         local ls = require("luasnip")
@@ -12,6 +11,6 @@ return {
 
         vim.keymap.set({ "i", "s" }, "<C-j>", function() require("luasnip").jump(1)  end, { desc = "Move to next item in snippet" })
         vim.keymap.set({ "i", "s" }, "<C-k>", function() require("luasnip").jump(-1) end, { desc = "Move to prev item in snippet" })
-    end
+    end,
 }
 

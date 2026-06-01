@@ -1,10 +1,8 @@
 return {
     "nvim-orgmode/orgmode",
+    dependencies = { "nvim-orgmode/org-bullets.nvim" },
     event = "VeryLazy",
     ft = { "org" },
-    dependencies = {
-        "nvim-orgmode/org-bullets.nvim",
-    },
 
     config = function()
         require("orgmode").setup({
@@ -33,6 +31,6 @@ return {
         require("org-bullets").setup()
 
         vim.lsp.enable("org")
-    end
+    end,
 }
 

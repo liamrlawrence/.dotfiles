@@ -1,5 +1,6 @@
 return {
     "sphamba/smear-cursor.nvim",
+    event = "VeryLazy",
 
     config = function()
         require("smear_cursor").setup({
@@ -10,6 +11,6 @@ return {
         })
 
         vim.keymap.set("n", "<leader>es", "<cmd>SmearCursorToggle<CR>", { desc = "Toggle Smear" })
-    end
+    end,
 }
 

@@ -3,6 +3,6 @@ return {
 
     config = function()
         require("repossession").setup()
-    end
+    end,
 }
 

@@ -107,7 +107,7 @@ return {
             callback = function(e)
                 vim.keymap.set("n",                 "gd",           vim.lsp.buf.definition,         { buffer = e.buf, desc = "LSP Goto definition" })
                 vim.keymap.set("n",                 "gD",           vim.lsp.buf.declaration,        { buffer = e.buf, desc = "LSP Goto declaration" })
-                vim.keymap.set("n",                 "<leader>/w",   vim.lsp.buf.workspace_symbol,   { buffer = e.buf, desc = "LSP workspace symbol" })
+                vim.keymap.set("n",                 "<leader>/ls",  vim.lsp.buf.workspace_symbol,   { buffer = e.buf, desc = "LSP workspace symbol" })
                 vim.keymap.set("n",                 "<leader>lD",   vim.diagnostic.setloclist,      { buffer = e.buf, desc = "LSP diagnostics to location list" })
                 vim.keymap.set({ "n", "i", "v", },  "<C-s>",        vim.lsp.buf.signature_help,     { buffer = e.buf, desc = "LSP display signature help" })
                 vim.keymap.set("n",                 "<leader>lr",   "<cmd>w|e<cr>",                 { buffer = e.buf, desc = "LSP restart" })
@@ -120,6 +120,6 @@ return {
                 -- vim.keymap.set("n", "]d",           function() vim.diagnostic.jump({ count = 1 }) end,  { buffer = e.buf, desc = "LSP Goto next diagnostic" }) -- ]d (default)
             end
         })
-    end
+    end,
 }
 

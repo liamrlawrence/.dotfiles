@@ -1,5 +1,6 @@
 return {
     "airblade/vim-gitgutter",
+    event = "VeryLazy",
 
     init = function()
         vim.g.gitgutter_enabled = 0     -- Disabled by default

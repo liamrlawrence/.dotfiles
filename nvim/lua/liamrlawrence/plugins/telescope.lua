@@ -1,9 +1,8 @@
 return {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.8",
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-    },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    event = "VeryLazy",
 
     config = function()
         require("telescope").setup{
@@ -99,6 +98,6 @@ return {
         -- Vim search
         vim.keymap.set("n", "<leader>/vh", builtin.help_tags,   { desc = "Search vim help" })
         vim.keymap.set("n", "<leader>/vk", builtin.keymaps,     { desc = "Search vim keymaps" })
-    end
+    end,
 }
 
