@@ -31,8 +31,8 @@ vim.api.nvim_create_autocmd("FileType", {
 
 
 -- Movements
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv",    { desc = "Move line down" })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv",    { desc = "Move line up" })
+vim.keymap.set("x", "J", ":m '>+1<CR>gv=gv",    { desc = "Move line down" })
+vim.keymap.set("x", "K", ":m '<-2<CR>gv=gv",    { desc = "Move line up" })
 vim.keymap.set("n", "J", function() -- "mzJ`z"
     local saved_pos = vim.fn.getpos(".")
     vim.cmd(":normal! J")
@@ -99,8 +99,8 @@ vim.keymap.set("n", "<leader>V", function() highlight_visual_mode("V") end, { de
 -- Yanks
 vim.keymap.set("n",             "yY",         [[:%y<CR>]],  { desc = "Yank entire file" })
 vim.keymap.set("n",             "<leader>yY", [[:%y+<CR>]], { desc = "Yank entire file to clipboard" })
-vim.keymap.set({ "n", "v", },   "<leader>y",  [["+y]],      { desc = "Yank to clipboard" })
-vim.keymap.set({ "n", "v", },   "<leader>Y",  [["+yg_]],    { desc = "Yank to clipboard" })
+vim.keymap.set({ "n", "x", },   "<leader>y",  [["+y]],      { desc = "Yank to clipboard" })
+vim.keymap.set({ "n", "x", },   "<leader>Y",  [["+yg_]],    { desc = "Yank to clipboard" })
 vim.keymap.set("n",             "<leader>yd", function()
     local diagnostics = vim.diagnostic.get(0)
     local current_line = vim.api.nvim_win_get_cursor(0)[1] - 1
@@ -129,9 +129,9 @@ end, { desc = "Yank diagnostics from current line to clipboard" })
 
 
 -- Deletes
-vim.keymap.set({ "n", "v", },   "<leader>d", [["_d]],   { desc = "Don't save deleted text to buffer" })
-vim.keymap.set({ "n", "v", },   "<leader>x", [["_x]],   { desc = "Don't save deleted text to buffer" })
-vim.keymap.set({ "n", "v", },   "<leader>c", [["_c]],   { desc = "Don't save deleted text to buffer" })
+vim.keymap.set({ "n", "x", },   "<leader>d", [["_d]],   { desc = "Don't save deleted text to buffer" })
+vim.keymap.set({ "n", "x", },   "<leader>x", [["_x]],   { desc = "Don't save deleted text to buffer" })
+vim.keymap.set({ "n", "x", },   "<leader>c", [["_c]],   { desc = "Don't save deleted text to buffer" })
 vim.keymap.set("x",             "<leader>p", [["_dP]],  { desc = "Don't save deleted text to buffer" })
 
 
