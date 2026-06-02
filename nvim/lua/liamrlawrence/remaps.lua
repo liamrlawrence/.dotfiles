@@ -8,9 +8,9 @@ local highlight_group = augroup("LL.remaps_highlight-group", { clear = true })
 vim.keymap.set("n", "Q", "<nop>", { desc = "<Nop>" })
 
 
--- Built-in
-vim.cmd("packadd nvim.undotree")
-vim.keymap.set("n", "<leader>u", require("undotree").open)
+-- -- Built-in
+-- vim.cmd("packadd nvim.undotree")
+-- vim.keymap.set("n", "<leader>u", require("undotree").open)
 
 
 -- Save
