@@ -27,7 +27,7 @@
   "org-bullets.nvim": { "branch": "main", "commit": "503fe053550879cc202086a40454e46a87c41ddb" },
   "orgmode": { "branch": "master", "commit": "b6be30158f3471c71cf1d8e51ceb0c9df53f23e2" },
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
-  "repossession.nvim": { "branch": "master", "commit": "53bcc9d81dd2627f61d16906b3fb2c7d71487578" },
+  "repossession.nvim": { "branch": "master", "commit": "96d022bb9f9455874e7fb88e66824891457b5d7d" },
   "smear-cursor.nvim": { "branch": "main", "commit": "9e9378d6ee34bb3782e0e8c63d9ec8ca618b479b" },
   "styler.nvim": { "branch": "main", "commit": "d73d868541a2536a96d057c793d53c50e5f407bb" },
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
