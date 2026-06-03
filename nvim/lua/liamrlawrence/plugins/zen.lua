@@ -16,6 +16,7 @@ return {
             plugins = {
                 tmux     = { enabled = true },
                 twilight = { enabled = true },
+                gitsigns = { enabled = true },
             },
         })
 
@@ -27,6 +28,7 @@ return {
             end,
         })
     end,
+
     keys = {
         { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen" },
     },
