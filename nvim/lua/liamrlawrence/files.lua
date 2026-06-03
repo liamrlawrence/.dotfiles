@@ -93,12 +93,6 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = true
         vim.bo.shiftwidth = 4
         vim.bo.tabstop = 4
-
-        vim.keymap.set("n", "<leader>lip", "oprint(f'{}')<Esc>hhi", {
-            desc = "Insert a print in Python",
-            buffer = true,
-            silent = true,
-        })
     end,
 })
 
@@ -163,11 +157,6 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = false
         vim.bo.shiftwidth = 8
         vim.bo.tabstop = 8
-        vim.keymap.set("n", "<leader>lip", 'oprintln!("{}", );<Esc>hi', {
-            desc = "Insert a println! in Rust",
-            buffer = true,
-            silent = true,
-        })
     end,
 })
 
