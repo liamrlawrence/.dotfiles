@@ -2,8 +2,11 @@ return {
     "tpope/vim-fugitive",
 
     config = function()
+        local fugitive_group = vim.api.nvim_create_augroup("LL.plugins_fugitive-group", { clear = true })
+
         vim.api.nvim_create_autocmd("BufWinEnter", {
-            group = vim.api.nvim_create_augroup("LL.plugins_fugitive-group", { clear = true }),
+            desc = "Register fugitive buffer keymaps",
+            group = fugitive_group,
             pattern = "*",
             callback = function()
                 if vim.bo.ft ~= "fugitive" then
@@ -11,19 +14,18 @@ return {
                 end
 
                 local bufnr = vim.api.nvim_get_current_buf()
-                local opts = { buffer = bufnr, remap = false }
 
                 -- Keybinds
                 vim.keymap.set("n", "<leader>p", function()
                     vim.cmd.Git("push")
-                end, opts)
+                end, { buffer = bufnr, desc = "Git push" })
 
                 vim.keymap.set("n", "<leader>P", function()
                     vim.cmd.Git({ "pull",  "--rebase" })
-                end, opts)  -- Rebase always
+                end, { buffer = bufnr, desc = "Git pull" })  -- rebase always
 
-                vim.keymap.set("n", "<leader>t", ":Git push -u origin ", opts)  -- Push new branch and set upstream tracking
-
+                vim.keymap.set("n", "<leader>t", ":Git push -u origin ",
+                    { buffer = bufnr, desc = "Git push new branch & set upstream tracking" })
             end,
         })
 

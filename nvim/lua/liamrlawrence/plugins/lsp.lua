@@ -10,6 +10,7 @@ return {
     },
 
     config = function()
+        local lsp_group = vim.api.nvim_create_augroup("LL.plugins_lsp-group", { clear = true })
         local cmp = require("cmp")
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend(
@@ -104,6 +105,8 @@ return {
         })
 
         vim.api.nvim_create_autocmd("LspAttach", {
+            desc = "Register LSP buffer keymaps",
+            group = lsp_group,
             callback = function(e)
                 vim.keymap.set("n",                 "gd",           vim.lsp.buf.definition,         { buffer = e.buf, desc = "LSP Goto definition" })
                 vim.keymap.set("n",                 "gD",           vim.lsp.buf.declaration,        { buffer = e.buf, desc = "LSP Goto declaration" })
