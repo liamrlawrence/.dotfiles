@@ -11,6 +11,9 @@ return {
     config = function ()
         require("neo-tree").setup({
             auto_clean_after_session_restore = true,
+            filesystem = {
+                hijack_netrw_behavior = "disabled",
+            }
         })
 
         vim.keymap.set("n", "<leader>pt", "<cmd>Neotree toggle right<cr>",          { desc = "Neotree toggle right" })
