@@ -3,9 +3,15 @@ return {
     dependencies = { "folke/twilight.nvim" },
 
     config = function()
+        local tw = require("twilight")
         local zm = require("zen-mode")
         local zm_view = require("zen-mode.view")
         local zen_group = vim.api.nvim_create_augroup("LL.plugins_zen-group", { clear = true })
+
+        tw.setup({
+            context = 10,
+            exclude = { "netrw" },
+        })
 
         zm.setup({
             window = {
