@@ -1,7 +1,6 @@
 return {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    event = "VeryLazy",
 
     config = function()
         require("todo-comments").setup{
@@ -17,11 +16,11 @@ return {
                 done    = {                                 "#00A36C" },
             },
             keywords = {
-                -- FIX: FIXME, FIXIT, BUG, BUGFIX, ISSUE
-                FIX = {
+                -- BUG: FIXME, ISSUE
+                BUG = {
                     icon = " ",
                     color = "error",
-                    alt = { "FIXME", "FIXIT", "BUG", "BUGFIX", "ISSUE" },
+                    alt = { "FIXME", "ISSUE" },
                 },
                 -- TODO:
                 TODO = {
@@ -34,10 +33,11 @@ return {
                     color = "hint",
                     alt = { "INFO" },
                 },
-                -- HACK:
+                -- HACK: FIX, BUGFIX
                 HACK = {
-                    icon = " ",
+                    icon = "󰶯 ",
                     color = "warning",
+                    alt = { "FIX", "BUGFIX" }
                 },
                 -- WARN: WARNING, CAUTION
                 WARN = {
