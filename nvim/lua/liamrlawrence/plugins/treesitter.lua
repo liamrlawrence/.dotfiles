@@ -10,14 +10,15 @@ return {
         local treesitter_group = vim.api.nvim_create_augroup("LL.plugins_treesitter-group", { clear = true })
         local ensure_installed = {
             "vim", "vimdoc", "query",
-            "markdown",
+            "regex",
+            "gitcommit", "gitignore", "diff", "markdown",
+            "json", "toml", "yaml", "dockerfile",
             "bash",
-            "lua",
-            "python",
-            "go", "templ",
+            "lua", "python",
+            "c", "cpp", "cmake",
             "rust",
-            "c", "cpp",
-            "javascript", "typescript",
+            "go", "templ",
+            "html", "css", "javascript", "typescript",
         }
         local already_installed = require("nvim-treesitter.config").get_installed()
         local to_install = vim.iter(ensure_installed)

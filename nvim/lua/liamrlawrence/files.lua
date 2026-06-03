@@ -15,16 +15,13 @@ local make_files_group = augroup("LL.files_make-group", { clear = true })
 
 vim.filetype.add({
     extension = {
-        templ = "templ",    -- Golang templ files
+        --
     },
     filename = {
-        [".dockerignore"] = "gitignore",
+        --
     },
     pattern = {
-        ["*%.env.*"]        = "sh",
-        [".*%.gitignore$"]  = "gitignore",
-        [".*%.ignore$"]     = "gitignore",
-        [".*Dockerfile.*"]  = "dockerfile",
+        --
     },
 })
 
