@@ -1,50 +1,44 @@
 return {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
+    branch = "main",
     dependencies = {
-        "nvim-treesitter/nvim-treesitter-textobjects",
+        { "nvim-treesitter/nvim-treesitter-textobjects", branch = "main" },
     },
+    build = ":TSUpdate",
 
-    config = function()
-        require("nvim-treesitter.configs").setup {
-            modules = {},
-            ignore_install = {},
-            ensure_installed = {
-                "vim", "vimdoc", "query",
-                "markdown",
-                "bash",
-                "lua",
-                "python",
-                "go", "templ",
-                "rust",
-                "c", "cpp",
-                "javascript", "typescript",
-                -- "org",
-            },
-
-            -- Install parsers synchronously (only applied to `ensure_installed`)
-            sync_install = false,
-
-            -- Automatically install missing parsers when entering buffer
-            -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-            auto_install = true,
-
-            indent = {
-                enabled = true
-            },
-
-            highlight = {
-                enable = true,
-                disable = { "bash" },   -- HACK: Bash is broken for some reason
-
-                -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-                -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-                -- Using this option may slow down your editor, and you may see some duplicate highlights.
-                -- Instead of true it can also be a list of languages
-                additional_vim_regex_highlighting = false,
-            },
+    init = function()
+        local treesitter_group = vim.api.nvim_create_augroup("LL.plugins_treesitter-group", { clear = true })
+        local ensure_installed = {
+            "vim", "vimdoc", "query",
+            "markdown",
+            "bash",
+            "lua",
+            "python",
+            "go", "templ",
+            "rust",
+            "c", "cpp",
+            "javascript", "typescript",
         }
+        local already_installed = require("nvim-treesitter.config").get_installed()
+        local to_install = vim.iter(ensure_installed)
+            :filter(function(p) return not vim.tbl_contains(already_installed, p) end)
+            :totable()
+        if #to_install > 0 then
+            require("nvim-treesitter").install(to_install)
+        end
 
+        -- Highlighting and indentation (replaces highlight/indent opts)
+        vim.api.nvim_create_autocmd("FileType", {
+            desc = "Enable treesitter highlighting and indentation per filetype",
+            group = treesitter_group,
+            callback = function()
+                if vim.bo.filetype == "bash" then return end  -- HACK: Bash is broken
+                pcall(vim.treesitter.start)
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end,
+        })
+
+        -- Textobjects
         require("nvim-treesitter-textobjects").setup {
             select = {
                 lookahead = true,
