@@ -125,6 +125,7 @@ DO_GIT=false
 DO_TMUX=false
 DO_NVIM=false
 DO_BASHRC=false
+DO_LANG_CC=false
 DO_LANG_GO=false
 DO_LANG_PY=false
 
@@ -134,6 +135,7 @@ if [ $# -eq 0 ]; then
     DO_TMUX=true
     DO_NVIM=true
     DO_BASHRC=true
+    DO_LANG_CC=true
     DO_LANG_GO=true
     DO_LANG_PY=true
 else

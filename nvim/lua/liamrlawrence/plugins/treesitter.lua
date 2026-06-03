@@ -11,7 +11,7 @@ return {
         local ensure_installed = {
             "vim", "vimdoc", "query",
             "regex",
-            "gitcommit", "gitignore", "diff", "markdown",
+            "gitcommit", "gitignore", "diff", "markdown", "markdown_inline",
             "json", "toml", "yaml", "dockerfile",
             "bash",
             "lua", "python",
