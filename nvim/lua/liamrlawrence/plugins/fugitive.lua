@@ -30,8 +30,8 @@ return {
         })
 
         vim.keymap.set("n", "<leader>gs",   vim.cmd.Git,            { desc = "Git Status" })
-        vim.keymap.set("n", "gu",           "<cmd>diffget //2<CR>", { desc = "Diffget left" })
-        vim.keymap.set("n", "gh",           "<cmd>diffget //3<CR>", { desc = "Diffget right" })
+        vim.keymap.set("n", "gu",           "<cmd>diffget //2<cr>", { desc = "Diffget left" })
+        vim.keymap.set("n", "gh",           "<cmd>diffget //3<cr>", { desc = "Diffget right" })
     end,
 }
 

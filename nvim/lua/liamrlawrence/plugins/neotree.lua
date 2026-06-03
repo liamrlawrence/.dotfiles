@@ -13,8 +13,8 @@ return {
             auto_clean_after_session_restore = true,
         })
 
-        vim.keymap.set("n", "<leader>pt", "<cmd>Neotree toggle right<CR>",          { desc = "Neotree toggle right" })
-        vim.keymap.set("n", "<leader>pT", "<cmd>Neotree float reveal toggle<CR>",   { desc = "Neotree toggle floating" })
+        vim.keymap.set("n", "<leader>pt", "<cmd>Neotree toggle right<cr>",          { desc = "Neotree toggle right" })
+        vim.keymap.set("n", "<leader>pT", "<cmd>Neotree float reveal toggle<cr>",   { desc = "Neotree toggle floating" })
     end,
 }
 

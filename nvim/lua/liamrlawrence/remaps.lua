@@ -31,8 +31,8 @@ vim.api.nvim_create_autocmd("FileType", {
 
 
 -- Movements
-vim.keymap.set("x", "J", ":m '>+1<CR>gv=gv",    { desc = "Move line down" })
-vim.keymap.set("x", "K", ":m '<-2<CR>gv=gv",    { desc = "Move line up" })
+vim.keymap.set("x", "J", ":m '>+1<cr>gv=gv",    { desc = "Move line down" })
+vim.keymap.set("x", "K", ":m '<-2<cr>gv=gv",    { desc = "Move line up" })
 vim.keymap.set("n", "J", function() -- "mzJ`z"
     local saved_pos = vim.fn.getpos(".")
     vim.cmd(":normal! J")
@@ -97,8 +97,8 @@ vim.keymap.set("n", "<leader>V", function() highlight_visual_mode("V") end, { de
 
 
 -- Yanks
-vim.keymap.set("n",             "yY",         [[:%y<CR>]],  { desc = "Yank entire file" })
-vim.keymap.set("n",             "<leader>yY", [[:%y+<CR>]], { desc = "Yank entire file to clipboard" })
+vim.keymap.set("n",             "yY",         [[:%y<cr>]],  { desc = "Yank entire file" })
+vim.keymap.set("n",             "<leader>yY", [[:%y+<cr>]], { desc = "Yank entire file to clipboard" })
 vim.keymap.set({ "n", "x", },   "<leader>y",  [["+y]],      { desc = "Yank to clipboard" })
 vim.keymap.set({ "n", "x", },   "<leader>Y",  [["+yg_]],    { desc = "Yank to clipboard" })
 vim.keymap.set("n",             "<leader>yd", function()
@@ -136,8 +136,8 @@ vim.keymap.set("x",             "<leader>p", [["_dP]],  { desc = "Don't save del
 
 
 -- Quickfix list
-vim.keymap.set("n", "<C-j>",     "<cmd>cnext<CR>zz",    { desc = "Next quickfix" })
-vim.keymap.set("n", "<C-k>",     "<cmd>cprev<CR>zz",    { desc = "Prev quickfix" })
+vim.keymap.set("n", "<C-j>",     "<cmd>cnext<cr>zz",    { desc = "Next quickfix" })
+vim.keymap.set("n", "<C-k>",     "<cmd>cprev<cr>zz",    { desc = "Prev quickfix" })
 vim.keymap.set("n", "<C-q>", function()
     for _, win in pairs(vim.fn.getwininfo()) do
         if win["quickfix"] == 1 then
@@ -150,8 +150,8 @@ end, { desc = "Toggle quickfix list" })
 
 
 -- Location list
-vim.keymap.set("n", "<M-j>", "<cmd>lnext<CR>zz",    { desc = "Next location list" })
-vim.keymap.set("n", "<M-k>", "<cmd>lprev<CR>zz",    { desc = "Prev location list" })
+vim.keymap.set("n", "<M-j>", "<cmd>lnext<cr>zz",    { desc = "Next location list" })
+vim.keymap.set("n", "<M-k>", "<cmd>lprev<cr>zz",    { desc = "Prev location list" })
 vim.keymap.set("n", "<M-q>", function()
     for _, win in pairs(vim.fn.getwininfo()) do
         if win["loclist"] == 1 then
