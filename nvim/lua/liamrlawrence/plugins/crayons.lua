@@ -46,9 +46,9 @@ return {
                 {   -- 2
                     name = "tokyonight",
                     variants = {
-                        standard = "tokyonight-moon",
-                        dark     = "tokyonight-night",
-                        darkest  = "tokyonight-storm",
+                        standard = "tokyonight-storm",
+                        dark     = "tokyonight-moon",
+                        darkest  = "tokyonight-night",
                         light    = "tokyonight-day",
                     }
                 },
