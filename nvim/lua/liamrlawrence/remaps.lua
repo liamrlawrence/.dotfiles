@@ -18,13 +18,13 @@ vim.keymap.set("n", "ZA", "<cmd>confirm wqa<cr>", { desc = "Write-Quit-All" })
 
 
 -- Tabs
-vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<cr><leader>/f", { remap = true, desc = "New tab" })
+vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<cr><leader>/f", { desc = "New tab", remap = true })
 
 
 -- Explorer
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Explorer" })
 vim.api.nvim_create_autocmd("FileType", {
-    desc = "Line numbers for netrw",
+    desc = "Netrw formatting",
     group = explorer_group,
     pattern = "netrw",
     callback = function()

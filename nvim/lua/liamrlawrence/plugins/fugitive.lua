@@ -3,11 +3,9 @@ return {
 
     config = function()
         local fugitive_group = vim.api.nvim_create_augroup("LL.plugins_fugitive-group", { clear = true })
-
         vim.api.nvim_create_autocmd("BufWinEnter", {
             desc = "Register fugitive buffer keymaps",
             group = fugitive_group,
-            pattern = "*",
             callback = function()
                 if vim.bo.ft ~= "fugitive" then
                     return
@@ -15,7 +13,6 @@ return {
 
                 local bufnr = vim.api.nvim_get_current_buf()
 
-                -- Keybinds
                 vim.keymap.set("n", "<leader>p", function()
                     vim.cmd.Git("push")
                 end, { buffer = bufnr, desc = "Git push" })
@@ -29,9 +26,9 @@ return {
             end,
         })
 
-        vim.keymap.set("n", "<leader>gs",   vim.cmd.Git,            { desc = "Git Status" })
-        vim.keymap.set("n", "gu",           "<cmd>diffget //2<cr>", { desc = "Diffget left" })
-        vim.keymap.set("n", "gh",           "<cmd>diffget //3<cr>", { desc = "Diffget right" })
+        vim.keymap.set("n", "<leader>gs", vim.cmd.Git,            { desc = "Git Status" })
+        vim.keymap.set("n", "gu",         "<cmd>diffget //2<cr>", { desc = "Diffget left" })
+        vim.keymap.set("n", "gh",         "<cmd>diffget //3<cr>", { desc = "Diffget right" })
     end,
 }
 

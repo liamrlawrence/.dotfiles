@@ -45,7 +45,7 @@ return {
         end, { desc = "Find files (including ignored)" })
 
 
-        -- Search for a specific word
+        -- Word search
         vim.keymap.set("n", "<leader>/w", function()
             local word = vim.fn.expand("<cword>")
             builtin.grep_string({ search = word })

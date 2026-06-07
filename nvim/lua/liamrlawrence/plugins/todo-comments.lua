@@ -33,11 +33,11 @@ return {
                     color = "hint",
                     alt = { "INFO" },
                 },
-                -- HACK: FIX, BUGFIX
+                -- HACK: PATCH, FIX, BUGFIX
                 HACK = {
                     icon = "󰶯 ",
                     color = "warning",
-                    alt = { "FIX", "BUGFIX" }
+                    alt = { "PATCH", "FIX", "BUGFIX" }
                 },
                 -- WARN: WARNING, CAUTION
                 WARN = {

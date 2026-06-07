@@ -28,7 +28,7 @@ return {
             require("nvim-treesitter").install(to_install)
         end
 
-        -- Highlighting and indentation (replaces highlight/indent opts)
+        -- Highlighting and indentation
         vim.api.nvim_create_autocmd("FileType", {
             desc = "Enable treesitter highlighting and indentation per filetype",
             group = treesitter_group,
