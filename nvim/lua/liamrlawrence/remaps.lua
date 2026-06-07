@@ -53,7 +53,7 @@ vim.keymap.set("n", "zM", "zMzz", { desc = "Close all folds in file" })
 
 
 -- Highlights
--- vim.keymap.set("n", "<leader>/h", vim.cmd.noh, { desc = "Clear highlights" })    -- NOTE: Can use <C-l> instead
+vim.keymap.set("n", "<leader>/h", vim.cmd.noh, { desc = "Clear highlights" })   -- NOTE: Can use <C-l> instead
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking text",
     group = highlight_group,
@@ -63,37 +63,36 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 local function highlight_visual_mode(key)
-    local original_visual_highlight = vim.api.nvim_get_hl_by_name("Visual", true)
-    local incsearch_highlight = vim.api.nvim_get_hl_by_name("IncSearch", true)
+    local function get_hl(name)
+        return vim.api.nvim_get_hl(0, { name = name, link = false }) --[[@as vim.api.keyset.highlight]]
+    end
 
-    vim.api.nvim_set_hl(0, "Visual", incsearch_highlight)
+    local visual_modes = {
+        ["v"] = true,
+        ["V"] = true,
+        [vim.keycode("<C-v>")] = true,
+    }
+
+    local original_visual = get_hl("Visual")
+    vim.api.nvim_set_hl(0, "Visual", get_hl("IncSearch"))
     vim.cmd("normal! " .. key)
 
     local autocmd_id
     autocmd_id = vim.api.nvim_create_autocmd("ModeChanged", {
-        desc = "Remove custom highlighting from visual mode on exit",
+        desc = "Restore Visual hl group on leaving Visual mode",
         group = highlight_group,
-        pattern = "*",
         callback = function()
-            local old_mode = vim.v.event.old_mode
-            local new_mode = vim.v.event.new_mode
-
-            local visual_modes = {
-                ['v'] = true,
-                ['V'] = true,
-                [string.char(22)] = true,   -- NOTE: Ctrl-V is char(22)
-            }
-
-            -- Check if we have left Visual mode entirely
-            if visual_modes[old_mode] and not visual_modes[new_mode] then
-                vim.api.nvim_set_hl(0, "Visual", original_visual_highlight)
+            local event = vim.v.event --[[@as {old_mode: string, new_mode: string}]]
+            if visual_modes[event.old_mode] and not visual_modes[event.new_mode] then
+                vim.api.nvim_set_hl(0, "Visual", original_visual)
                 vim.api.nvim_del_autocmd(autocmd_id)
             end
         end,
     })
 end
-vim.keymap.set("n", "<leader>v", function() highlight_visual_mode("v") end, { desc = "Enter visual mode with highlighting" })
-vim.keymap.set("n", "<leader>V", function() highlight_visual_mode("V") end, { desc = "Enter Visual mode with highlighting" })
+vim.keymap.set("n", "<leader>v",     function() highlight_visual_mode("v")                  end, { desc = "Enter visual mode with highlighting" })
+vim.keymap.set("n", "<leader>V",     function() highlight_visual_mode("V")                  end, { desc = "Enter Visual mode with highlighting" })
+vim.keymap.set("n", "<leader><C-v>", function() highlight_visual_mode(vim.keycode("<C-v>")) end, { desc = "Enter blockwise Visual mode with highlighting" })
 
 
 -- Yanks
@@ -180,10 +179,10 @@ vim.keymap.set("n", "<leader>er", function()
     vim.wo.relativenumber = not vim.wo.relativenumber
 end, { desc = "Toggle relative line numbers" })
 
-vim.keymap.set("n", "<leader>e=", function() -- "mzgg=G`z"
-    local saved_pos = vim.fn.getpos(".")
-    vim.cmd(":normal! =lgg=G")              -- NOTE: =l prevents undo/redo from jumping to the top of the file
-    vim.fn.setpos(".", saved_pos)
+vim.keymap.set("n", "<leader>e=", function()    -- "mzgg=G`z"
+    local view = vim.fn.winsaveview()
+    vim.cmd("normal! ==gg=G")                   -- NOTE: == prevents undo/redo from jumping to the top of the file
+    vim.fn.winrestview(view)
 end, { desc = "Reindent file" })
 
 vim.keymap.set("n", "<leader>et", function()
