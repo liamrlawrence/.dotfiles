@@ -7,7 +7,7 @@ vim.opt.statusline = "%<%f %h%m%r%=%-18( 0x%B | %l,%c%V%) %P"
 vim.opt.fillchars = { vert = " ", eob = "~" }
 vim.opt.termguicolors = true
 vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "80,120"
+vim.opt.colorcolumn = "81,121"
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.scrolloff = 8
