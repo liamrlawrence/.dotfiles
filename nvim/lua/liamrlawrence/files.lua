@@ -196,7 +196,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
--- Org files
+-- Org
 vim.api.nvim_create_autocmd("FileType", {
     desc = "Org file settings",
     group = org_files_group,
@@ -208,19 +208,8 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-    desc = "Format org files on save",
-    group = org_files_group,
-    pattern = "*.org",
-    callback = function()
-        local saved_pos = vim.fn.getpos(".")
-        vim.cmd(":normal! =lgg=G")      -- TODO: Why can't I use '<leader>e='?
-        vim.fn.setpos(".", saved_pos)
-    end,
-})
 
-
--- Makefiles
+-- Makefile
 vim.api.nvim_create_autocmd("FileType", {
     desc = "Makefile settings",
     group = make_files_group,
