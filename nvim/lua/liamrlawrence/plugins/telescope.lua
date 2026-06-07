@@ -31,13 +31,18 @@ return {
 
 
         -- File search
-        vim.keymap.set("n", "<leader>/f", builtin.find_files, { desc = "Find files" })
+        vim.keymap.set("n", "<leader>/f", function()
+            builtin.find_files({
+                hidden = true,
+            })
+        end, { desc = "Find files" })
+
         vim.keymap.set("n", "<leader>/F", function()
             builtin.find_files({
                 hidden = true,
                 no_ignore = true,
             })
-        end, { desc = "Find files (including hidden)" })
+        end, { desc = "Find files (including ignored)" })
 
 
         -- Search for a specific word
@@ -80,7 +85,7 @@ return {
         end, { desc = "Live Grep search (regex)" })
 
 
-        -- Theme search
+        -- Colorscheme search
         vim.keymap.set("n", "<leader>/c", function()
             builtin.colorscheme({
                 enable_preview = true,

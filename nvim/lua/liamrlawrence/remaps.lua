@@ -17,6 +17,10 @@ vim.keymap.set("n", "Q", "<nop>", { desc = "<Nop>" })
 vim.keymap.set("n", "ZA", "<cmd>confirm wqa<cr>", { desc = "Write-Quit-All" })
 
 
+-- Tabs
+vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<cr><leader>/f", { remap = true, desc = "New tab" })
+
+
 -- Explorer
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Explorer" })
 vim.api.nvim_create_autocmd("FileType", {
