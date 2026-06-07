@@ -28,10 +28,13 @@ vim.filetype.add({
 
 -- All files
 vim.api.nvim_create_autocmd("BufWritePre", {
-    desc = "Remove trailing whitespace from files",
+    desc = "Remove trailing whitespace on write",
     group = all_files_group,
-    pattern = "*",
-    command = [[%s/\s\+$//e]],
+    callback = function()
+        local view = vim.fn.winsaveview()
+        vim.cmd([[%s/\s\+$//e]])
+        vim.fn.winrestview(view)
+    end,
 })
 
 
