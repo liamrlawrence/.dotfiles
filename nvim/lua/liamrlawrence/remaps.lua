@@ -52,8 +52,9 @@ vim.keymap.set("n", "N", "Nzzzv",       { desc = "Center on search jumps" })
 
 
 -- Folds
-vim.keymap.set("n", "zR", "zRzz", { desc = "Open all folds in file" })
-vim.keymap.set("n", "zM", "zMzz", { desc = "Close all folds in file" })
+vim.keymap.set("n", "zR",         "zRzz",   { desc = "Open all folds in file" })
+vim.keymap.set("n", "zM",         "zMzz",   { desc = "Close all folds in file" })
+vim.keymap.set("n", "<leader>fm", "vimjzf", { desc = "Fold function", remap = true })
 
 
 -- Highlights
