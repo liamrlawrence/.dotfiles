@@ -1,4 +1,7 @@
 .session*.vim
 .session*.shada
+
 .DS_STORE
+
+.git/
 
