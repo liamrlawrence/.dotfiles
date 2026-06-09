@@ -1,6 +1,12 @@
 return {
     "folke/zen-mode.nvim",
-    dependencies = { "folke/twilight.nvim" },
+    dependencies = {
+        {
+            "folke/twilight.nvim",
+            url = "https://github.com/SAY-5/twilight.nvim.git",
+            branch = "fix-no-parser-crash",
+        },
+    },
 
     config = function()
         local tw = require("twilight")
@@ -10,7 +16,6 @@ return {
 
         tw.setup({
             context = 10,
-            exclude = { "netrw" },
         })
 
         zm.setup({
