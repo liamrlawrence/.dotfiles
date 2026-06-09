@@ -8,13 +8,7 @@ case $- in
 esac
 
 
-## TERMINAL
-if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
-    builtin source "$GHOSTTY_RESOURCES_DIR/shell-integration/bash/ghostty.bash"
-fi
-
-
-## HISTORY OPTIONS
+## History Options
 HISTSIZE=10000          # 10k lines in memory
 HISTFILESIZE=100000     # 100k lines on disk
 HISTCONTROL=ignoreboth  # don't put duplicate lines or lines starting with space in the history
@@ -25,21 +19,28 @@ shopt -s histappend     # append to the history file, don't overwrite it
 shopt -s checkwinsize
 
 
-## PROMPT
+## Prompt
 if [[ $EUID -eq 0 ]]; then
     PS1='\[\033[01;31m\]\u@\h \[\033[01;33m\][ROOT]\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]$ '
 else
     PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 fi
 
-# If this is an xterm set the title to user@host:dir
+
+## Title
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;\u@\h: \w\a\]$PS1"
+    PS1="\[\e]0;\u@\h: \w\a\]$PS1"  # If this is an xterm set the title to user@host:dir
     ;;
 *)
     ;;
 esac
+
+
+## Terminal
+if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
+    builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
+fi
 
 
 ## Neovim
@@ -59,24 +60,24 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 
-# Python
+## Python
 [[ -n "$ACTIVATE_VENV" ]] && source "$ACTIVATE_VENV" && unset ACTIVATE_VENV     # activate venvs in tmux panes with split_window.sh
 
 
-## COLOR COMMANDS
+## Color commands
 bind 'set colored-completion-prefix on'
 bind 'set colored-stats on'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 
-## ALIASES
+## Aliases
 alias cleard='clear; date +%r'
 alias ll='ls -alFh'
 alias la='ls -A'
 
 
-## SYSTEM
+## System
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export VISUAL="$NEOVIM_PATH"
