@@ -1,15 +1,16 @@
 local augroup = vim.api.nvim_create_augroup
-local all_files_group = augroup("LL.files_all-group", { clear = true })
-local git_files_group = augroup("LL.files_git-group", { clear = true })
-local python_files_group = augroup("LL.files_python-group", { clear = true })
-local cc_files_group = augroup("LL.files_cc-group", { clear = true })
-local go_files_group = augroup("LL.files_go-group", { clear = true })
-local rust_files_group = augroup("LL.files_rust-group", { clear = true })
-local html_files_group = augroup("LL.files_html-group", { clear = true })
-local css_files_group = augroup("LL.files_css-group", { clear = true })
-local json_files_group = augroup("LL.files_json-group", { clear = true })
-local org_files_group = augroup("LL.files_org-group", { clear = true })
-local make_files_group = augroup("LL.files_make-group", { clear = true })
+local all_files_group    = augroup("LL.files_all-group",      { clear = true })
+local cc_files_group     = augroup("LL.files_cc-group",       { clear = true })
+local python_files_group = augroup("LL.files_python-group",   { clear = true })
+local go_files_group     = augroup("LL.files_go-group",       { clear = true })
+local rust_files_group   = augroup("LL.files_rust-group",     { clear = true })
+local html_files_group   = augroup("LL.files_html-group",     { clear = true })
+local css_files_group    = augroup("LL.files_css-group",      { clear = true })
+local json_files_group   = augroup("LL.files_json-group",     { clear = true })
+local make_files_group   = augroup("LL.files_make-group",     { clear = true })
+local markdown_group     = augroup("LL.files_markdown-group", { clear = true })
+local org_files_group    = augroup("LL.files_org-group",      { clear = true })
+local git_files_group    = augroup("LL.files_git-group",      { clear = true })
 
 
 
@@ -196,19 +197,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
--- Org
-vim.api.nvim_create_autocmd("FileType", {
-    desc = "Org file settings",
-    group = org_files_group,
-    pattern = "org",
-    callback = function()
-        vim.bo.expandtab = true
-        vim.bo.shiftwidth = 2
-        vim.bo.tabstop = 2
-    end,
-})
-
-
 -- Makefile
 vim.api.nvim_create_autocmd("FileType", {
     desc = "Makefile settings",
@@ -218,6 +206,30 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = false
         vim.bo.shiftwidth = 8
         vim.bo.tabstop = 8
+    end,
+})
+
+
+-- Markdown
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Markdown settings",
+    group = markdown_group,
+    pattern = "markdown",
+    callback = function(args)
+        vim.keymap.set("n", "<leader>ep", "<cmd>Markview toggle<cr>", { buffer = args.buf, desc = "Toggle preview (Markdown)" })
+    end,
+})
+
+
+-- Org
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Org file settings",
+    group = org_files_group,
+    pattern = "org",
+    callback = function()
+        vim.bo.expandtab = true
+        vim.bo.shiftwidth = 2
+        vim.bo.tabstop = 2
     end,
 })
 
