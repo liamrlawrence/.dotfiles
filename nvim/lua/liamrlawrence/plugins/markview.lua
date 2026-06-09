@@ -1,5 +1,6 @@
 return {
     "OXY2DEV/markview.nvim",
-    lazy = false,
+    event = "VeryLazy",
+    ft = { "md" },
 }
 
