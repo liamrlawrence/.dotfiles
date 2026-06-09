@@ -11,6 +11,12 @@ case $- in
 esac
 
 
+## TERMINAL
+if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
+    builtin source "$GHOSTTY_RESOURCES_DIR/shell-integration/bash/ghostty.bash"
+fi
+
+
 ## HISTORY OPTIONS
 HISTSIZE=10000          # 10k lines in memory
 HISTFILESIZE=100000     # 100k lines on disk

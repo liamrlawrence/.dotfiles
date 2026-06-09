@@ -1,0 +1,41 @@
+# Font
+font-family = "JetBrains Mono"
+font-size = 18
+font-thicken = false
+
+# Colors
+palette = 0=#1a1a1a
+palette = 1=#df1f1f
+palette = 2=#1fcb1f
+palette = 3=#f5d800
+palette = 4=#2e6bff
+palette = 5=#e01fe0
+palette = 6=#1fdbdb
+palette = 7=#d0d0d0
+palette = 8=#666666
+palette = 9=#ff4d4d
+palette = 10=#4dff4d
+palette = 11=#ffea3d
+palette = 12=#5c8aff
+palette = 13=#ff5cff
+palette = 14=#4dffff
+palette = 15=#ffffff
+background = #070707
+foreground = #d4d4d4
+cursor-color = #d4d4d4
+cursor-text = #000000
+selection-background = #b5d5ff
+selection-foreground = #000000
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = sudo,no-cursor,no-title
+
+# Scrollback
+scrollback-limit = 10000000
+
+# MacOS
+macos-option-as-alt = true
+macos-window-buttons = hidden
+

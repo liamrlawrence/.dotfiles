@@ -20,6 +20,7 @@ Flags:
     --lang-cc
     --lang-go
     --lang-python
+    --ghostty
     -h, --help
 EOF
 }
@@ -119,6 +120,10 @@ setup_lang_python() {
     create_symlink "$HOME/.config/black" "$(pwd)/languages/python/black_config.toml"
 }
 
+setup_ghostty() {
+    create_symlink "$HOME/.config/ghostty"
+}
+
 
 # Parse flags
 DO_GIT=false
@@ -128,6 +133,7 @@ DO_BASHRC=false
 DO_LANG_CC=false
 DO_LANG_GO=false
 DO_LANG_PY=false
+DO_GHOSTTY=false
 
 if [ $# -eq 0 ]; then
     # No args: do everything
@@ -138,6 +144,7 @@ if [ $# -eq 0 ]; then
     DO_LANG_CC=true
     DO_LANG_GO=true
     DO_LANG_PY=true
+    DO_GHOSTTY=true
 else
     while [ $# -gt 0 ]; do
         case "$1" in
@@ -148,6 +155,7 @@ else
             --lang-cc)      DO_LANG_CC=true ;;
             --lang-go)      DO_LANG_GO=true ;;
             --lang-python)  DO_LANG_PY=true ;;
+            --ghostty)      DO_GHOSTTY=true ;;
             -h|--help)
                 usage
                 exit 0
@@ -171,4 +179,7 @@ $DO_BASHRC      && setup_bashrc
 $DO_LANG_CC     && setup_lang_cc
 $DO_LANG_GO     && setup_lang_go
 $DO_LANG_PY     && setup_lang_python
+$DO_GHOSTTY     && setup_ghostty
+
+exit 0
 
