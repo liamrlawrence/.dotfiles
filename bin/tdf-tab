@@ -1,0 +1,16 @@
+#!/bin/bash
+# NOTE: Only works on MacOS
+# TODO: Make switch that works on Linux
+
+pdf="$1"
+osascript <<EOF
+tell application "Ghostty" to activate
+delay 0.10
+tell application "System Events"
+    keystroke "t" using command down
+    delay 0.10
+    keystroke "exec tdf '$pdf'"
+    key code 36
+end tell
+EOF
+
