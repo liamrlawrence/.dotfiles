@@ -3,7 +3,7 @@ return {
 
     config = function()
         require("repossession").setup({
-            tidy_sessions = true,
+            ignore_filetypes = { "neo-tree" },
         })
 
         vim.keymap.set("n", "<leader>rp", "<cmd>Repossession<cr>",      { desc = "Session manager" })
