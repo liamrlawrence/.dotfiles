@@ -14,7 +14,7 @@ VENV_CFG=$(find "$PANE_DIR" -maxdepth 2 -type f -name "pyvenv.cfg" | head -n1)
 if [[ -n "$VENV_CFG" ]]; then
     VENV="${VENV_CFG%/pyvenv.cfg}/bin/activate"
     tmux split-window "$SPLIT_DIRECTION" -c "$PANE_DIR" \
-        ". ${VENV}; $SHELL"
+        -e "ACTIVATE_VENV=${VENV}"
 else
     tmux split-window "$SPLIT_DIRECTION" -c "$PANE_DIR"
 fi
