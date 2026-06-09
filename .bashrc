@@ -1,7 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
+# ~/.bashrc
 
 
 # If not running interactively, don't do anything
@@ -51,42 +48,42 @@ xterm*|rxvt*)
     ;;
 esac
 
-# Enable color support for commands
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
 
-
-
-# Neovim
+## Neovim
 export NEOVIM_PATH="/usr/local/nvim-linux/bin/nvim"
 alias nvim="$NEOVIM_PATH"
 
 
-# C
+## C
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 
-# Go
-export PATH="$PATH:$GOROOT/bin"
-export PATH="$PATH:$GOPATH/bin"
+## Go
+[[ -d "$GOPATH" ]] && export PATH="$GOPATH/bin:$PATH"
 
 
-# Rust
-. "$HOME/.cargo/env"
+## Rust
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 
-# Aliases
+## COLOR COMMANDS
+bind 'set colored-completion-prefix on'
+bind 'set colored-stats on'
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+
+## ALIASES
 alias cleard='clear; date +%r'
+alias ll='ls -alFh'
+alias la='ls -A'
 
 
-# System
-export PATH="$PATH:$HOME/bin"
-export PATH="$PATH:$HOME/.local/bin"
+## SYSTEM
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export VISUAL="$NEOVIM_PATH"
+export EDITOR="$NEOVIM_PATH"
 export GIT_EDITOR="$NEOVIM_PATH"
 export SUDO_EDITOR="$NEOVIM_PATH"
 export MANPAGER="$NEOVIM_PATH +Man!"
