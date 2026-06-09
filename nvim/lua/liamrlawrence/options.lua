@@ -2,8 +2,15 @@
 vim.g.mapleader = " "
 
 -- UI
+vim.opt.statusline = table.concat({
+    "%<%f",
+    " %h%m%r",
+    "%=",
+    "%(0x%B %)| ",
+    "%(%l,%c%V %)| ",
+    "%P",
+})
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
-vim.opt.statusline = "%<%f %h%m%r%=%-18( 0x%B | %l,%c%V%) %P"
 vim.opt.fillchars = { vert = " ", eob = "~" }
 vim.opt.termguicolors = true
 vim.opt.signcolumn = "yes"
