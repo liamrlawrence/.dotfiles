@@ -2,6 +2,9 @@
 font-family = "JetBrains Mono"
 font-size = 18
 font-thicken = false
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
 
 # Colors
 palette = 0=#1a1a1a
