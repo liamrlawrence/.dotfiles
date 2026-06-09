@@ -80,6 +80,7 @@ alias la='ls -A'
 ## System
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.dotfiles/bin:$PATH"
 export VISUAL="$NEOVIM_PATH"
 export EDITOR="$NEOVIM_PATH"
 export GIT_EDITOR="$NEOVIM_PATH"
