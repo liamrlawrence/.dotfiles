@@ -64,8 +64,8 @@ return {
                 {   -- 4
                     name = "nightfox2",
                     variants = {
-                        standard = "duskfox",
-                        dark     = "terafox",
+                        standard = "nordfox",
+                        dark     = "duskfox",
                         darkest  = "carbonfox",
                         light    = "dawnfox",
                     }
