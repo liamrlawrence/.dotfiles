@@ -91,13 +91,13 @@ return {
                     colorscheme = "vscode",
                     background = "dark",
                     transparent = false,
-                    keybinding = "<leader>ttv",
+                    keymap = "<leader>ttv",
                 },
                 {
                     colorscheme = "christmas",
                     background = "dark",
                     transparent = false,
-                    keybinding = "<leader>thc",
+                    keymap = "<leader>thc",
                 },
             },
 
