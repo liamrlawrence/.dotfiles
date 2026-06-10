@@ -102,8 +102,14 @@ LS="#[fg=$TD,bg=$TL,bold]#{?client_prefix,#[bg=$HL],} $user_icon $user_name@#h #
 tmux set -gq status-left "$LS"
 
 # Right side of status bar
+tmux set -g @status_alt 0
+tmux bind A if-shell -F '#{==:#{@status_alt},1}' \
+    'set -g @status_alt 0 ; set -g @alt_str ""' \
+    'run-shell "tmux set -g @alt_str \"$(python3 ~/Dev/almanac/almanac.py)\" ; tmux set -g @status_alt 1"'
+date_seg="#{?#{==:#{@status_alt},0},$date_icon $date_format,#{@alt_str}}"
+time_seg="$time_icon $time_format"
+RS="#[fg=$TM]$larrow#[fg=$TL,bg=$TM] $time_seg #[fg=$TL,bg=$TM]$larrow#[fg=$TD,bg=$TL] $date_seg "
 tmux set -gq status-right-length 150
-RS="#[fg=$TM]$larrow#[fg=$TL,bg=$TM] $time_icon $time_format #[fg=$TL,bg=$TM]$larrow#[fg=$TD,bg=$TL] $date_icon $date_format "
 tmux set -gq status-right "$RS"
 
 # Panes
