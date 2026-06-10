@@ -2,6 +2,7 @@ local augroup = vim.api.nvim_create_augroup
 local all_files_group      = augroup("LL.files_all-group",      { clear = true })
 local cc_files_group       = augroup("LL.files_cc-group",       { clear = true })
 local python_files_group   = augroup("LL.files_python-group",   { clear = true })
+local lua_files_group      = augroup("LL.files_lua-group",      { clear = true })
 local go_files_group       = augroup("LL.files_go-group",       { clear = true })
 local rust_files_group     = augroup("LL.files_rust-group",     { clear = true })
 local html_files_group     = augroup("LL.files_html-group",     { clear = true })
@@ -106,6 +107,21 @@ vim.api.nvim_create_autocmd("BufWritePost", {
         -- local file = vim.fn.expand('%')
         -- vim.fn.system("black -q " .. file)
         -- vim.cmd("edit!")    -- Re-read the file to reflect the changes
+    end,
+})
+
+
+-- Lua
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Lua file settings",
+    group = lua_files_group,
+    pattern = "lua",
+    callback = function()
+        vim.bo.expandtab = true
+        vim.bo.shiftwidth = 4
+        vim.bo.tabstop = 4
+
+        vim.keymap.set("n", "<leader>fm", "vimjzf", { desc = "Fold function (lua)", remap = true }) -- OVERRIDE:
     end,
 })
 
