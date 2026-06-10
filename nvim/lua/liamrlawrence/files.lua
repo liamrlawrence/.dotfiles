@@ -233,6 +233,10 @@ vim.api.nvim_create_autocmd("FileType", {
     group = markdown_files_group,
     pattern = "markdown",
     callback = function(args)
+        vim.bo.expandtab = true
+        vim.bo.shiftwidth = 4
+        vim.bo.tabstop = 4
+
         vim.keymap.set("n", "<leader>ep", "<cmd>Markview toggle<cr>", { buffer = args.buf, desc = "Toggle preview (Markdown)" })
     end,
 })
