@@ -8,11 +8,6 @@ local highlight_group = augroup("LL.remaps_highlight-group", { clear = true })
 vim.keymap.set("n", "Q", "<nop>", { desc = "<Nop>" })
 
 
--- -- Built-in
--- vim.cmd("packadd nvim.undotree")
--- vim.keymap.set("n", "<leader>u", require("undotree").open)
-
-
 -- Save
 vim.keymap.set("n", "ZA", "<cmd>confirm wqa<cr>", { desc = "Write-Quit-All" })
 
@@ -35,12 +30,12 @@ vim.api.nvim_create_autocmd("FileType", {
 
 
 -- Movements
-vim.keymap.set("x", "J", ":m '>+1<cr>gv=gv",    { desc = "Move line down" })
-vim.keymap.set("x", "K", ":m '<-2<cr>gv=gv",    { desc = "Move line up" })
+vim.keymap.set("x", "J", ":m '>+1<cr>gv=gv", { desc = "Move line down" })
+vim.keymap.set("x", "K", ":m '<-2<cr>gv=gv", { desc = "Move line up" })
 vim.keymap.set("n", "J", function() -- "mzJ`z"
-    local saved_pos = vim.fn.getpos(".")
+    local view = vim.fn.winsaveview()
     vim.cmd(":normal! J")
-    vim.fn.setpos(".", saved_pos)
+    vim.fn.winrestview(view)
 end, { desc = "J does not move cursor" })
 
 
@@ -52,9 +47,9 @@ vim.keymap.set("n", "N", "Nzzzv",       { desc = "Center on search jumps" })
 
 
 -- Folds
-vim.keymap.set("n", "zR",         "zRzz",   { desc = "Open all folds in file" })
-vim.keymap.set("n", "zM",         "zMzz",   { desc = "Close all folds in file" })
-vim.keymap.set("n", "<leader>fm", "vimjzf", { desc = "Fold function", remap = true })
+vim.keymap.set("n", "zR",         "zRzz",  { desc = "Open all folds in file" })
+vim.keymap.set("n", "zM",         "zMzz",  { desc = "Close all folds in file" })
+vim.keymap.set("n", "<leader>fm", "vimzf", { desc = "Fold function", remap = true })
 
 
 -- Highlights
@@ -101,11 +96,11 @@ vim.keymap.set("n", "<leader><C-v>", function() highlight_visual_mode(vim.keycod
 
 
 -- Yanks
-vim.keymap.set("n",             "yY",         [[:%y<cr>]],  { desc = "Yank entire file" })
-vim.keymap.set("n",             "<leader>yY", [[:%y+<cr>]], { desc = "Yank entire file to clipboard" })
-vim.keymap.set({ "n", "x", },   "<leader>y",  [["+y]],      { desc = "Yank to clipboard" })
-vim.keymap.set({ "n", "x", },   "<leader>Y",  [["+yg_]],    { desc = "Yank to clipboard" })
-vim.keymap.set("n",             "<leader>yd", function()
+vim.keymap.set("n",           "yY",         [[:%y<cr>]],  { desc = "Yank entire file" })
+vim.keymap.set("n",           "<leader>yY", [[:%y+<cr>]], { desc = "Yank entire file to clipboard" })
+vim.keymap.set({ "n", "x", }, "<leader>y",  [["+y]],      { desc = "Yank to clipboard" })
+vim.keymap.set({ "n", "x", }, "<leader>Y",  [["+yg_]],    { desc = "Yank to clipboard" })
+vim.keymap.set("n",           "<leader>yd", function()
     local diagnostics = vim.diagnostic.get(0)
     local current_line = vim.api.nvim_win_get_cursor(0)[1] - 1
     local messages = {}
@@ -133,15 +128,15 @@ end, { desc = "Yank diagnostics from current line to clipboard" })
 
 
 -- Deletes
-vim.keymap.set({ "n", "x", },   "<leader>d", [["_d]],   { desc = "Don't save deleted text to buffer" })
-vim.keymap.set({ "n", "x", },   "<leader>x", [["_x]],   { desc = "Don't save deleted text to buffer" })
-vim.keymap.set({ "n", "x", },   "<leader>c", [["_c]],   { desc = "Don't save deleted text to buffer" })
-vim.keymap.set("x",             "<leader>p", [["_dP]],  { desc = "Don't save deleted text to buffer" })
+vim.keymap.set({ "n", "x", }, "<leader>d", [["_d]],  { desc = "Don't save deleted text to buffer" })
+vim.keymap.set({ "n", "x", }, "<leader>x", [["_x]],  { desc = "Don't save deleted text to buffer" })
+vim.keymap.set({ "n", "x", }, "<leader>c", [["_c]],  { desc = "Don't save deleted text to buffer" })
+vim.keymap.set("x",           "<leader>p", [["_dP]], { desc = "Don't save deleted text to buffer" })
 
 
 -- Quickfix list
-vim.keymap.set("n", "<C-j>",     "<cmd>cnext<cr>zz",    { desc = "Next quickfix" })
-vim.keymap.set("n", "<C-k>",     "<cmd>cprev<cr>zz",    { desc = "Prev quickfix" })
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<cr>zz", { desc = "Next quickfix" })
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<cr>zz", { desc = "Prev quickfix" })
 vim.keymap.set("n", "<C-q>", function()
     for _, win in pairs(vim.fn.getwininfo()) do
         if win["quickfix"] == 1 then
@@ -154,8 +149,8 @@ end, { desc = "Toggle quickfix list" })
 
 
 -- Location list
-vim.keymap.set("n", "<M-j>", "<cmd>lnext<cr>zz",    { desc = "Next location list" })
-vim.keymap.set("n", "<M-k>", "<cmd>lprev<cr>zz",    { desc = "Prev location list" })
+vim.keymap.set("n", "<M-j>", "<cmd>lnext<cr>zz", { desc = "Next location list" })
+vim.keymap.set("n", "<M-k>", "<cmd>lprev<cr>zz", { desc = "Prev location list" })
 vim.keymap.set("n", "<M-q>", function()
     for _, win in pairs(vim.fn.getwininfo()) do
         if win["loclist"] == 1 then
