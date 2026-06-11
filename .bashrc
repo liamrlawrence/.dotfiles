@@ -45,7 +45,6 @@ fi
 
 ## Neovim
 export NEOVIM_PATH="/usr/local/nvim-linux/bin/nvim"
-alias nvim="$NEOVIM_PATH"
 
 
 ## C
@@ -81,6 +80,8 @@ alias la='ls -A'
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.dotfiles/bin:$PATH"
+export PATH="${NEOVIM_PATH%/*}:$PATH"
+
 export VISUAL="$NEOVIM_PATH"
 export EDITOR="$NEOVIM_PATH"
 export GIT_EDITOR="$NEOVIM_PATH"
