@@ -16,6 +16,21 @@ vim.keymap.set("n", "ZA", "<cmd>confirm wqa<cr>", { desc = "Write-Quit-All" })
 vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<cr><leader>/f", { desc = "New tab", remap = true })
 
 
+-- Zoom
+local zoom_restore = nil
+local function zoom_toggle()
+    if zoom_restore then
+        vim.cmd(zoom_restore)
+        zoom_restore = nil
+    else
+        zoom_restore = vim.fn.winrestcmd()
+        vim.cmd.wincmd("_")
+        vim.cmd.wincmd("|")
+    end
+end
+vim.keymap.set("n", "<leader>m", zoom_toggle, { desc = "Toggle window maximize" })
+
+
 -- Explorer
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Explorer" })
 vim.api.nvim_create_autocmd("FileType", {
