@@ -1,7 +1,7 @@
 .session*.vim
 .session*.shada
 
-.DS_STORE
+.DS_Store
 
 .git/
 
