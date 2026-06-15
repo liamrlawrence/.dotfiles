@@ -14,8 +14,15 @@ session_icon=" "
 time_icon=" "
 date_icon=" "
 
-# Accent colors
+# Colors
 # WARN: Capital hex colors might fail due to variable expansion (see: tmux/issues/3239)
+RED="#ae2a34"
+ORANGE="#ff8f2d"
+YELLOW="#d3bc00"
+GREEN="#008a3c"
+BLUE="#00659c"
+PURPLE="#8a00c8"
+WHITE="#aeaeae"
 G01="#080808"
 G02="#121212"
 G03="#1c1c1c"
@@ -29,49 +36,63 @@ G10="#626262"
 G11="#6c6c6c"
 G12="#767676"
 
-# Themes
-theme="${1:-green}"
+
+theme="${1:-white}"
 case $theme in
     red)
-        TC="#9b092b"            # Theme color
-        HL="#91099b"            # Highlight color
-        TD="$G02"               # Theme dark accent color
+        TC="$RED"               # Theme color
+        HL="$GREEN"             # Highlight
+        TD="$G01"               # Theme dark accent color
         TM="$G03"               # Theme medium accent color
         TL="$TC"                # Theme light accent color
         ;;
     orange)
-        TC="#be6404"
-        HL="#be8904"
-        TD="$G04"
-        TM="$G06"
+        TC="$ORANGE"
+        HL="$BLUE"
+        TD="$G01"
+        TM="$G04"
         TL="$TC"
         ;;
     yellow)
-        TC="#be8904"
-        HL="#be6404"
-        TD="$G04"
-        TM="$G06"
+        TC="$YELLOW"
+        HL="$PURPLE"
+        TD="$G01"
+        TM="$G05"
         TL="$TC"
         ;;
     green)
-        TC="#87a96b"
-        HL="#bab86c"
-        TD="$G04"
-        TM="$G06"
+        TC="$GREEN"
+        HL="$RED"
+        TD="$G01"
+        TM="$G03"
         TL="$TC"
         ;;
     blue)
-        TC="#0047ab"
-        HL="#ab8600"
+        TC="$BLUE"
+        HL="$ORANGE"
         TD="$G01"
-        TM="$G02"
+        TM="$G03"
         TL="$TC"
         ;;
     purple)
-        TC="#5d3fd3"
-        HL="#983fd3"
-        TD="$G02"
-        TM="$G04"
+        TC="$PURPLE"
+        HL="$YELLOW"
+        TD="$G01"
+        TM="$G03"
+        TL="$TC"
+        ;;
+    white)
+        TC="$WHITE"
+        HL="$G09"
+        TD="$G01"
+        TM="$G03"
+        TL="$TC"
+        ;;
+    critical)
+        TC="#ffff00"
+        HL="#00ff00"
+        TD="#ff0000"
+        TM="#0000ff"
         TL="$TC"
         ;;
     *)
