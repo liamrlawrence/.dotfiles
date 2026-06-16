@@ -9,7 +9,6 @@ return {
         "EdenEast/nightfox.nvim",
         "motaz-shokry/gruvbox.nvim",
         --
-        "Mofiqul/vscode.nvim",
         "chaserensberger/christmas.nvim",
     },
 
@@ -28,6 +27,14 @@ return {
             on_highlights = function(highlights, colors)
                 highlights.EndOfBuffer = { fg = colors.dark3 }
             end,
+        })
+
+        require("nightfox").setup({
+            groups = {
+                all = {
+                    EndOfBuffer = { fg = "fg3" },
+                },
+            },
         })
 
 
@@ -88,12 +95,6 @@ return {
 
             special_themes = {
                 {
-                    colorscheme = "vscode",
-                    background = "dark",
-                    transparent = false,
-                    keymap = "<leader>ttv",
-                },
-                {
                     colorscheme = "christmas",
                     background = "dark",
                     transparent = false,
@@ -102,13 +103,6 @@ return {
             },
 
             filetype_themes = {
-                -- Git
-                {
-                    filetype = "fugitive",
-                    colorscheme = "carbonfox",
-                    background = "dark",
-                },
-
                 -- C/C++
                 {
                     filetype = { "c", "cpp" },
@@ -118,6 +112,13 @@ return {
                 {
                     filetype = { "c.header", "cpp.header" },
                     colorscheme = "kanagawa-dragon",
+                    background = "dark",
+                },
+
+                -- Git
+                {
+                    filetype = "fugitive",
+                    colorscheme = "carbonfox",
                     background = "dark",
                 },
             },
