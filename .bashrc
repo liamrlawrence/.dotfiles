@@ -60,7 +60,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 
 ## Python
-[[ -n "$ACTIVATE_VENV" ]] && source "$ACTIVATE_VENV" && unset ACTIVATE_VENV     # activate venvs in tmux panes with split_window.sh
+[[ -n "$ACTIVATE_VENV" ]] && { source "$ACTIVATE_VENV"; unset ACTIVATE_VENV; }  # activate venvs in tmux panes with split_window.sh
 
 
 ## Color commands
