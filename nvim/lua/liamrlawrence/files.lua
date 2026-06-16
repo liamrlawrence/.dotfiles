@@ -18,7 +18,9 @@ local git_files_group      = augroup("LL.files_git-group",      { clear = true }
 
 vim.filetype.add({
     extension = {
-        --
+        h   = "c.header",
+        hh  = "cpp.header",
+        hpp = "cpp.header",
     },
     filename = {
         --

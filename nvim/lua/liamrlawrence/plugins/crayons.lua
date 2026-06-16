@@ -116,7 +116,7 @@ return {
                     background = "dark",
                 },
                 {
-                    pattern = { "*.h", "*.hh", "*.hpp" },
+                    filetype = { "c.header", "cpp.header" },
                     colorscheme = "kanagawa-dragon",
                     background = "dark",
                 },
