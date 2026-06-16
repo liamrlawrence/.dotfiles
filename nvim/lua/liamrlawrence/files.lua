@@ -44,14 +44,18 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 
 -- C/C++
+local c_filetypes = { "c", "c.header", }
+local cpp_filetypes = { "cpp", "cpp.header" }
+local cc_filetypes = vim.iter({ c_filetypes, cpp_filetypes }):flatten():totable()
+
 local c_file_patterns = { "*.c", "*.h", }
 local cpp_file_patterns = { "*.cc", "*.hh", "*.cpp", "*.hpp", }
-local cc_file_patterns = vim.list_extend(vim.list_extend({}, c_file_patterns), cpp_file_patterns)
+local cc_file_patterns = vim.iter({ c_file_patterns, cpp_file_patterns }):flatten():totable()
 
 vim.api.nvim_create_autocmd("FileType", {
     desc = "C/C++ file settings",
     group = cc_files_group,
-    pattern = cc_file_patterns,
+    pattern = cc_filetypes,
     callback = function()
         vim.bo.expandtab = false
         vim.bo.shiftwidth = 8
