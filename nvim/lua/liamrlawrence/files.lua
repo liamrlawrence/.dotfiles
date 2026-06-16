@@ -272,6 +272,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = true
         vim.bo.shiftwidth = 2
         vim.bo.tabstop = 2
+        vim.wo.conceallevel = 2
     end,
 })
 

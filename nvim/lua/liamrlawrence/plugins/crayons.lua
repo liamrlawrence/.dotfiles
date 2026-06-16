@@ -121,6 +121,14 @@ return {
                     colorscheme = "carbonfox",
                     background = "dark",
                 },
+
+                -- Org
+                {
+                    filetype = "org",
+                    colorscheme = "kanagawa-wave",
+                    background = "dark",
+                    no_cache = true,
+                },
             },
         })
     end,
