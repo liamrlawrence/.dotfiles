@@ -16,11 +16,11 @@ return {
                 done    = {                                 "#00A36C" },
             },
             keywords = {
-                -- BUG: FIXME, ISSUE
+                -- BUG: FIX, FIXME, BUGFIX, ISSUE
                 BUG = {
                     icon = " ",
                     color = "error",
-                    alt = { "FIXME", "ISSUE" },
+                    alt = { "FIX", "FIXME", "BUGFIX", "ISSUE" },
                 },
                 -- TODO:
                 TODO = {
@@ -33,11 +33,11 @@ return {
                     color = "hint",
                     alt = { "INFO" },
                 },
-                -- FIX: PATCH, HACK, BUGFIX, OVERRIDE
-                FIX = {
+                -- HACK: PATCH, OVERRIDE
+                HACK = {
                     icon = "󰶯 ",
                     color = "warning",
-                    alt = { "PATCH", "HACK", "BUGFIX", "OVERRIDE" }
+                    alt = { "PATCH", "OVERRIDE" }
                 },
                 -- WARN: WARNING, CAUTION
                 WARN = {
