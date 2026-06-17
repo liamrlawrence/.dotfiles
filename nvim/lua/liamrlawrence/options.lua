@@ -18,6 +18,8 @@ vim.opt.colorcolumn = "81,121"
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.scrolloff = 8
+vim.opt.list = false
+vim.opt.listchars = { leadmultispace = "·   ", tab = "  ", leadtab = "· " }
 
 -- Line numbers
 vim.opt.nu = true
