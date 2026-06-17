@@ -57,16 +57,15 @@ return {
             vim.fn.sign_define("DapStopped",             { text = "▶", texthl = "DiagnosticOk", linehl = "CursorLine" })
 
             -- Keymaps
-            vim.keymap.set({ "n", "v" }, "<leader>za", dapview.add_expr,  { desc = "DAP: watch expression" })
-            vim.keymap.set("n",          "<leader>zl", dap.run_last,      { desc = "DAP: re-run last config" })
-            vim.keymap.set("n",          "<leader>zC", dap.run_to_cursor, { desc = "DAP: run to cursor" })
-            vim.keymap.set("n",          "<leader>zT", dap_cleanup,       { desc = "DAP: terminate" })
+            vim.keymap.set({ "n", "v" }, "<leader>za", dapview.add_expr,      { desc = "DAP: watch expression" })
+            vim.keymap.set("n",          "<leader>zb", dap.toggle_breakpoint, { desc = "DAP: toggle breakpoint" })
+            vim.keymap.set("n",          "<leader>zc", dap.continue,          { desc = "DAP: continue" })
+            vim.keymap.set("n",          "<leader>zC", dap.run_to_cursor,     { desc = "DAP: run to cursor" })
+            vim.keymap.set("n",          "<leader>zl", dap.run_last,          { desc = "DAP: re-run last config" })
+            vim.keymap.set("n",          "<leader>zT", dap_cleanup,           { desc = "DAP: terminate" })
         end,
 
-        keys = {
-            { "<leader>zb", function() require("dap").toggle_breakpoint() end, desc = "DAP: toggle breakpoint" },
-            { "<leader>zc", function() require("dap").continue()          end, desc = "DAP: continue" },
-        },
+        keys = { "<leader>za", "<leader>zb", "<leader>zc" },
     },
 
 

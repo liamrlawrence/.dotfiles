@@ -38,10 +38,10 @@ return {
                 if zm_view.is_open() then zm.close() end
             end,
         })
+
+        vim.keymap.set("n", "<leader>ez", "<cmd>ZenMode<cr>", { desc = "Zen" })
     end,
 
-    keys = {
-        { "<leader>ez", "<cmd>ZenMode<cr>", desc = "Zen" },
-    },
+    keys = { "<leader>ez" },
 }
 
