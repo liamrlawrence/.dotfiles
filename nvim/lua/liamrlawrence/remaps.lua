@@ -187,6 +187,13 @@ vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- Editor
 vim.keymap.set("n", "<leader>ew", function()
     vim.wo.wrap = not vim.wo.wrap
+    for _, k in ipairs({ "j", "k" }) do
+        if vim.wo.wrap then
+            vim.keymap.set("n", k, "g" .. k, { buffer = true })
+        else
+            vim.keymap.del("n", k, { buffer = true })
+        end
+    end
 end, { desc = "Toggle line wrapping" })
 
 vim.keymap.set("n", "<leader>er", function()
