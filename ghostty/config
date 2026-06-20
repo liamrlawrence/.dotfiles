@@ -36,7 +36,6 @@ mouse-hide-while-typing = true
 # Cursor
 cursor-style = block
 cursor-style-blink = false
-shell-integration-features = sudo,no-cursor,no-title
 
 # Scrollback
 scrollback-limit = 10000000
@@ -44,6 +43,12 @@ scrollback-limit = 10000000
 # Bell
 bell-features = audio,no-system
 bell-audio-path = ~/.config/ghostty/bell_morse.aiff
+
+# Keybinds
+keybind = alt+shift+minus=text:—
+
+# System
+shell-integration-features = sudo,no-cursor,no-title
 
 # MacOS
 macos-option-as-alt = true
