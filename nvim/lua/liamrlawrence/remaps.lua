@@ -13,7 +13,8 @@ vim.keymap.set("n", "ZA", "<cmd>confirm wqa<cr>", { desc = "Write-Quit-All" })
 
 
 -- Tabs
-vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<cr><leader>/f", { desc = "New tab", remap = true })
+vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<cr>",           { desc = "New tab" })
+vim.keymap.set("n", "<leader>tf", "<cmd>tabnew<cr><leader>/f", { desc = "New tab with file picker", remap = true })
 
 
 -- Explorer
