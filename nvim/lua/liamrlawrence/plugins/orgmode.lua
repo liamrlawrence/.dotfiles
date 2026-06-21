@@ -8,11 +8,13 @@ return {
             org_agenda_files = "~/Notes/**/*",
             org_default_notes_file = "~/Notes/refile.org",
 
-            org_todo_keywords = { "TODO(t)", "WAITING", "IN-PROGRESS", "|", "DONE", "CANCELLED" },
+            org_todo_keywords = { "TODO(t)", "BLOCKED", "WAITING", "IN-PROGRESS", "PAUSED", "|", "DONE", "CANCELLED" },
             org_todo_keyword_faces = {
-                ["TODO"]        = ":foreground #F74040 :weight bold",
+                ["TODO"]        = ":foreground #F71040 :weight bold",
+                ["BLOCKED"]     = ":foreground #E0306B :weight bold",
                 ["WAITING"]     = ":foreground #F5C030 :weight bold",
-                ["IN-PROGRESS"] = ":foreground #F5923E :weight bold :slant italic",
+                ["IN-PROGRESS"] = ":foreground #F5923E :weight bold :underline on",
+                ["PAUSED"]      = ":foreground #C28A4E :weight bold :underline on",
                 ["DONE"]        = ":foreground #26A65B :weight bold",
                 ["CANCELLED"]   = ":foreground #8FA3D8 :weight bold",
             },
