@@ -76,6 +76,8 @@ return {
             elseif old_state == "IN-PROGRESS" and after:is_clocked_in() then
                 require("orgmode").action("clock.org_clock_out")
             end
+
+            vim.schedule(function() vim.cmd("silent write") end)
         end
 
         -- HACK: Map keymap to the string "<cmd>lua _G.fn()<cr>"
