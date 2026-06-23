@@ -23,7 +23,10 @@ return {
             org_priority_default = 3,
             org_priority_lowest  = 5,
 
+            org_agenda_skip_deadline_if_done = true,
+            org_agenda_skip_scheduled_if_done = true,
             win_split_mode = { "float", 0.75 },
+
             org_hide_emphasis_markers = true,
             org_startup_indented = true,
             org_tags_column = -80,
