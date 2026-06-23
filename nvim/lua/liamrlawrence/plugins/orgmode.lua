@@ -19,6 +19,10 @@ return {
                 ["CANCELLED"]   = ":foreground #8FA3D8 :weight bold",
             },
 
+            org_priority_highest = 1,
+            org_priority_default = 3,
+            org_priority_lowest  = 5,
+
             win_split_mode = { "float", 0.75 },
             org_hide_emphasis_markers = true,
             org_startup_indented = true,
@@ -30,8 +34,19 @@ return {
                 },
             },
         })
-        vim.lsp.enable("org")
         require("org-bullets").setup()
+        vim.lsp.enable("org")
+
+        -- Highlights
+        vim.api.nvim_create_autocmd("ColorScheme", {
+            callback = function()
+                vim.api.nvim_set_hl(0, "@org.priority.highest", { link = "@comment.error"   })
+                vim.api.nvim_set_hl(0, "@org.priority.high",    { link = "@comment.warning" })
+                vim.api.nvim_set_hl(0, "@org.priority.default", { link = "@comment.note"    })
+                vim.api.nvim_set_hl(0, "@org.priority.low",     { link = "@comment.note"    })
+                vim.api.nvim_set_hl(0, "@org.priority.lowest",  { link = "@comment.comment" })
+            end,
+        })
 
         -- Keymaps
         vim.api.nvim_create_autocmd("FileType", {
