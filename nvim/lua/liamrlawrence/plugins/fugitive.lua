@@ -22,17 +22,7 @@ return {
             end,
         })
 
-        vim.keymap.set("n", "<leader>gs", function()
-            for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-                local buf = vim.api.nvim_win_get_buf(win)
-                if vim.bo[buf].filetype == "fugitive" then
-                    vim.api.nvim_win_close(win, false)
-                    return
-                end
-            end
-            vim.cmd.Git()
-        end, { desc = "Git Status (toggle)" })
-
+        vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git status" })
         vim.keymap.set("n", "<leader>gD", function()
             if vim.wo.diff then return end
 
