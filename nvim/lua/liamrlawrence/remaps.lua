@@ -191,7 +191,7 @@ vim.keymap.set("n", "<leader>ew", function()
         if vim.wo.wrap then
             vim.keymap.set("n", k, "g" .. k, { buffer = true })
         else
-            vim.keymap.del("n", k, { buffer = true })
+            pcall(vim.keymap.del, "n", k, { buffer = true })
         end
     end
 end, { desc = "Toggle line wrapping" })
