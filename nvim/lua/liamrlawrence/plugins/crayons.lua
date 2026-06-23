@@ -107,26 +107,26 @@ return {
                 {
                     filetype = { "c", "cpp" },
                     colorscheme = "kanagawa-wave",
-                    background = "dark",
                 },
                 {
                     filetype = { "c.header", "cpp.header" },
                     colorscheme = "kanagawa-dragon",
-                    background = "dark",
                 },
 
                 -- Git
                 {
+                    filetype = "git",
+                    colorscheme = "tokyonight-moon",
+                },
+                {
                     filetype = "fugitive",
                     colorscheme = "carbonfox",
-                    background = "dark",
                 },
 
                 -- Org
                 {
                     filetype = "org",
                     colorscheme = "kanagawa-wave",
-                    background = "dark",
                     no_cache = true,
                 },
             },
