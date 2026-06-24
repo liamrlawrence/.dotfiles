@@ -211,8 +211,9 @@ vim.keymap.set("n", "<leader>et", function()
     local char = vim.fn.getcharstr()
     local num = tonumber(char)
     if num and num >= 1 and num <= 9 then
-        vim.opt.tabstop = num
-        vim.notify("tabstop=" .. num, vim.log.levels.INFO)
+        vim.opt_local.tabstop = num
+        vim.opt_local.shiftwidth = num
+        vim.notify((vim.bo.expandtab and "shiftwidth=" or "tabstop=") .. num, vim.log.levels.INFO)
     end
 end, { desc = "Set tabstop" })
 
