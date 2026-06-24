@@ -278,6 +278,15 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Org agenda settings",
+    group = org_files_group,
+    pattern = "orgagenda",
+    callback = function()
+        vim.wo.colorcolumn = ""
+    end,
+})
+
 
 -- Git
 vim.api.nvim_create_autocmd("FileType", {
