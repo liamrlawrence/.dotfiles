@@ -52,6 +52,10 @@ return {
         })
 
         -- Keymap helper functions
+        local function reposition_cursor()
+            vim.cmd("normal! 0f ge")
+        end
+
         local function get_headline()
             local ok, files = pcall(function() return require("orgmode").files end)
             if not ok or not files then return nil end
@@ -93,7 +97,16 @@ return {
             desc = "Register org buffer keymaps",
             pattern = "org",
             callback = function(args)
-                vim.keymap.set("n", "cit", "<cmd>lua _G.__org.todo_next_state()<cr>",   -- OVERRIDE:
+                vim.keymap.set("n", "<Tab>", function()                                                 -- OVERRIDE:
+                    local before = vim.fn.foldclosed(vim.fn.line(".") + 1)
+                    require("orgmode").action("org_mappings.cycle")
+                    local after = vim.fn.foldclosed(vim.fn.line(".") + 1)
+                    if before ~= -1 and after == -1 then
+                        reposition_cursor()
+                    end
+                end, { buffer = args.buf, desc = "org cycle, reposition cursor on open" })
+
+                vim.keymap.set("n", "cit", "<cmd>lua _G.__org.todo_next_state()<cr>",                   -- OVERRIDE:
                     { buffer = args.buf, desc = "org next todo state + IN-PROGRESS clock sync" })
 
                 vim.keymap.set("n", "<leader>oip", function()
