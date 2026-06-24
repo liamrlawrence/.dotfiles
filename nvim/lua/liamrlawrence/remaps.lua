@@ -1,6 +1,7 @@
 local augroup = vim.api.nvim_create_augroup
-local explorer_group = augroup("LL.remaps_explorer-group", { clear = true })
+local explorer_group  = augroup("LL.remaps_explorer-group",  { clear = true })
 local highlight_group = augroup("LL.remaps_highlight-group", { clear = true })
+local editor_group    = augroup("LL.remaps_editor-group",    { clear = true })
 
 
 
@@ -185,15 +186,25 @@ end, { desc = "Toggle window maximize" })
 
 
 -- Editor
+vim.api.nvim_create_autocmd("OptionSet", {
+    desc = "Improved j/k navigation for wrapped lines",
+    group = editor_group,
+    pattern = "wrap",
+    callback = function(args)
+        for _, k in ipairs({ "j", "k" }) do
+            if vim.v.option_new then
+                vim.keymap.set("n", k, function()
+                    return vim.v.count == 0 and ("g" .. k) or k
+                end, { buffer = args.buf, expr = true })
+            else
+                pcall(vim.keymap.del, "n", k, { buffer = args.buf })
+            end
+        end
+    end,
+})
+
 vim.keymap.set("n", "<leader>ew", function()
     vim.wo.wrap = not vim.wo.wrap
-    for _, k in ipairs({ "j", "k" }) do
-        if vim.wo.wrap then
-            vim.keymap.set("n", k, "g" .. k, { buffer = true })
-        else
-            pcall(vim.keymap.del, "n", k, { buffer = true })
-        end
-    end
 end, { desc = "Toggle line wrapping" })
 
 vim.keymap.set("n", "<leader>er", function()
