@@ -36,7 +36,7 @@ vim.keymap.set("x", "J", ":m '>+1<cr>gv=gv", { desc = "Move line down" })
 vim.keymap.set("x", "K", ":m '<-2<cr>gv=gv", { desc = "Move line up" })
 vim.keymap.set("n", "J", function() -- "mzJ`z"
     local view = vim.fn.winsaveview()
-    vim.cmd(":normal! J")
+    vim.cmd(":normal! " .. vim.v.count1 .. "J")
     vim.fn.winrestview(view)
 end, { desc = "J does not move cursor" })
 
