@@ -9,38 +9,14 @@ return {
             local dap_group = vim.api.nvim_create_augroup("LL.plugins_dap-group", { clear = true })
 
             -- Autocmds
-            local function dap_cleanup()
-                if package.loaded["dap-view"] then
-                    pcall(require("dap-view").close)
-                end
-                if package.loaded["dap"] then
-                    pcall(require("dap").terminate)
-                end
-                for _, w in ipairs(vim.api.nvim_list_wins()) do
-                    local ft = vim.bo[vim.api.nvim_win_get_buf(w)].filetype
-                    if ft == "dap-view" or ft == "dap-view-term" then
-                        pcall(vim.api.nvim_win_close, w, true)
-                    end
-                end
-                for _, b in ipairs(vim.api.nvim_list_bufs()) do
-                    local ft = vim.bo[b].filetype
-                    if ft == "dap-view" or ft == "dap-view-term" then
-                        pcall(vim.api.nvim_buf_delete, b, { force = true })
-                    end
-                end
-            end
-
             vim.api.nvim_create_autocmd("User", {
-                desc     = "Close dap UI before session switch",
+                desc     = "Clean up dap UI when leaving a session",
                 group    = dap_group,
                 pattern  = "RepossessionSwitchPre",
-                callback = dap_cleanup,
-            })
-
-            vim.api.nvim_create_autocmd("ExitPre", {
-                desc     = "Close dap UI before exit",
-                group    = dap_group,
-                callback = dap_cleanup,
+                callback = function()
+                    pcall(require("dap-view").close)
+                    pcall(require("dap").terminate)
+                end,
             })
 
             -- Config
@@ -57,15 +33,17 @@ return {
             vim.fn.sign_define("DapStopped",             { text = "▶", texthl = "DiagnosticOk", linehl = "CursorLine" })
 
             -- Keymaps
-            vim.keymap.set({ "n", "v" }, "<leader>za", dapview.add_expr,      { desc = "DAP: watch expression" })
-            vim.keymap.set("n",          "<leader>zb", dap.toggle_breakpoint, { desc = "DAP: toggle breakpoint" })
-            vim.keymap.set("n",          "<leader>zc", dap.continue,          { desc = "DAP: continue" })
-            vim.keymap.set("n",          "<leader>zC", dap.run_to_cursor,     { desc = "DAP: run to cursor" })
-            vim.keymap.set("n",          "<leader>zl", dap.run_last,          { desc = "DAP: re-run last config" })
-            vim.keymap.set("n",          "<leader>zT", dap_cleanup,           { desc = "DAP: terminate" })
+            vim.keymap.set("n",          "<S-F11>", dap.continue,          { desc = "DAP: run/start" })
+            vim.keymap.set("n",          "<S-F10>", dap.continue,          { desc = "DAP: debug/start" })
+            vim.keymap.set("n",          "<F7>",    dap.continue,          { desc = "DAP: resume" })
+            vim.keymap.set("n",          "<F8>",    dap.step_into,         { desc = "DAP: step into" })
+            vim.keymap.set("n",          "<F9>",    dap.step_over,         { desc = "DAP: step over" })
+            vim.keymap.set("n",          "<S-F9>",  dap.step_out,          { desc = "DAP: step out" })
+            vim.keymap.set("n",          "<F12>",   dap.toggle_breakpoint, { desc = "DAP: toggle breakpoint" })
+            vim.keymap.set({ "n", "v" }, "<S-F12>", dapview.add_expr,      { desc = "DAP: watch expression" })
         end,
 
-        keys = { "<leader>za", "<leader>zb", "<leader>zc" },
+        keys = { "<S-F10>", "<S-F11>", "<F12>", "<S-F12>" },
     },
 
 
