@@ -135,6 +135,11 @@ return {
                     colorscheme = "kanagawa-wave",
                     no_cache = true,
                 },
+                {
+                    filetype = "orgagenda",
+                    colorscheme = "kanagawa-wave",
+                    no_cache = true,
+                },
             },
         })
     end,
