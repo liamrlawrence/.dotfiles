@@ -7,6 +7,11 @@
 [push]
     autoSetupRemote = true  # no need to --set-upstream on first push
 
+[diff]
+    tool = nvimdiff
+[difftool]
+    prompt = false
+
 [alias]
     lg = log --oneline --graph --decorate
     lgd = log --format=\"%C(yellow)commit %H%Creset%nAuthor:     %C(bold)%an%Creset <%ae>%nAuthorDate: %C(green)%ad%Creset%nCommit:     %C(bold)%cn%Creset <%ce>%nCommitDate: %C(green)%cd%Creset%n%n%w(0,4,4)%B\"
