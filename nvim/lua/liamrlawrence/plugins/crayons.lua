@@ -123,6 +123,12 @@ return {
                     colorscheme = "carbonfox",
                 },
 
+                -- Markdown
+                {
+                    filetype = "markdown",
+                    colorscheme = "tokyonight-moon",
+                },
+
                 -- Org
                 {
                     filetype = "org",
