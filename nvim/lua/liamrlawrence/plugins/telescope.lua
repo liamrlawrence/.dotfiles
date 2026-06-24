@@ -8,7 +8,8 @@ return {
         require("telescope").setup{
             defaults = {
                 file_ignore_patterns = {
-                    "%.git$",
+                    "%.git",
+                    "%.venv",
                     "venv",
                     "node_modules",
                     "static/vendor",
@@ -20,6 +21,17 @@ return {
                     i = {
                         ["<M-q>"] = require("telescope.actions").send_to_loclist + require("telescope.actions").open_loclist,
                     },
+                },
+            },
+            pickers = {
+                find_files = {
+                    follow = true,
+                },
+                grep_string = {
+                    additional_args = { "--follow" },
+                },
+                live_grep = {
+                    additional_args = { "--follow" },
                 },
             },
         }
