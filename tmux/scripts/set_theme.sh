@@ -1,6 +1,7 @@
 #!/bin/bash
 # Usage: ./set_theme.sh [theme]
-
+#
+# shellcheck disable=SC2034 # Suppress "unused variable" warning
 
 user_name="$(whoami)"
 time_format="%-H:%M:%S %Z"
@@ -151,6 +152,7 @@ tmux set -gq pane-active-border-style "fg=${TC},bg=default"
 
 
 # Other styles
+tmux set -gq prompt-cursor-colour "$HL"
 tmux set -gq message-style "fg=${HL},bg=${TD}"  # Messages
 tmux set -gq mode-style    "fg=${TD},bg=${HL}"  # Copy mode (highlighting)
 
