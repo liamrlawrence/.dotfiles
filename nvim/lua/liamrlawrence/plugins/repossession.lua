@@ -4,6 +4,7 @@ return {
     config = function()
         require("repossession").setup({
             ignore_filetypes = {
+                "trouble",
                 "neo-tree",
                 "dap-view",
                 "dap-view-term",
