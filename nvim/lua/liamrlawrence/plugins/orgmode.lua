@@ -4,7 +4,11 @@ return {
     ft = { "org" },
 
     config = function()
-        require("orgmode").setup({
+        local org_mode = require("orgmode")
+        local org_bullets = require("org-bullets")
+        local org_group = vim.api.nvim_create_augroup("LL.plugins_org-group", { clear = true })
+
+        org_mode.setup({
             org_agenda_files = "~/Notes/**/*",
             org_default_notes_file = "~/Notes/refile.org",
 
@@ -61,11 +65,13 @@ return {
                 },
             },
         })
-        require("org-bullets").setup()
+        org_bullets.setup()
         vim.lsp.enable("org")
 
         -- Highlights
         vim.api.nvim_create_autocmd("ColorScheme", {
+            desc = "Set custom org highlights",
+            group = org_group,
             callback = function()
                 vim.api.nvim_set_hl(0, "@org.priority.highest", { fg = "#F71040" })
                 vim.api.nvim_set_hl(0, "@org.priority.high",    { fg = "#F5C030" })
@@ -122,6 +128,7 @@ return {
         -- Keymaps
         vim.api.nvim_create_autocmd("FileType", {
             desc = "Register org buffer keymaps",
+            group = org_group,
             pattern = "org",
             callback = function(args)
                 vim.keymap.set("n", "<Tab>", function()                                                 -- OVERRIDE:
