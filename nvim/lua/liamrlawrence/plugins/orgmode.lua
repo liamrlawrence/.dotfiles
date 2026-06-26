@@ -89,7 +89,10 @@ return {
 
         local function todo_next_with_inprogress_clock()
             local before = get_headline()
-            if not before then return end
+            if not before then
+                vim.notify("[orgmode] No headline found", vim.log.levels.ERROR)
+                return
+            end
             local old_state = before:get_todo()
 
             require("orgmode").action("org_mappings.todo_next_state")
@@ -134,14 +137,9 @@ return {
                     { buffer = args.buf, desc = "org next todo state + IN-PROGRESS clock sync" })
 
                 vim.keymap.set("n", "<leader>oip", function()
-                    local ok, file = pcall(require("orgmode.api").current)
-                    if not ok or not file then
-                        vim.notify("Not in an org buffer", vim.log.levels.WARN)
-                        return
-                    end
-                    local headline = file:get_closest_headline()
+                    local headline = get_headline()
                     if not headline then
-                        vim.notify("No headline at cursor", vim.log.levels.WARN)
+                        vim.notify("[orgmode] No headline found", vim.log.levels.ERROR)
                         return
                     end
 
