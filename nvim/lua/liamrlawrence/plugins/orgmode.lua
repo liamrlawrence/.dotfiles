@@ -8,8 +8,9 @@ return {
             org_agenda_files = "~/Notes/**/*",
             org_default_notes_file = "~/Notes/refile.org",
 
-            org_todo_keywords = { "TODO(t)", "BLOCKED", "WAITING", "IN-PROGRESS", "PAUSED", "|", "DONE", "CANCELLED" },
+            org_todo_keywords = { "NEXT(n)", "TODO", "BLOCKED", "WAITING", "IN-PROGRESS", "PAUSED", "|", "DONE", "CANCELLED" },
             org_todo_keyword_faces = {
+                ["NEXT"]        = ":foreground #16C8C8 :weight bold",
                 ["TODO"]        = ":foreground #F71040 :weight bold",
                 ["BLOCKED"]     = ":foreground #E0306B :weight bold",
                 ["WAITING"]     = ":foreground #F5C030 :weight bold",
