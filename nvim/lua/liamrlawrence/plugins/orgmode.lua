@@ -20,13 +20,36 @@ return {
                 ["CANCELLED"]   = ":foreground #5A8FB0 :weight bold",
             },
 
+            org_agenda_custom_commands = {
+                d = {
+                    description = "Today",
+                    types = {
+                        {
+                            type = "agenda",
+                            org_agenda_span = "day",
+                            org_agenda_sorting_strategy = { "priority-down", "todo-state-up", "time-up" },
+                        },
+                    },
+                },
+                s = {
+                    description = "School",
+                    types = {
+                        {
+                            org_agenda_overriding_header = "Week-agenda (school)",
+                            type = "agenda",
+                            org_agenda_span = "week",
+                            org_agenda_sorting_strategy = { "priority-down", "todo-state-up", "time-up" },
+                            org_agenda_tag_filter_preset = "school",
+                            org_agenda_remove_tags = true,
+                        },
+                    },
+                },
+            },
+            win_split_mode = { "float", 0.77 },
+
             org_priority_highest = 1,
             org_priority_default = 3,
             org_priority_lowest  = 5,
-
-            org_agenda_skip_deadline_if_done = true,
-            org_agenda_skip_scheduled_if_done = true,
-            win_split_mode = { "float", 0.75 },
 
             org_hide_emphasis_markers = true,
             org_startup_indented = true,
