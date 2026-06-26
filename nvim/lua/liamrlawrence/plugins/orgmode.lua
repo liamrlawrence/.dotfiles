@@ -17,7 +17,7 @@ return {
                 ["IN-PROGRESS"] = ":foreground #F5923E :weight bold :underline on",
                 ["PAUSED"]      = ":foreground #C28A4E :weight bold :underline on",
                 ["DONE"]        = ":foreground #26A65B :weight bold",
-                ["CANCELLED"]   = ":foreground #8FA3D8 :weight bold",
+                ["CANCELLED"]   = ":foreground #5A8FB0 :weight bold",
             },
 
             org_priority_highest = 1,
@@ -44,11 +44,11 @@ return {
         -- Highlights
         vim.api.nvim_create_autocmd("ColorScheme", {
             callback = function()
-                vim.api.nvim_set_hl(0, "@org.priority.highest", { link = "@comment.error"   })
-                vim.api.nvim_set_hl(0, "@org.priority.high",    { link = "@comment.warning" })
-                vim.api.nvim_set_hl(0, "@org.priority.default", { link = "@comment.note"    })
-                vim.api.nvim_set_hl(0, "@org.priority.low",     { link = "@comment.note"    })
-                vim.api.nvim_set_hl(0, "@org.priority.lowest",  { link = "@comment.comment" })
+                vim.api.nvim_set_hl(0, "@org.priority.highest", { fg = "#F71040" })
+                vim.api.nvim_set_hl(0, "@org.priority.high",    { fg = "#F5C030" })
+                vim.api.nvim_set_hl(0, "@org.priority.default", { fg = "#3B9EFF" })
+                vim.api.nvim_set_hl(0, "@org.priority.low",     { fg = "#5A8FB0" })
+                vim.api.nvim_set_hl(0, "@org.priority.lowest",  { fg = "#5C6670" })
             end,
         })
 
