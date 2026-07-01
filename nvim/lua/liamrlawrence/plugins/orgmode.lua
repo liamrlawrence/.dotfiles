@@ -12,7 +12,12 @@ return {
             org_agenda_files = "~/Notes/**/*",
             org_default_notes_file = "~/Notes/refile.org",
 
-            org_todo_keywords = { "NEXT(n)", "TODO", "BLOCKED", "WAITING", "IN-PROGRESS", "PAUSED", "|", "DONE", "CANCELLED" },
+            org_todo_keywords = {
+                "NEXT(n)", "TODO(t)", "BLOCKED(b)", "WAITING(w)", "IN-PROGRESS(i)", "PAUSED(o)",
+                "|",
+                "DONE(d)", "PARTIAL(p)", "CANCELLED(c)",
+                "ABANDONED(a)", "LAPSED(l)",
+            },
             org_todo_keyword_faces = {
                 ["NEXT"]        = ":foreground #16C8C8 :weight bold",
                 ["TODO"]        = ":foreground #F71040 :weight bold",
@@ -21,7 +26,10 @@ return {
                 ["IN-PROGRESS"] = ":foreground #F5923E :weight bold :underline on",
                 ["PAUSED"]      = ":foreground #C28A4E :weight bold :underline on",
                 ["DONE"]        = ":foreground #26A65B :weight bold",
+                ["PARTIAL"]     = ":foreground #8FAE3C :weight bold",
                 ["CANCELLED"]   = ":foreground #5A8FB0 :weight bold",
+                ["ABANDONED"]   = ":foreground #A53A0C :weight bold",
+                ["LAPSED"]      = ":foreground #6E7B8B :weight bold",
             },
 
             org_agenda_custom_commands = {
