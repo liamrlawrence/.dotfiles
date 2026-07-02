@@ -131,6 +131,7 @@ end, { desc = "Yank diagnostics from current line to clipboard" })
 
 -- Deletes
 vim.keymap.set({ "n", "x", }, "<leader>d", [["_d]],  { desc = "Don't save deleted text to buffer" })
+vim.keymap.set({ "n", "x", }, "<leader>D", [["_D]],  { desc = "Don't save deleted text to buffer" })
 vim.keymap.set({ "n", "x", }, "<leader>x", [["_x]],  { desc = "Don't save deleted text to buffer" })
 vim.keymap.set({ "n", "x", }, "<leader>c", [["_c]],  { desc = "Don't save deleted text to buffer" })
 vim.keymap.set("x",           "<leader>p", [["_dP]], { desc = "Don't save deleted text to buffer" })
