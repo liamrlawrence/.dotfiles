@@ -13,8 +13,11 @@
     prompt = false
 
 [alias]
-    lg = log --oneline --graph --decorate
-    lgd = log --format=\"%C(yellow)commit %H%Creset%nAuthor:     %C(bold)%an%Creset <%ae>%nAuthorDate: %C(green)%ad%Creset%nCommit:     %C(bold)%cn%Creset <%ce>%nCommitDate: %C(green)%cd%Creset%n%n%w(0,4,4)%B\"
+    lg  = log --pretty=format:'%C(yellow)%h %C(green)%ad %C(red)%d %C(reset)%s%<|(96) %C(blue)[%cn]%C(reset)' --decorate --date=short --graph
+    ldr = log --pretty=format:'%C(green)%h %C(yellow)[%ad] %C(red)%d %C(reset)%s%<|(107) %C(blue)[%cn]%C(reset)' --decorate --date=relative
+    ldc = log --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s%nCommitDate:    %C(green)%cd %<|(51)%C(blue)[%cn]%C(reset)%nAuthorDate:    %C(green)%ad %<|(51)%C(blue)[%an]%C(reset)%n' --graph
+    ll  = log --pretty=format:'%C(yellow)%h%C(red)%d %C(reset)%s %C(blue)[%cn]%C(reset)' --decorate --numstat
+    last = log -1 HEAD
     st = status -s
     rid = rebase -i --committer-date-is-author-date
 
