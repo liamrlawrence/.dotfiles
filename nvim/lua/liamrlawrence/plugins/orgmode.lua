@@ -31,6 +31,7 @@ return {
                 ["ABANDONED"]   = ":foreground #A53A0C :weight bold",
                 ["LAPSED"]      = ":foreground #6E7B8B :weight bold",
             },
+            org_todo_repeat_to_state = "TODO",
 
             org_agenda_custom_commands = {
                 d = {
