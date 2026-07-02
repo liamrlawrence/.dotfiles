@@ -79,15 +79,14 @@ local function highlight_visual_mode(key)
     vim.api.nvim_set_hl(0, "Visual", get_hl("IncSearch"))
     vim.cmd("normal! " .. key)
 
-    local autocmd_id
-    autocmd_id = vim.api.nvim_create_autocmd("ModeChanged", {
+    vim.api.nvim_create_autocmd("ModeChanged", {
         desc = "Restore Visual hl group on leaving Visual mode",
         group = highlight_group,
         callback = function()
             local event = vim.v.event --[[@as {old_mode: string, new_mode: string}]]
             if visual_modes[event.old_mode] and not visual_modes[event.new_mode] then
                 vim.api.nvim_set_hl(0, "Visual", original_visual)
-                vim.api.nvim_del_autocmd(autocmd_id)
+                return true -- delete autocmd
             end
         end,
     })
@@ -173,17 +172,20 @@ vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 
 -- Zoom
-local zoom_restore = nil
-vim.keymap.set("n", "<leader>m", function()
-    if zoom_restore then
-        vim.cmd(zoom_restore)
-        zoom_restore = nil
-    else
-        zoom_restore = vim.fn.winrestcmd()
-        vim.cmd.wincmd("_")
-        vim.cmd.wincmd("|")
+local function make_zoom_toggle()
+    local zoom_restore = nil
+    return function()
+        if zoom_restore then
+            vim.cmd(zoom_restore)
+            zoom_restore = nil
+        else
+            zoom_restore = vim.fn.winrestcmd()
+            vim.cmd.wincmd("_")
+            vim.cmd.wincmd("|")
+        end
     end
-end, { desc = "Toggle window maximize" })
+end
+vim.keymap.set("n", "<leader>m", make_zoom_toggle(), { desc = "Toggle window maximize" })
 
 
 -- Editor
