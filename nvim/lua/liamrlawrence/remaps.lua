@@ -1,6 +1,7 @@
 local augroup = vim.api.nvim_create_augroup
 local explorer_group  = augroup("LL.remaps_explorer-group",  { clear = true })
 local highlight_group = augroup("LL.remaps_highlight-group", { clear = true })
+local yank_group      = augroup("LL.remaps_yank-group",      { clear = true })
 local editor_group    = augroup("LL.remaps_editor-group",    { clear = true })
 
 
@@ -126,6 +127,24 @@ vim.keymap.set("n",           "<leader>yd", function()
         end)
     end
 end, { desc = "Yank diagnostics from current line to clipboard" })
+
+local function make_yank_guard()
+    local last_yank = { content = vim.fn.getreg('"'), regtype = vim.fn.getregtype('"') }
+    return function()
+        local event = vim.v.event
+        if event.regname == "+" or event.regname == "*" then
+            vim.fn.setreg('"', last_yank.content, last_yank.regtype)
+        else
+            last_yank.content = event.regcontents
+            last_yank.regtype = event.regtype
+        end
+    end
+end
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "Prevent clipboard yanks from clobbering the unnamed register",
+    group = yank_group,
+    callback = make_yank_guard(),
+})
 
 
 -- Deletes
