@@ -4,6 +4,41 @@ return {
     config = function()
         local fugitive_group = vim.api.nvim_create_augroup("LL.plugins_fugitive-group", { clear = true })
 
+        -- Autocmds
+        vim.api.nvim_create_autocmd("FileType", {
+            desc = "Highlight improvments for fugitive's blame",
+            group = fugitive_group,
+            pattern = "fugitiveblame",
+            callback = function(args)
+                local blame_ns = vim.api.nvim_create_namespace("LL.plugins_fugitive-blame-ns")
+                local blame_buf = args.buf
+                local file_win = vim.fn.win_getid(vim.fn.winnr("l"))
+                local file_buf = file_win ~= 0 and vim.api.nvim_win_get_buf(file_win) or nil
+
+                vim.api.nvim_create_autocmd("CursorMoved", {
+                    desc = "Update the highlight when changing lines in the blame buffer",
+                    buffer = blame_buf,
+                    callback = function()
+                        if not file_buf or not vim.api.nvim_buf_is_valid(file_buf) then return end
+                        local lnum = vim.api.nvim_win_get_cursor(0)[1]
+                        vim.api.nvim_buf_clear_namespace(file_buf, blame_ns, 0, -1)
+                        vim.api.nvim_buf_set_extmark(file_buf, blame_ns, lnum - 1, 0, { line_hl_group = "Visual" })
+                    end,
+                })
+
+                vim.api.nvim_create_autocmd("BufWinLeave", {
+                    desc = "Clear the highlight when the blame buffer closes",
+                    buffer = blame_buf,
+                    callback = function()
+                        if file_buf and vim.api.nvim_buf_is_valid(file_buf) then
+                            vim.api.nvim_buf_clear_namespace(file_buf, blame_ns, 0, -1)
+                        end
+                    end,
+                })
+            end,
+        })
+
+        -- Keymaps
         vim.api.nvim_create_autocmd("FileType", {
             desc = "Register fugitive buffer keymaps",
             group = fugitive_group,
