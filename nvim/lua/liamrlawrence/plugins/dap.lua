@@ -4,15 +4,15 @@ return {
         dependencies = { "igorlfs/nvim-dap-view" },
 
         config = function()
-            local dap     = require("dap")
+            local dap = require("dap")
             local dapview = require("dap-view")
             local dap_group = vim.api.nvim_create_augroup("LL.plugins_dap-group", { clear = true })
 
             -- Autocmds
             vim.api.nvim_create_autocmd("User", {
-                desc     = "Clean up dap UI when leaving a session",
-                group    = dap_group,
-                pattern  = "RepossessionSwitchPre",
+                desc = "Clean up dap UI when leaving a session",
+                group = dap_group,
+                pattern = "RepossessionSwitchPre",
                 callback = function()
                     pcall(require("dap-view").close)
                     pcall(require("dap").terminate)
