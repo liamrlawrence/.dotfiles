@@ -17,12 +17,12 @@
         local col=$((96 + ${1:-0})); \
         git log --pretty=format:'%C(yellow)%h %C(green)%ad  %C(reset)%s%<|('\"$col\"') %C(blue)[%cn] %C(red)%d%C(reset)' --decorate --date=short --graph; \
     }; f"
-    ldr = "!f() { \
+    lgr = "!f() { \
         local col=$((107 + ${1:-0})); \
         git log --pretty=format:'%C(green)%h %C(yellow)[%ad]  %C(reset)%s%<|('\"$col\"') %C(blue)[%cn] %C(red)%d%C(reset)' --decorate --date=relative; \
     }; f"
-    ldc = log --pretty=format:'%C(yellow)%h%C(reset) %s%C(red)%d%nCommitDate:    %C(green)%cd %<|(51)%C(blue)[%cn]%C(reset)%nAuthorDate:    %C(green)%ad %<|(51)%C(blue)[%an]%C(reset)%n' --graph
-    ll  = log --pretty=format:'%C(yellow)%h %C(reset)%s %C(blue)[%cn]%C(red)%d%C(reset)' --decorate --numstat
+    lgc = log --pretty=format:'%C(yellow)%h%C(reset) %s%C(red)%d%nCommitDate:    %C(green)%cd %<|(51)%C(blue)[%cn]%C(reset)%nAuthorDate:    %C(green)%ad %<|(51)%C(blue)[%an]%C(reset)%n' --graph
+    lgl = log --pretty=format:'%C(yellow)%h %C(reset)%s %C(blue)[%cn]%C(red)%d%C(reset)' --decorate --numstat
     last = log -1 HEAD
     st = status -s
     rid = rebase -i --committer-date-is-author-date
