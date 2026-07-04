@@ -255,12 +255,10 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = "LaTeX settings",
     group = latex_files_group,
     pattern = "tex",
-    callback = function(args)
+    callback = function()
         vim.bo.expandtab = false
         vim.bo.shiftwidth = 4
         vim.bo.tabstop = 4
-
-        vim.keymap.set("n", "<leader>ep", "<cmd>VimtexCompile<cr>", { buffer = args.buf, desc = "Toggle preview (LaTeX)" })
     end,
 })
 
