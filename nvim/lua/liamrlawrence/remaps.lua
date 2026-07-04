@@ -35,7 +35,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Movements
 vim.keymap.set("x", "J", ":m '>+1<cr>gv=gv", { desc = "Move line down" })
 vim.keymap.set("x", "K", ":m '<-2<cr>gv=gv", { desc = "Move line up" })
-vim.keymap.set("n", "J", function() -- "mzJ`z"
+vim.keymap.set("n", "J", function() -- "mzJ'z"
     local view = vim.fn.winsaveview()
     vim.cmd(":normal! " .. vim.v.count1 .. "J")
     vim.fn.winrestview(view)
@@ -234,7 +234,7 @@ vim.keymap.set("n", "<leader>er", function()
     vim.wo.relativenumber = not vim.wo.relativenumber
 end, { desc = "Toggle relative line numbers" })
 
-vim.keymap.set("n", "<leader>e=", function()    -- "mzgg=G`z"
+vim.keymap.set("n", "<leader>e=", function()    -- "mzgg=G'z"
     local view = vim.fn.winsaveview()
     vim.cmd("normal! ==gg=G")                   -- NOTE: == prevents undo/redo from jumping to the top of the file
     vim.fn.winrestview(view)
