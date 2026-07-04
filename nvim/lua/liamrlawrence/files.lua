@@ -238,14 +238,12 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = "Markdown settings",
     group = markdown_files_group,
     pattern = "markdown",
-    nested = true,
-    callback = function(args)
+    nested = true,  -- NOTE: triggers the improved-wrap-navigation autocmd
+    callback = function()
         vim.bo.expandtab = true
         vim.bo.shiftwidth = 4
         vim.bo.tabstop = 4
         vim.wo.wrap = true
-
-        vim.keymap.set("n", "<leader>ep", "<cmd>Markview toggle<cr>", { buffer = args.buf, desc = "Toggle preview (Markdown)" })
     end,
 })
 
