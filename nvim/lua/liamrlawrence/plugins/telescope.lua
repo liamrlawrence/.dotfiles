@@ -8,10 +8,9 @@ return {
         require("telescope").setup{
             defaults = {
                 file_ignore_patterns = {
-                    "%.git",
-                    "%.venv",
-                    "venv",
-                    "node_modules",
+                    "%.git/",
+                    "venv/",
+                    "node_modules/",
                     "static/vendor",
                 },
                 mappings = {
