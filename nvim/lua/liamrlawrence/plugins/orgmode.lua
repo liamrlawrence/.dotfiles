@@ -92,7 +92,7 @@ return {
 
         -- Keymap helper functions
         local function reposition_cursor()
-            vim.cmd("normal! 0f ge")
+            vim.cmd("normal! 0E")
         end
 
         local function get_headline()
@@ -166,6 +166,20 @@ return {
                     -- value "" -> nil removes the property; otherwise upsert
                     headline:set_property(key, value ~= "" and value or nil)
                 end, { buffer = args.buf, desc = "org set property on headline" })
+
+                vim.keymap.set("n", "<leader>oie", function()
+                    local lnum = vim.fn.line(".")
+                    local stars
+                    while lnum >= 1 do
+                        local line = vim.fn.getline(lnum)
+                        local m = line:match("^(%*+)%s")
+                        if m then stars = m; break end
+                        lnum = lnum - 1
+                    end
+                    vim.cmd("normal! o")
+                    vim.api.nvim_put({ (stars or "*") .. " " }, "c", false, true)
+                    vim.cmd("startinsert!")
+                end, { buffer = args.buf, desc = "org insert new headline at current level" })
             end,
         })
     end,
