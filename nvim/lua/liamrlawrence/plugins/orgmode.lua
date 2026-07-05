@@ -70,6 +70,11 @@ return {
             org_startup_indented = true,
             org_tags_column = -80,
 
+            org_blank_before_new_entry = {
+                heading = false,
+                plain_list_item = false,
+            },
+
             mappings = {
                 org = {
                     org_toggle_checkbox = "<C-t>",
@@ -168,20 +173,6 @@ return {
                     -- value "" -> nil removes the property; otherwise upsert
                     headline:set_property(key, value ~= "" and value or nil)
                 end, { buffer = args.buf, desc = "org set property on headline" })
-
-                vim.keymap.set("n", "<leader>oie", function()
-                    local lnum = vim.fn.line(".")
-                    local stars
-                    while lnum >= 1 do
-                        local line = vim.fn.getline(lnum)
-                        local m = line:match("^(%*+)%s")
-                        if m then stars = m; break end
-                        lnum = lnum - 1
-                    end
-                    vim.cmd("normal! o")
-                    vim.api.nvim_put({ (stars or "*") .. " " }, "c", false, true)
-                    vim.cmd("startinsert!")
-                end, { buffer = args.buf, desc = "org insert new headline at current level" })
             end,
         })
     end,
