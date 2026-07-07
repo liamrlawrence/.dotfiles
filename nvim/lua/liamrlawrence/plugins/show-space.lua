@@ -1,6 +1,5 @@
-return {
+return __LazyVirtualPlugin({
     "liamrlawrence/show-space.nvim",
-    dir = vim.g.lazy_virtual_plugin,
 
     config = function()
         local show_space_ns = vim.api.nvim_create_namespace("LL.plugins_show-space-ns")
@@ -58,5 +57,5 @@ return {
     end,
 
     keys = { "<leader>ed" },
-}
+})
 

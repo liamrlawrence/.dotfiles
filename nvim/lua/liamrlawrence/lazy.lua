@@ -11,8 +11,13 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.lazy_virtual_plugin = vim.fn.stdpath("data") .. "/virtual-plugin.lazy"
-vim.fn.mkdir(vim.g.lazy_virtual_plugin, "p")
+function __LazyVirtualPlugin(spec)
+    local name = spec[1]:match("([^/]+)$")
+    local dir = vim.fn.stdpath("data") .. "/lazy.virtual-plugin/" .. name
+    vim.fn.mkdir(dir, "p")
+    spec.dir = dir
+    return spec
+end
 
 require("lazy").setup({
     spec = "liamrlawrence.plugins",
