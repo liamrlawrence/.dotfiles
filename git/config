@@ -16,23 +16,23 @@
     lg = "!f() { \
         local maxline=$(git log --pretty=format:'%h %ad  %s' --date=short --graph | awk '{ if (length > m) m = length } END { print m+0 }'); \
         local col=$((maxline + 2 + ${1:-0})); \
-        git log --pretty=format:'%C(yellow)%h %C(green)%ad  %C(reset)%s%<|('\"$col\"') %C(blue)[%cn] %C(red)%d%C(reset)' --decorate --date=short --graph; \
+        git log --pretty=format:'%C(yellow)%h %C(green)%ad  %C(white)%s%<|('\"$col\"') %C(blue)[%cn] %C(red)%d%C(reset)' --decorate --date=short --graph; \
     }; f"
     lgf = "!f() { \
         local col=$((96 + ${1:-0})); \
-        git log --pretty=format:'%C(yellow)%h %C(green)%ad  %C(reset)%s%<|('\"$col\"') %C(blue)[%cn] %C(red)%d%C(reset)' --decorate --date=short --graph; \
+        git log --pretty=format:'%C(yellow)%h %C(green)%ad  %C(white)%s%<|('\"$col\"') %C(blue)[%cn] %C(red)%d%C(reset)' --decorate --date=short --graph; \
     }; f"
     lgr = "!f() { \
         local maxline=$(git log --pretty=format:'%h [%ad]  %s' --date=relative | awk '{ if (length > m) m = length } END { print m+0 }'); \
         local col=$((maxline + 2 + ${1:-0})); \
-        git log --pretty=format:'%C(green)%h %C(yellow)[%ad]  %C(reset)%s%<|('\"$col\"') %C(blue)[%cn] %C(red)%d%C(reset)' --decorate --date=relative; \
+        git log --pretty=format:'%C(green)%h %C(yellow)[%ad]  %C(white)%s%<|('\"$col\"') %C(blue)[%cn] %C(red)%d%C(reset)' --decorate --date=relative; \
     }; f"
     lgrf = "!f() { \
         local col=$((107 + ${1:-0})); \
-        git log --pretty=format:'%C(green)%h %C(yellow)[%ad]  %C(reset)%s%<|('\"$col\"') %C(blue)[%cn] %C(red)%d%C(reset)' --decorate --date=relative; \
+        git log --pretty=format:'%C(green)%h %C(yellow)[%ad]  %C(white)%s%<|('\"$col\"') %C(blue)[%cn] %C(red)%d%C(reset)' --decorate --date=relative; \
     }; f"
-    lgc = log --pretty=format:'%C(yellow)%h%C(reset) %s%C(red)%d%nCommitDate:    %C(green)%<(30)%cd%C(reset)    %C(blue)[%cn]%C(reset)%nAuthorDate:    %C(green)%<(30)%ad%C(reset)    %C(blue)[%an]%C(reset)%n' --graph
-    lgl = log --pretty=format:'%C(yellow)%h %C(reset)%s %C(blue)[%cn]%C(red)%d%C(reset)' --decorate --numstat
+    lgc = log --pretty=format:'%C(yellow)%h %C(white)%s%C(red)%d%n%C(white)CommitDate:    %<(30)%C(green)%cd    %C(blue)[%cn]%n%C(white)AuthorDate:    %<(30)%C(green)%ad    %C(blue)[%an]%C(reset)%n' --graph
+    lgl = log --pretty=format:'%C(yellow)%h %C(green)%ad %C(cyan)%s %C(blue)[%cn]%C(red)%d%C(reset)' --date=short --decorate --numstat
     last = log -1 HEAD
     st = status -s
     rid = rebase -i --committer-date-is-author-date
