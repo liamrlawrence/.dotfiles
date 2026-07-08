@@ -217,7 +217,7 @@ vim.api.nvim_create_autocmd("OptionSet", {
             if vim.v.option_new then
                 vim.keymap.set("n", k, function()
                     return vim.v.count == 0 and ("g" .. k) or k
-                end, { buffer = args.buf, expr = true })
+                end, { buffer = args.buf, expr = true, desc = "Improved wrapped line navigation" })
             else
                 pcall(vim.keymap.del, "n", k, { buffer = args.buf })
             end
