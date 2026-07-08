@@ -13,17 +13,17 @@ return {
             org_default_notes_file = "~/Notes/refile.org",
 
             org_todo_keywords = {
-                "NEXT(n)", "TODO(t)", "BLOCKED(b)", "WAITING(w)",
+                "TODO(t)", "BLOCKED(b)", "WAITING(w)", "NEXT(n)",
                 "ONGOING(g)", "IN-PROGRESS(i)", "PAUSED(o)",
                 "|",
                 "DONE(d)", "PARTIAL(p)", "CANCELLED(c)",
                 "ABANDONED(a)", "LAPSED(l)",
             },
             org_todo_keyword_faces = {
-                ["NEXT"]        = ":foreground #16C8C8 :weight bold",               -- Queued as the immediate next action
                 ["TODO"]        = ":foreground #F71040 :weight bold",               -- Captured but not yet started
                 ["BLOCKED"]     = ":foreground #E0306B :weight bold",               -- Cannot proceed; blocked by a dependency
                 ["WAITING"]     = ":foreground #F5C030 :weight bold",               -- Waiting on someone or something external
+                ["NEXT"]        = ":foreground #16C8C8 :weight bold",               -- Queued as the immediate next action
                 ["ONGOING"]     = ":foreground #3B9EFF :weight bold",               -- Progressing passively in the background
                 ["IN-PROGRESS"] = ":foreground #F5823E :weight bold :underline on", -- Actively being worked on right now
                 ["PAUSED"]      = ":foreground #C28A4E :weight bold :underline on", -- Was active; deliberately set aside
@@ -33,7 +33,6 @@ return {
                 ["ABANDONED"]   = ":foreground #A53A0C :weight bold",               -- Neglected until it decayed
                 ["LAPSED"]      = ":foreground #6E7B8B :weight bold",               -- Window closed; no longer possible
             },
-            org_todo_repeat_to_state = "TODO",
 
             org_agenda_custom_commands = {
                 d = {
