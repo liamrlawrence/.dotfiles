@@ -2,6 +2,8 @@
 vim.g.mapleader = " "
 
 -- UI
+vim.opt.termguicolors = true
+vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 vim.opt.statusline = table.concat({
     "%<%f",
     " %h%m%r",
@@ -10,27 +12,24 @@ vim.opt.statusline = table.concat({
     "%(%l,%c%V %)| ",
     "%P",
 })
-vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 vim.opt.fillchars = { vert = " ", eob = "~" }
-vim.opt.termguicolors = true
-vim.opt.signcolumn = "yes"
+vim.opt.listchars = { leadmultispace = "·   ", tab = "  ", leadtab = "· " }
+vim.opt.list = false
 vim.opt.colorcolumn = "81,121"
+vim.opt.scrolloff = 8
+
+-- Gutter
+vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
-vim.opt.scrolloff = 8
-vim.opt.list = false
-vim.opt.listchars = { leadmultispace = "·   ", tab = "  ", leadtab = "· " }
-
--- Line numbers
-vim.opt.nu = true
-vim.opt.relativenumber = true
+vim.opt.signcolumn = "yes"
 
 -- Indentation
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.opt.smartindent = true
 
 -- Wrapping
 vim.opt.wrap = false
