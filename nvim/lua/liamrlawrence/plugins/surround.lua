@@ -4,6 +4,6 @@ return {
 
     config = function()
         require("mini.surround").setup()
-    end
+    end,
 }
 
