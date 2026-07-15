@@ -2,9 +2,7 @@
 font-family = "JetBrains Mono"
 font-size = 18
 font-thicken = false
-font-feature = -calt
-font-feature = -liga
-font-feature = -dlig
+font-feature = -calt, -liga, -dlig
 
 # Colors
 palette = 0=#1a1a1a
@@ -30,25 +28,20 @@ cursor-text = #000000
 selection-background = #b5d5ff
 selection-foreground = #000000
 
-# Mouse
+# UI
+window-padding-balance = true
 mouse-hide-while-typing = true
-
-# Cursor
 cursor-style = block
 cursor-style-blink = false
 
-# Scrollback
-scrollback-limit = 10000000
-
-# Bell
-bell-features = audio,no-system
+# System
+shell-integration-features = sudo, no-cursor, no-title
+bell-features = audio, no-system
 bell-audio-path = ~/.config/ghostty/bell_morse.aiff
+scrollback-limit = 10000000
 
 # Keybinds
 keybind = alt+shift+minus=text:—
-
-# System
-shell-integration-features = sudo,no-cursor,no-title
 
 # MacOS
 macos-option-as-alt = true
