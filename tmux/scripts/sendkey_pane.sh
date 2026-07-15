@@ -68,7 +68,7 @@ fi
 
 pane_count="$(tmux list-panes -t "$window_id" | wc -l | tr -d ' ')"
 if [[ "$pane_count" == "1" ]]; then
-    tmux split-window -h -d -t "$active_pane_id" -c "#{pane_current_path}"
+    bash ~/.config/tmux/scripts/split_window.sh -h -d -t "$active_pane_id" -c "#{pane_current_path}"
 fi
 
 

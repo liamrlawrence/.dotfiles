@@ -56,11 +56,13 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 
 ## Rust
+# shellcheck source=/dev/null
 [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 
 ## Python
-[[ -n "$ACTIVATE_VENV" ]] && { source "$ACTIVATE_VENV"; unset ACTIVATE_VENV; }  # activate venvs in tmux panes with split_window.sh
+# shellcheck source=/dev/null
+[[ -n "$ACTIVATE_VENV" ]] && { . "$ACTIVATE_VENV"; unset ACTIVATE_VENV; }  # activate venvs in tmux panes with split_window.sh
 
 
 ## Color commands
@@ -72,7 +74,7 @@ alias grep='grep --color=auto'
 
 ## Aliases
 alias cleard='clear; date +%r'
-alias ll='ls -alFh'
+alias ll='ls -AlFh'
 alias la='ls -A'
 
 
