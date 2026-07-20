@@ -209,11 +209,11 @@ vim.keymap.set("n", "<leader>m", make_zoom_toggle(), { desc = "Toggle window max
 
 -- Editor
 vim.api.nvim_create_autocmd("OptionSet", {
-    desc = "Improved j/k navigation for wrapped lines",
+    desc = "Improved navigation for wrapped lines",
     group = editor_group,
     pattern = "wrap",
     callback = function(args)
-        for _, k in ipairs({ "j", "k" }) do
+        for _, k in ipairs({ "j", "k", "0", "$" }) do
             if vim.v.option_new then
                 vim.keymap.set("n", k, function()
                     return vim.v.count == 0 and ("g" .. k) or k
