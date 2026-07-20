@@ -192,17 +192,25 @@ vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- Editor
 vim.api.nvim_create_autocmd("OptionSet", {
-    desc = "Improved navigation for wrapped lines",
+    desc = "Improve navigation for wrapped lines",
     group = editor_group,
     pattern = "wrap",
     callback = function(args)
-        for _, k in ipairs({ "j", "k", "0", "$" }) do
+        local keymaps = {
+            ["j"]  = "gj",
+            ["k"]  = "gk",
+            ["0"]  = "g0",
+            ["$"]  = "g$",
+            ["gj"] = "j",
+            ["gk"] = "k",
+            ["g0"] = "0",
+            ["g$"] = "$",
+        }
+        for lhs, rhs in pairs(keymaps) do
             if vim.v.option_new then
-                vim.keymap.set("n", k, function()
-                    return vim.v.count == 0 and ("g" .. k) or k
-                end, { buffer = args.buf, expr = true, desc = "Improved wrapped line navigation" })
+                vim.keymap.set("n", lhs, rhs, { buffer = args.buf, desc = "Improved wrapped line navigation" })
             else
-                pcall(vim.keymap.del, "n", k, { buffer = args.buf })
+                pcall(vim.keymap.del, "n", lhs, { buffer = args.buf })
             end
         end
     end,
