@@ -98,7 +98,7 @@ return {
 
         -- Keymap helper functions
         local function reposition_cursor()
-            vim.cmd("normal! 0E")
+            vim.cmd("normal! 0f ge")
         end
 
         local function get_headline()
