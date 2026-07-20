@@ -1,0 +1,5 @@
+nvim/lazy-lock.json merge=keep-local
+
+git/config linguist-language=gitconfig
+git/ignore linguist-language=gitignore
+

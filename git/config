@@ -1,39 +1,60 @@
 [core]
     autocrlf = input
 
-[pull]
-    rebase = true           # avoid merge commits on pull
-
 [push]
     autoSetupRemote = true  # no need to --set-upstream on first push
 
+[pull]
+    rebase = true           # avoid merge commits on pull
+
+[merge "keep-local"]
+    driver = true
+
 [diff]
     tool = nvimdiff
+
 [difftool]
     prompt = false
 
 [alias]
+    # log
     lg = "!f() { \
         local maxline=$(git log --pretty=format:'%h %ad  %s' --date=short --graph | awk '{ if (length > m) m = length } END { print m+0 }'); \
         local col=$((maxline + 2 + ${1:-0})); \
         git log --pretty=format:'%C(yellow)%h %C(green)%ad  %C(white)%s%<|('\"$col\"') %C(blue)[%cn] %C(red)%d%C(reset)' --decorate --date=short --graph; \
     }; f"
+
+    # log (fixed-width)
     lgf = "!f() { \
         local col=$((96 + ${1:-0})); \
         git log --pretty=format:'%C(yellow)%h %C(green)%ad  %C(white)%s%<|('\"$col\"') %C(blue)[%cn] %C(red)%d%C(reset)' --decorate --date=short --graph; \
     }; f"
+
+    # log relative
     lgr = "!f() { \
         local maxline=$(git log --pretty=format:'%h [%ad]  %s' --date=relative | awk '{ if (length > m) m = length } END { print m+0 }'); \
         local col=$((maxline + 2 + ${1:-0})); \
         git log --pretty=format:'%C(green)%h %C(yellow)[%ad]  %C(white)%s%<|('\"$col\"') %C(blue)[%cn] %C(red)%d%C(reset)' --decorate --date=relative; \
     }; f"
+
+    # log relative (fixed-width)
     lgrf = "!f() { \
         local col=$((107 + ${1:-0})); \
         git log --pretty=format:'%C(green)%h %C(yellow)[%ad]  %C(white)%s%<|('\"$col\"') %C(blue)[%cn] %C(red)%d%C(reset)' --decorate --date=relative; \
     }; f"
+
+    # log committer
     lgc = log --pretty=format:'%C(yellow)%h %C(white)%s%C(red)%d%n%C(white)CommitDate:    %<(30)%C(green)%cd    %C(blue)[%cn]%n%C(white)AuthorDate:    %<(30)%C(green)%ad    %C(blue)[%an]%C(reset)%n' --graph
+
+    # log lines
     lgl = log --pretty=format:'%C(yellow)%h %C(green)%ad %C(cyan)%s %C(blue)[%cn]%C(red)%d%C(reset)' --date=short --decorate --numstat
+
+    # log last
     last = log -1 HEAD
+
+    # status
     st = status -s
+
+    # rebase interactive date
     rid = rebase -i --committer-date-is-author-date
 

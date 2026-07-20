@@ -1,5 +1,5 @@
+.DS_Store
+
 .session*.vim
 .session*.shada
-
-.DS_Store
 
