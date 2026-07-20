@@ -50,7 +50,7 @@ vim.opt.undofile = true
 vim.opt.undolevels = 100000
 
 -- Sessions
-vim.opt.sessionoptions = "blank,curdir,folds,help,tabpages,winsize,terminal"
+vim.opt.sessionoptions = "blank,curdir,folds,help,tabpages,winsize,terminal,localoptions"
 vim.opt.shadafile = "NONE"
 
 -- Performance
