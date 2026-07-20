@@ -190,23 +190,6 @@ vim.keymap.set("n", "<leader>s", [[:.s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Global text replace" })
 
 
--- Zoom
-local function make_zoom_toggle()
-    local zoom_restore = nil
-    return function()
-        if zoom_restore then
-            vim.cmd(zoom_restore)
-            zoom_restore = nil
-        else
-            zoom_restore = vim.fn.winrestcmd()
-            vim.cmd.wincmd("_")
-            vim.cmd.wincmd("|")
-        end
-    end
-end
-vim.keymap.set("n", "<leader>m", make_zoom_toggle(), { desc = "Toggle window maximize" })
-
-
 -- Editor
 vim.api.nvim_create_autocmd("OptionSet", {
     desc = "Improved navigation for wrapped lines",
@@ -249,4 +232,19 @@ vim.keymap.set("n", "<leader>et", function()
         vim.notify((vim.bo.expandtab and "shiftwidth=" or "tabstop=") .. num, vim.log.levels.INFO)
     end
 end, { desc = "Set tabstop" })
+
+local function make_zoom_toggle()
+    local zoom_restore = nil
+    return function()
+        if zoom_restore then
+            vim.cmd(zoom_restore)
+            zoom_restore = nil
+        else
+            zoom_restore = vim.fn.winrestcmd()
+            vim.cmd.wincmd("_")
+            vim.cmd.wincmd("|")
+        end
+    end
+end
+vim.keymap.set("n", "<leader>em", make_zoom_toggle(), { desc = "Toggle window maximize" })
 
