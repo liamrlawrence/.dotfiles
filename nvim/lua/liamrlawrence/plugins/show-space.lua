@@ -6,10 +6,15 @@ return __LazyVirtualPlugin({
         local show_space_group = vim.api.nvim_create_augroup("LL.plugins_show-space-group", { clear = true })
 
         local function set_lead()
-            if not vim.b.blank_line then return end
+            if not vim.b.blank_line then
+                vim.opt_local.listchars = vim.opt_global.listchars:get()
+                return
+            end
             local sw = vim.bo.shiftwidth
             if sw == 0 then sw = vim.bo.tabstop end
-            vim.opt_local.listchars:append({ leadmultispace = "·" .. string.rep(" ", sw - 1) })
+            local lcs = vim.opt_global.listchars:get()
+            lcs.leadmultispace = "·" .. string.rep(" ", sw - 1)
+            vim.opt_local.listchars = lcs
         end
 
         local function mark_blanks(buf, enabled)
@@ -39,6 +44,18 @@ return __LazyVirtualPlugin({
             group = show_space_group,
             callback = function(args)
                 vim.wo.list = vim.b[args.buf].blank_line == true
+                set_lead()
+            end,
+        })
+
+        vim.api.nvim_create_autocmd("User", {
+            desc = "Clean up show-space when leaving a session",
+            group = show_space_group,
+            pattern = "RepossessionSwitchPre",
+            callback = function()
+                for _, win in ipairs(vim.api.nvim_list_wins()) do
+                    vim.wo[win].list = false
+                end
             end,
         })
 
