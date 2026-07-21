@@ -43,8 +43,10 @@ return __LazyVirtualPlugin({
             desc = "Sync window list option to the buffer's blank_line flag",
             group = show_space_group,
             callback = function(args)
-                vim.wo.list = vim.b[args.buf].blank_line == true
-                set_lead()
+                local win = vim.api.nvim_get_current_win()
+                if vim.api.nvim_win_get_buf(win) ~= args.buf then return end
+                vim.wo[win].list = vim.b[args.buf].blank_line == true
+                vim.api.nvim_win_call(win, set_lead)
             end,
         })
 
