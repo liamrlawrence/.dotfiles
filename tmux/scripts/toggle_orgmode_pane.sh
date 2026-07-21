@@ -46,7 +46,7 @@ fi
 notes_dir="$HOME/Notes/drawer"
 file_ending="notes.org"
 current_pane_dir="$(tmux display-message -p '#{pane_current_path}')"
-file_name="$(echo $current_pane_dir | sed -e 's|^/||' -e 's|/|_|g')_${file_ending}"
+file_name="$(echo "$current_pane_dir" | sed -e 's|^/||' -e 's|/|_|g')_${file_ending}"
 file_path="${notes_dir}/${file_name}"
 run_cmd="nvim $file_path"
 
@@ -67,7 +67,7 @@ done
 # Open or toggle focus of the orgmode pane
 if [ -z "$target_pane_id" ]; then
     if [ ! -f "$file_path" ]; then
-        mkdir -p "$(dirname $file_path)"
+        mkdir -p "$(dirname "$file_path")"
         echo "#+TITLE: Notes drawer for ${current_pane_dir}" >> "$file_path"
         echo "#+AUTHOR: Liam Lawrence" >> "$file_path"
     fi
