@@ -11,23 +11,26 @@ fi
 usage() {
     cat >&2 <<'EOF'
 Usage:
-    sendkey_pane.sh --x {left|right} --y {top|bottom} command [args...]
+    sendkey_pane.sh --x {left|right} --y {top|bottom} [-k] command [args...]
 
 Examples:
     sendkey_pane.sh --x left  --y top    htop
     sendkey_pane.sh --x right --y bottom tail -f /var/log/syslog
+    sendkey_pane.sh --x right --y bottom -k tail -f /var/log/syslog
 EOF
 }
 
 
 x_dir=""
 y_dir=""
+kill_first=0
 
 while [ $# -gt 0 ]; do
     case "${1:-}" in
         -h|--help) usage; exit 0 ;;
         --x|-x) shift; x_dir="${1:-}" ;;
         --y|-y) shift; y_dir="${1:-}" ;;
+        -k) kill_first=1 ;;
         --) shift; break ;;
         *) break ;;
     esac
@@ -50,7 +53,7 @@ if [[ "$y_dir" != "top" && "$y_dir" != "bottom" ]]; then
     echo "Error: --y must be 'top' or 'bottom'." >&2
     exit 1
 fi
-if [ $# -eq 0 ]; then
+if [ $# -eq 0 ] && [[ "$kill_first" != "1" ]]; then
     echo "Error: you must provide a command to run." >&2
     usage
     exit 1
@@ -86,5 +89,11 @@ target_pane="$(
     | awk 'NR==1 {print $1}'
 )"
 
-tmux send-keys -t "$target_pane" "${cmd[*]}" C-m
+if [[ "$kill_first" == "1" ]]; then
+    tmux send-keys -t "$target_pane" C-c
+fi
+
+if [ ${#cmd[@]} -gt 0 ]; then
+    tmux send-keys -t "$target_pane" "${cmd[*]}" C-m
+fi
 
