@@ -24,8 +24,8 @@ return {
             cloak_on_leave = true,          -- ;)
         })
 
-        vim.keymap.set("n", "<leader>ec", vim.cmd.CloakPreviewLine, { desc = "Preview cloaked line" })
-        vim.keymap.set("n", "<leader>eC", vim.cmd.CloakToggle,      { desc = "Toggle Cloak" })
+        vim.keymap.set("n", "<Leader>ec", vim.cmd.CloakPreviewLine, { desc = "Preview cloaked line" })
+        vim.keymap.set("n", "<Leader>eC", vim.cmd.CloakToggle,      { desc = "Toggle Cloak" })
     end,
 }
 

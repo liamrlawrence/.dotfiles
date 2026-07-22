@@ -7,12 +7,12 @@ return {
         local harpoon = require("harpoon")
         harpoon:setup()
 
-        vim.keymap.set("n", "<leader>a", function() harpoon:list():add()                         end, { desc = "Harpoon add file" })
+        vim.keymap.set("n", "<Leader>a", function() harpoon:list():add()                         end, { desc = "Harpoon add file" })
         vim.keymap.set("n", "<M-]>",     function() harpoon:list():next()                        end, { desc = "Harpoon next file" })
         vim.keymap.set("n", "<M-[>",     function() harpoon:list():prev()                        end, { desc = "Harpoon prev file" })
         vim.keymap.set("n", "<C-e>",     function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon toggle menu" })
     end,
 
-    keys = { "<leader>a", "<M-]>", "<M-[>", "<C-e>" },
+    keys = { "<Leader>a", "<M-]>", "<M-[>", "<C-e>" },
 }
 

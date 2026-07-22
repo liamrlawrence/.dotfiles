@@ -61,7 +61,7 @@ return __LazyVirtualPlugin({
             end,
         })
 
-        vim.keymap.set("n", "<leader>ed", function()
+        vim.keymap.set("n", "<Leader>ed", function()
             local buf = vim.api.nvim_get_current_buf()
             local enabled = not (vim.b[buf].blank_line == true)
             vim.b[buf].blank_line = enabled
@@ -75,6 +75,6 @@ return __LazyVirtualPlugin({
         end, { desc = "Toggle blank-line tildes + list" })
     end,
 
-    keys = { "<leader>ed" },
+    keys = { "<Leader>ed" },
 })
 

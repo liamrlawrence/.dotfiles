@@ -11,8 +11,8 @@ return {
             },
         })
 
-        vim.keymap.set("n", "<leader>rp", "<cmd>Repossession<cr>",      { desc = "Session manager" })
-        vim.keymap.set("n", "<leader>rl", "<cmd>Repossession last<cr>", { desc = "Toggle to last session" })
+        vim.keymap.set("n", "<Leader>rp", "<Cmd>Repossession<CR>",      { desc = "Session manager" })
+        vim.keymap.set("n", "<Leader>rl", "<Cmd>Repossession last<CR>", { desc = "Toggle to last session" })
     end,
 }
 

@@ -7,20 +7,20 @@ local editor_group    = augroup("LL.remaps_editor-group",    { clear = true })
 
 
 -- Disabled
-vim.keymap.set("n", "Q", "<nop>", { desc = "<Nop>" })
+vim.keymap.set("n", "Q", "<Nop>", { desc = "<Nop>" })
 
 
 -- Save
-vim.keymap.set("n", "ZA", "<cmd>confirm wqa<cr>", { desc = "Write-Quit-All" })
+vim.keymap.set("n", "ZA", "<Cmd>confirm wqa<CR>", { desc = "Write-Quit-All" })
 
 
 -- Tabs
-vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<cr>",           { desc = "New tab" })
-vim.keymap.set("n", "<leader>tf", "<cmd>tabnew<cr><leader>/f", { desc = "New tab with file picker", remap = true })
+vim.keymap.set("n", "<Leader>tn", "<Cmd>tabnew<CR>",           { desc = "New tab" })
+vim.keymap.set("n", "<Leader>tf", "<Cmd>tabnew<CR><Leader>/f", { desc = "New tab with file picker", remap = true })
 
 
 -- Explorer
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Explorer" })
+vim.keymap.set("n", "<Leader>pv", vim.cmd.Ex, { desc = "Explorer" })
 vim.api.nvim_create_autocmd("FileType", {
     desc = "Netrw formatting",
     group = explorer_group,
@@ -33,8 +33,8 @@ vim.api.nvim_create_autocmd("FileType", {
 
 
 -- Movements
-vim.keymap.set("x", "J", function() return ":m '>+" .. vim.v.count1     .. "<cr>gv=gv" end, { desc = "Move line down", expr = true })
-vim.keymap.set("x", "K", function() return ":m '<-" .. vim.v.count1 + 1 .. "<cr>gv=gv" end, { desc = "Move line up",   expr = true })
+vim.keymap.set("x", "J", function() return ":m '>+" .. vim.v.count1     .. "<CR>gv=gv" end, { desc = "Move line down", expr = true })
+vim.keymap.set("x", "K", function() return ":m '<-" .. vim.v.count1 + 1 .. "<CR>gv=gv" end, { desc = "Move line up",   expr = true })
 vim.keymap.set("n", "J", function() -- "mzJ'z"
     local view = vim.fn.winsaveview()
     vim.cmd(":normal! " .. vim.v.count1 .. "J")
@@ -52,11 +52,11 @@ vim.keymap.set("n", "N", "Nzzzv",       { desc = "Center on search jumps" })
 -- Folds
 vim.keymap.set("n", "zR",         "zRzz",  { desc = "Open all folds in file" })
 vim.keymap.set("n", "zM",         "zMzz",  { desc = "Close all folds in file" })
-vim.keymap.set("n", "<leader>fm", "vimzf", { desc = "Fold function", remap = true })
+vim.keymap.set("n", "<Leader>fm", "vimzf", { desc = "Fold function", remap = true })
 
 
 -- Highlights
-vim.keymap.set("n", "<leader>/h", vim.cmd.noh, { desc = "Clear highlights" })   -- NOTE: Can use <C-l> instead
+vim.keymap.set("n", "<Leader>/h", vim.cmd.noh, { desc = "Clear highlights" })   -- NOTE: Can use <C-l> instead
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking text",
     group = highlight_group,
@@ -92,17 +92,17 @@ local function highlight_visual_mode(key)
         end,
     })
 end
-vim.keymap.set("n", "<leader>v",     function() highlight_visual_mode("v")                  end, { desc = "Enter visual mode with highlighting" })
-vim.keymap.set("n", "<leader>V",     function() highlight_visual_mode("V")                  end, { desc = "Enter Visual mode with highlighting" })
-vim.keymap.set("n", "<leader><C-v>", function() highlight_visual_mode(vim.keycode("<C-v>")) end, { desc = "Enter blockwise Visual mode with highlighting" })
+vim.keymap.set("n", "<Leader>v",     function() highlight_visual_mode("v")                  end, { desc = "Enter visual mode with highlighting" })
+vim.keymap.set("n", "<Leader>V",     function() highlight_visual_mode("V")                  end, { desc = "Enter Visual mode with highlighting" })
+vim.keymap.set("n", "<Leader><C-v>", function() highlight_visual_mode(vim.keycode("<C-v>")) end, { desc = "Enter blockwise Visual mode with highlighting" })
 
 
 -- Yanks
-vim.keymap.set("n",           "yY",         [[:%y<cr>]],  { desc = "Yank entire file" })
-vim.keymap.set("n",           "<leader>yY", [[:%y+<cr>]], { desc = "Yank entire file to clipboard" })
-vim.keymap.set({ "n", "x", }, "<leader>y",  [["+y]],      { desc = "Yank to clipboard" })
-vim.keymap.set({ "n", "x", }, "<leader>Y",  [["+yg_]],    { desc = "Yank to clipboard" })
-vim.keymap.set("n",           "<leader>yd", function()
+vim.keymap.set("n",           "yY",         [[:%y<CR>]],  { desc = "Yank entire file" })
+vim.keymap.set("n",           "<Leader>yY", [[:%y+<CR>]], { desc = "Yank entire file to clipboard" })
+vim.keymap.set({ "n", "x", }, "<Leader>y",  [["+y]],      { desc = "Yank to clipboard" })
+vim.keymap.set({ "n", "x", }, "<Leader>Y",  [["+yg_]],    { desc = "Yank to clipboard" })
+vim.keymap.set("n",           "<Leader>yd", function()
     local diagnostics = vim.diagnostic.get(0)
     local current_line = vim.api.nvim_win_get_cursor(0)[1] - 1
     local messages = {}
@@ -148,16 +148,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 
 -- Deletes
-vim.keymap.set({ "n", "x", }, "<leader>d", [["_d]],  { desc = "Don't save deleted text to buffer" })
-vim.keymap.set({ "n", "x", }, "<leader>D", [["_D]],  { desc = "Don't save deleted text to buffer" })
-vim.keymap.set({ "n", "x", }, "<leader>x", [["_x]],  { desc = "Don't save deleted text to buffer" })
-vim.keymap.set({ "n", "x", }, "<leader>c", [["_c]],  { desc = "Don't save deleted text to buffer" })
-vim.keymap.set("x",           "<leader>p", [["_dP]], { desc = "Don't save deleted text to buffer" })
+vim.keymap.set({ "n", "x", }, "<Leader>d", [["_d]],  { desc = "Don't save deleted text to buffer" })
+vim.keymap.set({ "n", "x", }, "<Leader>D", [["_D]],  { desc = "Don't save deleted text to buffer" })
+vim.keymap.set({ "n", "x", }, "<Leader>x", [["_x]],  { desc = "Don't save deleted text to buffer" })
+vim.keymap.set({ "n", "x", }, "<Leader>c", [["_c]],  { desc = "Don't save deleted text to buffer" })
+vim.keymap.set("x",           "<Leader>p", [["_dP]], { desc = "Don't save deleted text to buffer" })
 
 
 -- Quickfix list
-vim.keymap.set("n", "<C-j>", "<cmd>cnext<cr>zz", { desc = "Next quickfix" })
-vim.keymap.set("n", "<C-k>", "<cmd>cprev<cr>zz", { desc = "Prev quickfix" })
+vim.keymap.set("n", "<C-j>", "<Cmd>cnext<CR>zz", { desc = "Next quickfix" })
+vim.keymap.set("n", "<C-k>", "<Cmd>cprev<CR>zz", { desc = "Prev quickfix" })
 vim.keymap.set("n", "<C-q>", function()
     for _, win in pairs(vim.fn.getwininfo()) do
         if win["quickfix"] == 1 then
@@ -170,8 +170,8 @@ end, { desc = "Toggle quickfix list" })
 
 
 -- Location list
-vim.keymap.set("n", "<M-j>", "<cmd>lnext<cr>zz", { desc = "Next location list" })
-vim.keymap.set("n", "<M-k>", "<cmd>lprev<cr>zz", { desc = "Prev location list" })
+vim.keymap.set("n", "<M-j>", "<Cmd>lnext<CR>zz", { desc = "Next location list" })
+vim.keymap.set("n", "<M-k>", "<Cmd>lprev<CR>zz", { desc = "Prev location list" })
 vim.keymap.set("n", "<M-q>", function()
     for _, win in pairs(vim.fn.getwininfo()) do
         if win["loclist"] == 1 then
@@ -186,8 +186,8 @@ end, { desc = "Toggle location list" })
 
 
 -- Text replace
-vim.keymap.set("n", "<leader>s", [[:.s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Line text replace" })
-vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Global text replace" })
+vim.keymap.set("n", "<Leader>s", [[:.s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Line text replace" })
+vim.keymap.set("n", "<Leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Global text replace" })
 
 
 -- Editor
@@ -216,22 +216,22 @@ vim.api.nvim_create_autocmd("OptionSet", {
     end,
 })
 
-vim.keymap.set("n", "<leader>ew", function()
+vim.keymap.set("n", "<Leader>ew", function()
     vim.wo.wrap = not vim.wo.wrap
 end, { desc = "Toggle line wrapping" })
 
-vim.keymap.set("n", "<leader>er", function()
+vim.keymap.set("n", "<Leader>er", function()
     vim.wo.nu = true
     vim.wo.relativenumber = not vim.wo.relativenumber
 end, { desc = "Toggle relative line numbers" })
 
-vim.keymap.set("n", "<leader>e=", function()    -- "mzgg=G'z"
+vim.keymap.set("n", "<Leader>e=", function()    -- "mzgg=G'z"
     local view = vim.fn.winsaveview()
     vim.cmd("normal! ==gg=G")                   -- NOTE: == prevents undo/redo from jumping to the top of the file
     vim.fn.winrestview(view)
 end, { desc = "Reindent file" })
 
-vim.keymap.set("n", "<leader>et", function()
+vim.keymap.set("n", "<Leader>et", function()
     local char = vim.fn.getcharstr()
     local num = tonumber(char)
     if num and num >= 1 and num <= 9 then
@@ -254,5 +254,5 @@ local function make_zoom_toggle()
         end
     end
 end
-vim.keymap.set("n", "<leader>em", make_zoom_toggle(), { desc = "Toggle window maximize" })
+vim.keymap.set("n", "<Leader>em", make_zoom_toggle(), { desc = "Toggle window maximize" })
 

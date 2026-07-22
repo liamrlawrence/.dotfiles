@@ -39,9 +39,9 @@ return {
             end,
         })
 
-        vim.keymap.set("n", "<leader>ez", "<cmd>ZenMode<cr>", { desc = "Zen" })
+        vim.keymap.set("n", "<Leader>ez", "<Cmd>ZenMode<CR>", { desc = "Zen" })
     end,
 
-    keys = { "<leader>ez" },
+    keys = { "<Leader>ez" },
 }
 

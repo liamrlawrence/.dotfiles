@@ -10,9 +10,9 @@ return {
             command = "UndotreeHide",
         })
 
-        vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undotree" })
+        vim.keymap.set("n", "<Leader>u", vim.cmd.UndotreeToggle, { desc = "Undotree" })
     end,
 
-    keys = { "<leader>u" },
+    keys = { "<Leader>u" },
 }
 

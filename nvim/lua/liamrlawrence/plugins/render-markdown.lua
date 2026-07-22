@@ -11,7 +11,7 @@ return {
             group = render_markdown_group,
             pattern = "markdown",
             callback = function(args)
-                vim.keymap.set("n", "<leader>ep", "<cmd>RenderMarkdown toggle<cr>", { buffer = args.buf, desc = "Toggle preview (Markdown)" })
+                vim.keymap.set("n", "<Leader>ep", "<Cmd>RenderMarkdown toggle<CR>", { buffer = args.buf, desc = "Toggle preview (Markdown)" })
             end,
         })
     end,

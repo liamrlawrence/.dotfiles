@@ -52,21 +52,21 @@ return {
             group = fugitive_group,
             pattern = "fugitive",
             callback = function(args)
-                vim.keymap.set("n", "<leader>p", function()
+                vim.keymap.set("n", "<Leader>p", function()
                     vim.cmd.Git("push")
                 end, { buffer = args.buf, desc = "Git push" })
 
-                vim.keymap.set("n", "<leader>P", function()
+                vim.keymap.set("n", "<Leader>P", function()
                     vim.cmd.Git({ "pull",  "--rebase" })
                 end, { buffer = args.buf, desc = "Git pull" })  -- rebase always
 
-                vim.keymap.set("n", "<leader>t", ":Git push -u origin ",
+                vim.keymap.set("n", "<Leader>t", ":Git push -u origin ",
                     { buffer = args.buf, desc = "Git push new branch & set upstream tracking" })
             end,
         })
 
-        vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git status" })
-        vim.keymap.set("n", "<leader>gD", function()
+        vim.keymap.set("n", "<Leader>gs", vim.cmd.Git, { desc = "Git status" })
+        vim.keymap.set("n", "<Leader>gD", function()
             if vim.wo.diff then return end
 
             local unmerged = vim.fn.systemlist({ "git", "ls-files", "-u", "--", vim.fn.expand("%:p") })
@@ -91,8 +91,8 @@ return {
 
             vim.cmd("Gvdiffsplit!")
         end, { desc = "Git diff (3-way merge)" })
-        vim.keymap.set("n", "gh", "<cmd>diffget //2<cr>", { desc = "Diffget left" })
-        vim.keymap.set("n", "gl", "<cmd>diffget //3<cr>", { desc = "Diffget right" })
+        vim.keymap.set("n", "gh", "<Cmd>diffget //2<CR>", { desc = "Diffget left" })
+        vim.keymap.set("n", "gl", "<Cmd>diffget //3<CR>", { desc = "Diffget right" })
     end,
 }
 

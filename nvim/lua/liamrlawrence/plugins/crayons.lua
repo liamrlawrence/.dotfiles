@@ -98,7 +98,7 @@ return {
                     colorscheme = "christmas",
                     background = "dark",
                     transparent = false,
-                    keymap = "<leader>thc",
+                    keymap = "<Leader>thc",
                 },
             },
 

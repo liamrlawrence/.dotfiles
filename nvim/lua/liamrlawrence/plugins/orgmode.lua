@@ -132,10 +132,10 @@ return {
             vim.schedule(function() vim.cmd("silent write") end)
         end
 
-        -- HACK: Map keymap to the string "<cmd>lua _G.fn()<cr>"
+        -- HACK: Map keymap to the string "<Cmd>lua _G.fn()<CR>"
         -- (not a Lua function callback) so the todo menu runs in
         -- Neovim's protected context and skips the "Press ENTER" prompt.
-        -- Global table so the <cmd> string can reach the fn.
+        -- Global table so the <Cmd> string can reach the fn.
         _G.__org = {
             todo_next_state = todo_next_with_inprogress_clock
         }
@@ -155,10 +155,10 @@ return {
                     end
                 end, { buffer = args.buf, desc = "org cycle, reposition cursor on open" })
 
-                vim.keymap.set("n", "cit", "<cmd>lua _G.__org.todo_next_state()<cr>",                   -- OVERRIDE:
+                vim.keymap.set("n", "cit", "<Cmd>lua _G.__org.todo_next_state()<CR>",                   -- OVERRIDE:
                     { buffer = args.buf, desc = "org next todo state + IN-PROGRESS clock sync" })
 
-                vim.keymap.set("n", "<leader>oip", function()
+                vim.keymap.set("n", "<Leader>oip", function()
                     local headline = get_headline()
                     if not headline then
                         vim.notify("[orgmode] No headline found", vim.log.levels.ERROR)

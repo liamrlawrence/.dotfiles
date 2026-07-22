@@ -13,7 +13,7 @@ return {
             group = vimtex_group,
             pattern = "tex",
             callback = function(args)
-                vim.keymap.set("n", "<leader>ep", "<cmd>VimtexCompile<cr>", { buffer = args.buf, desc = "Toggle preview (LaTeX)" })
+                vim.keymap.set("n", "<Leader>ep", "<Cmd>VimtexCompile<CR>", { buffer = args.buf, desc = "Toggle preview (LaTeX)" })
             end,
         })
     end,

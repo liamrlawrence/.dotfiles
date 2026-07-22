@@ -38,17 +38,17 @@ return {
 
 
         -- Git file search
-        vim.keymap.set("n", "<leader>/g", telescope.git_files, { desc = "Find git files" })
+        vim.keymap.set("n", "<Leader>/g", telescope.git_files, { desc = "Find git files" })
 
 
         -- File search
-        vim.keymap.set("n", "<leader>/f", function()
+        vim.keymap.set("n", "<Leader>/f", function()
             telescope.find_files({
                 hidden = true,
             })
         end, { desc = "Find files" })
 
-        vim.keymap.set("n", "<leader>/F", function()
+        vim.keymap.set("n", "<Leader>/F", function()
             telescope.find_files({
                 hidden = true,
                 no_ignore = true,
@@ -57,19 +57,19 @@ return {
 
 
         -- Word search
-        vim.keymap.set("n", "<leader>/w", function()
+        vim.keymap.set("n", "<Leader>/w", function()
             local word = vim.fn.expand("<cword>")
             telescope.grep_string({ search = word })
         end, { desc = "Find word" })
 
-        vim.keymap.set("n", "<leader>/W", function()
+        vim.keymap.set("n", "<Leader>/W", function()
             local word = vim.fn.expand("<cWORD>")
             telescope.grep_string({ search = word })
         end, { desc = "Find capital Word" })
 
 
         -- Grep search
-        vim.keymap.set("n", "<leader>/s", function()
+        vim.keymap.set("n", "<Leader>/s", function()
             vim.ui.input({ prompt = "Grep > " }, function(input)
                 if not input then
                     return
@@ -78,15 +78,15 @@ return {
             end)
         end, { desc = "Grep search" })
 
-        vim.keymap.set("n", "<leader>/S", function()
+        vim.keymap.set("n", "<Leader>/S", function()
             telescope.live_grep()
         end, { desc = "Live Grep search" })
 
-        vim.keymap.set("n", "<leader>/t", function()
+        vim.keymap.set("n", "<Leader>/t", function()
             telescope.live_grep({ search_dirs = { vim.fn.expand("%:p") } })
         end, { desc = "Grep this file" })
 
-        vim.keymap.set("n", "<leader>/r", function()
+        vim.keymap.set("n", "<Leader>/r", function()
             vim.ui.input({ prompt = "Grep (regex) > " }, function(input)
                 if not input then
                     return
@@ -95,13 +95,13 @@ return {
             end)
         end, { desc = "Grep search (regex)" })
 
-        vim.keymap.set("n", "<leader>/R", function()
+        vim.keymap.set("n", "<Leader>/R", function()
             telescope.live_grep({ use_regex = true })
         end, { desc = "Live Grep search (regex)" })
 
 
         -- Colorscheme search
-        vim.keymap.set("n", "<leader>/c", function()
+        vim.keymap.set("n", "<Leader>/c", function()
             telescope.colorscheme({
                 enable_preview = true,
                 layout_config = {
@@ -116,8 +116,8 @@ return {
 
 
         -- Vim search
-        vim.keymap.set("n", "<leader>/vh", telescope.help_tags, { desc = "Search vim help" })
-        vim.keymap.set("n", "<leader>/vk", telescope.keymaps,   { desc = "Search vim keymaps" })
+        vim.keymap.set("n", "<Leader>/vh", telescope.help_tags, { desc = "Search vim help" })
+        vim.keymap.set("n", "<Leader>/vk", telescope.keymaps,   { desc = "Search vim keymaps" })
     end,
 }
 
