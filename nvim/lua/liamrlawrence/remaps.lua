@@ -1,5 +1,4 @@
 local augroup = vim.api.nvim_create_augroup
-local explorer_group  = augroup("LL.remaps_explorer-group",  { clear = true })
 local highlight_group = augroup("LL.remaps_highlight-group", { clear = true })
 local yank_group      = augroup("LL.remaps_yank-group",      { clear = true })
 local editor_group    = augroup("LL.remaps_editor-group",    { clear = true })
@@ -19,19 +18,6 @@ vim.keymap.set("n", "<Tab>",          "<Cmd>tabnext<CR>",          { desc = "Nex
 vim.keymap.set("n", "<S-Tab>",        "<Cmd>tabprev<CR>",          { desc = "Prev tab" })
 vim.keymap.set("n", "<Leader><Tab>n", "<Cmd>tabnew<CR>",           { desc = "New tab" })
 vim.keymap.set("n", "<Leader><Tab>f", "<Cmd>tabnew<CR><Leader>/f", { desc = "New tab with file picker", remap = true })
-
-
--- Explorer
-vim.keymap.set("n", "<Leader>pv", vim.cmd.Ex, { desc = "Explorer" })
-vim.api.nvim_create_autocmd("FileType", {
-    desc = "Netrw formatting",
-    group = explorer_group,
-    pattern = "netrw",
-    callback = function()
-        vim.wo.nu = true
-        vim.wo.relativenumber = true
-    end,
-})
 
 
 -- Movements
