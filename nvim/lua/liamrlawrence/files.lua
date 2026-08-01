@@ -292,9 +292,9 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = "gitcommit",
     callback = function()
         vim.wo.colorcolumn = "51,73"
-        vim.fn.matchadd("WarningMsg", [[\%1l\%>50v.*]])         -- yellow 51+
-        vim.fn.matchadd("ErrorMsg",   [[\%1l\%>72v.*]], 11)     -- red 73+
-        vim.fn.matchadd("ErrorMsg",   [[\%2l.*]])               -- red line 2
+        vim.fn.matchadd("WarningMsg", [[\%1l\%>50v.*]])     -- yellow: subject 51+
+        vim.fn.matchadd("ErrorMsg",   [[\%>72v.*]], 11)     -- red: any line 73+
+        vim.fn.matchadd("ErrorMsg",   [[\%2l.*]])           -- red: line 2 not blank
     end,
 })
 
