@@ -35,10 +35,11 @@ end, { desc = "J does not move cursor" })
 -- Jumps
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Center on half-page jumps" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Center on half-page jumps" })
-vim.keymap.set("n", "n", "nzzzv",       { desc = "Center on search jumps"})
-vim.keymap.set("n", "N", "Nzzzv",       { desc = "Center on search jumps" })
-
-
+vim.keymap.set("n", "n",     "nzzzv",   { desc = "Center on search jumps"})
+vim.keymap.set("n", "N",     "Nzzzv",   { desc = "Center on search jumps" })
+vim.keymap.set("n", "<C-i>", "<C-i>",   { desc = "Jump forward in jumplist" })  -- NOTE: <Tab> and <C-i> are the same keycode in legacy terminals;
+                                                                                -- once the kitty protocol disambiguates them, mapping <Tab>
+                                                                                -- clobbers <C-i>, so manually reassert it.
 -- Folds
 vim.keymap.set("n", "zR",         "zRzz",  { desc = "Open all folds in file" })
 vim.keymap.set("n", "zM",         "zMzz",  { desc = "Close all folds in file" })
