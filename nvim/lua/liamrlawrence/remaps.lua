@@ -2,7 +2,6 @@ local augroup = vim.api.nvim_create_augroup
 local scroll_group    = augroup("LL.remaps_scroll-group",    { clear = true })
 local highlight_group = augroup("LL.remaps_highlight-group", { clear = true })
 local yank_group      = augroup("LL.remaps_yank-group",      { clear = true })
-local editor_group    = augroup("LL.remaps_editor-group",    { clear = true })
 
 
 
@@ -23,7 +22,21 @@ vim.keymap.set("n", "<Leader><S-Tab>n", "<Cmd>-tabnew<CR>",           { desc = "
 vim.keymap.set("n", "<Leader><S-Tab>f", "<Cmd>-tabnew<CR><Leader>/f", { desc = "New tab (before) with file picker", remap = true })
 
 
--- Movements
+-- Motions
+local function wrap_aware(nowrap, wrap)
+    return function() return vim.wo.wrap and wrap or nowrap end
+end
+vim.keymap.set({ "n", "x", "o" }, "j",  wrap_aware("j",  "gj"), { expr = true, desc = "Down (screen line)" })
+vim.keymap.set({ "n", "x", "o" }, "k",  wrap_aware("k",  "gk"), { expr = true, desc = "Up (screen line)" })
+vim.keymap.set({ "n", "x", "o" }, "0",  wrap_aware("0",  "g0"), { expr = true, desc = "Start of screen line" })
+vim.keymap.set({ "n", "x", "o" }, "$",  wrap_aware("$",  "g$"), { expr = true, desc = "End of screen line" })
+vim.keymap.set({ "n", "x", "o" }, "gj", wrap_aware("gj", "j"),  { expr = true, desc = "Down (logical line)" })
+vim.keymap.set({ "n", "x", "o" }, "gk", wrap_aware("gk", "k"),  { expr = true, desc = "Up (logical line)" })
+vim.keymap.set({ "n", "x", "o" }, "g0", wrap_aware("g0", "0"),  { expr = true, desc = "Start of logical line" })
+vim.keymap.set({ "n", "x", "o" }, "g$", wrap_aware("g$", "$"),  { expr = true, desc = "End of logical line" })
+
+
+-- Line manipulation
 vim.keymap.set("x", "J", function() return ":m '>+" .. vim.v.count1     .. "<CR>gv=gv" end, { expr = true, desc = "Move line down" })
 vim.keymap.set("x", "K", function() return ":m '<-" .. vim.v.count1 + 1 .. "<CR>gv=gv" end, { expr = true, desc = "Move line up" })
 vim.keymap.set("n", "J", function() -- "mzJ'z"
@@ -274,31 +287,6 @@ vim.keymap.set("n", "<Leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 
 -- Editor
-vim.api.nvim_create_autocmd("OptionSet", {
-    desc = "Improve navigation for wrapped lines",
-    group = editor_group,
-    pattern = "wrap",
-    callback = function(args)
-        local keymaps = {
-            ["j"]  = "gj",
-            ["k"]  = "gk",
-            ["0"]  = "g0",
-            ["$"]  = "g$",
-            ["gj"] = "j",
-            ["gk"] = "k",
-            ["g0"] = "0",
-            ["g$"] = "$",
-        }
-        for lhs, rhs in pairs(keymaps) do
-            if vim.v.option_new then
-                vim.keymap.set("n", lhs, rhs, { buffer = args.buf, desc = "Improved wrapped line navigation" })
-            else
-                pcall(vim.keymap.del, "n", lhs, { buffer = args.buf })
-            end
-        end
-    end,
-})
-
 vim.keymap.set("n", "<Leader>ew", function()
     vim.wo.wrap = not vim.wo.wrap
 end, { desc = "Toggle line wrapping" })

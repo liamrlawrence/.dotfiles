@@ -239,7 +239,6 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = "Markdown settings",
     group = markdown_files_group,
     pattern = "markdown",
-    nested = true,  -- NOTE: triggers the improved-wrap-navigation autocmd
     callback = function()
         vim.bo.expandtab = true
         vim.bo.shiftwidth = 4
