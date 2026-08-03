@@ -1,5 +1,6 @@
 return {
     "lervag/vimtex",
+    version = "*",
     ft = { "tex" },
 
     init = function()
