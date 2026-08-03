@@ -325,13 +325,14 @@ vim.keymap.set("n", "<Leader>et", function()
 end, { desc = "Set tabstop" })
 
 local function make_zoom_toggle()
-    local zoom_restore = nil
+    local zoom_restore = {}
     return function()
-        if zoom_restore then
-            vim.cmd(zoom_restore)
-            zoom_restore = nil
+        local tab = vim.api.nvim_get_current_tabpage()
+        if zoom_restore[tab] then
+            vim.cmd(zoom_restore[tab])
+            zoom_restore[tab] = nil
         else
-            zoom_restore = vim.fn.winrestcmd()
+            zoom_restore[tab] = vim.fn.winrestcmd()
             vim.cmd.wincmd("_")
             vim.cmd.wincmd("|")
         end
