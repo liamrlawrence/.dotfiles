@@ -5,7 +5,7 @@ return {
     event = "VeryLazy",
 
     config = function()
-        require("telescope").setup{
+        require("telescope").setup({
             defaults = {
                 file_ignore_patterns = {
                     "%.git/",
@@ -33,7 +33,7 @@ return {
                     additional_args = { "--follow" },
                 },
             },
-        }
+        })
         local telescope = require("telescope.builtin")
 
 
@@ -74,12 +74,17 @@ return {
                 if not input then
                     return
                 end
-                telescope.grep_string({ search = input })
+                telescope.grep_string({
+                    search = input,
+                    additional_args = { "--hidden" },
+                })
             end)
         end, { desc = "Grep search" })
 
         vim.keymap.set("n", "<Leader>/S", function()
-            telescope.live_grep()
+            telescope.live_grep({
+                additional_args = { "--hidden" },
+            })
         end, { desc = "Live Grep search" })
 
         vim.keymap.set("n", "<Leader>/t", function()
