@@ -91,8 +91,18 @@ return {
 
             vim.cmd("Gvdiffsplit!")
         end, { desc = "Git diff (3-way merge)" })
-        vim.keymap.set("n", "gh", "<Cmd>diffget //2<CR>", { desc = "Diffget left" })
-        vim.keymap.set("n", "gl", "<Cmd>diffget //3<CR>", { desc = "Diffget right" })
+
+        local function diffget(spec)
+            return function()
+                if not vim.wo.diff then
+                    vim.notify("Not in a diff", vim.log.levels.WARN)
+                    return
+                end
+                vim.cmd("diffget " .. spec)
+            end
+        end
+        vim.keymap.set("n", "gh", diffget("//2"), { desc = "Diffget left" })
+        vim.keymap.set("n", "gl", diffget("//3"), { desc = "Diffget right" })
     end,
 }
 
