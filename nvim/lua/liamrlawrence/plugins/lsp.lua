@@ -1,8 +1,8 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason.nvim",
+        "mason-org/mason-lspconfig.nvim",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/nvim-cmp",
@@ -54,7 +54,6 @@ return {
 
         -- Lua
         vim.lsp.config("lua_ls", {
-            capabilities = capabilities,
             settings = {
                 Lua = {
                     runtime = { version = "Lua 5.1" },
@@ -79,7 +78,6 @@ return {
         end
 
         vim.lsp.config("clangd", {
-            capabilities = capabilities,
             cmd = {
                 clangd_cmd,
             },
@@ -113,8 +111,8 @@ return {
                 vim.keymap.set("n",                 "gD",           vim.lsp.buf.declaration,        { buffer = e.buf, desc = "LSP Goto declaration" })
                 vim.keymap.set("n",                 "<Leader>/ls",  vim.lsp.buf.workspace_symbol,   { buffer = e.buf, desc = "LSP workspace symbol" })
                 vim.keymap.set("n",                 "<Leader>lD",   vim.diagnostic.setloclist,      { buffer = e.buf, desc = "LSP diagnostics to location list" })
-                vim.keymap.set({ "n", "i", "v", },  "<C-s>",        vim.lsp.buf.signature_help,     { buffer = e.buf, desc = "LSP display signature help" })
-                vim.keymap.set("n",                 "<Leader>lr",   "<Cmd>w|e<CR>",                 { buffer = e.buf, desc = "LSP restart" })
+                vim.keymap.set({ "n", "i", "x", },  "<C-s>",        vim.lsp.buf.signature_help,     { buffer = e.buf, desc = "LSP display signature help" })
+                vim.keymap.set("n",                 "<Leader>lr",   "<Cmd>lsp restart<CR>",         { buffer = e.buf, desc = "LSP restart" })
                 -- vim.keymap.set("n", "gr",           vim.lsp.buf.references,         { buffer = e.buf, desc = "LSP Get references" })         -- grr (default)
                 -- vim.keymap.set("n", "<Leader>ld",   vim.diagnostic.open_float,      { buffer = e.buf, desc = "LSP open diagnostics" })       -- <C-w>d (default)
                 -- vim.keymap.set("n", "<Leader>lca",  vim.lsp.buf.code_action,        { buffer = e.buf, desc = "LSP code action" })            -- gra (default)
