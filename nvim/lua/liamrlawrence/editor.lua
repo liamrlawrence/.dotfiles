@@ -1,7 +1,7 @@
 local augroup = vim.api.nvim_create_augroup
-local scroll_group    = augroup("LL.remaps_scroll-group",    { clear = true })
-local highlight_group = augroup("LL.remaps_highlight-group", { clear = true })
-local yank_group      = augroup("LL.remaps_yank-group",      { clear = true })
+local scroll_group    = augroup("LL.editor_scroll-group",    { clear = true })
+local highlight_group = augroup("LL.editor_highlight-group", { clear = true })
+local yank_group      = augroup("LL.editor_yank-group",      { clear = true })
 
 
 
@@ -56,7 +56,7 @@ vim.keymap.set("n", "<C-i>", "<C-i>",   { desc = "Jump forward in jumplist" })  
                                                                                 -- clobbers <C-i>, so manually reassert it.
 -- Scrolling
 local function make_scroll_above_padder()
-    local scroll_ns = vim.api.nvim_create_namespace("LL.remaps_scroll-above-ns")
+    local scroll_ns = vim.api.nvim_create_namespace("LL.editor_scroll-above-ns")
     local watching = {}
 
     local function pad_above(n, buf)
