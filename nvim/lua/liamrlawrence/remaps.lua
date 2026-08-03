@@ -24,8 +24,8 @@ vim.keymap.set("n", "<Leader><S-Tab>f", "<Cmd>-tabnew<CR><Leader>/f", { desc = "
 
 
 -- Movements
-vim.keymap.set("x", "J", function() return ":m '>+" .. vim.v.count1     .. "<CR>gv=gv" end, { desc = "Move line down", expr = true })
-vim.keymap.set("x", "K", function() return ":m '<-" .. vim.v.count1 + 1 .. "<CR>gv=gv" end, { desc = "Move line up",   expr = true })
+vim.keymap.set("x", "J", function() return ":m '>+" .. vim.v.count1     .. "<CR>gv=gv" end, { expr = true, desc = "Move line down" })
+vim.keymap.set("x", "K", function() return ":m '<-" .. vim.v.count1 + 1 .. "<CR>gv=gv" end, { expr = true, desc = "Move line up" })
 vim.keymap.set("n", "J", function() -- "mzJ'z"
     local view = vim.fn.winsaveview()
     vim.cmd(":normal! " .. vim.v.count1 .. "J")
@@ -34,10 +34,10 @@ end, { desc = "J does not move cursor" })
 
 
 -- Jumps
+vim.keymap.set("n", "n",     "nzzzv",   { desc = "Center on search jumps" })
+vim.keymap.set("n", "N",     "Nzzzv",   { desc = "Center on search jumps" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Center on half-page jumps" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Center on half-page jumps" })
-vim.keymap.set("n", "n",     "nzzzv",   { desc = "Center on search jumps"})
-vim.keymap.set("n", "N",     "Nzzzv",   { desc = "Center on search jumps" })
 vim.keymap.set("n", "<C-i>", "<C-i>",   { desc = "Jump forward in jumplist" })  -- NOTE: <Tab> and <C-i> are the same keycode in legacy terminals;
                                                                                 -- once the kitty protocol disambiguates them, mapping <Tab>
                                                                                 -- clobbers <C-i>, so manually reassert it.
