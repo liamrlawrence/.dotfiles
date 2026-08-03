@@ -52,12 +52,12 @@ local function make_scroll_above_padder()
         for _ = 1, n do
             lines[#lines + 1] = { { eob, "EndOfBuffer" } }
         end
-
         vim.api.nvim_buf_set_extmark(buf, scroll_ns, 0, 0, {
             id = 1,
             virt_lines = lines,
             virt_lines_above = true,
             virt_lines_leftcol = true,
+            right_gravity = false,
         })
     end
 
