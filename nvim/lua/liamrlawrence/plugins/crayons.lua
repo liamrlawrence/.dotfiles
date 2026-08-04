@@ -109,7 +109,7 @@ return {
                     colorscheme = "kanagawa-wave",
                 },
                 {
-                    filetype = { "c.header", "cpp.header" },
+                    pattern = { "*.h", "*.hh", "*.hpp" },
                     colorscheme = "kanagawa-dragon",
                 },
 

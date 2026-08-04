@@ -81,7 +81,6 @@ return {
             cmd = {
                 clangd_cmd,
             },
-            filetypes = { "c", "cpp", "c.header", "cpp.header", "objc", "objcpp", "cuda", "proto" },
         })
 
 

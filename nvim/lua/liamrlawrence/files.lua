@@ -15,12 +15,10 @@ local org_files_group      = augroup("LL.files_org-group",      { clear = true }
 local git_files_group      = augroup("LL.files_git-group",      { clear = true })
 
 
-
+-- Filetypes
 vim.filetype.add({
     extension = {
-        h   = "c.header",
-        hh  = "cpp.header",
-        hpp = "cpp.header",
+        --
     },
     filename = {
         --
@@ -30,6 +28,8 @@ vim.filetype.add({
         [".*/git/ignore"] = "gitignore",
     },
 })
+
+vim.g.c_syntax_for_h = 1
 
 
 -- All files
@@ -45,10 +45,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 
 -- C/C++
-local c_filetypes = { "c", "c.header", }
-local cpp_filetypes = { "cpp", "cpp.header" }
-local cc_filetypes = vim.iter({ c_filetypes, cpp_filetypes }):flatten():totable()
-
 local c_file_patterns = { "*.c", "*.h", }
 local cpp_file_patterns = { "*.cc", "*.hh", "*.cpp", "*.hpp", }
 local cc_file_patterns = vim.iter({ c_file_patterns, cpp_file_patterns }):flatten():totable()
@@ -56,7 +52,7 @@ local cc_file_patterns = vim.iter({ c_file_patterns, cpp_file_patterns }):flatte
 vim.api.nvim_create_autocmd("FileType", {
     desc = "C/C++ file settings",
     group = cc_files_group,
-    pattern = cc_filetypes,
+    pattern = { "c", "cpp" },
     callback = function()
         vim.bo.expandtab = false
         vim.bo.shiftwidth = 8
@@ -64,16 +60,16 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- C++
 vim.api.nvim_create_autocmd("BufWritePre", {
-    desc = "Format C++ files with 'clang-format' before saving",
+    desc = "Format C/C++ files with 'clang-format' before saving",
     group = cc_files_group,
-    pattern = cpp_file_patterns,
+    pattern = cc_file_patterns,
     callback = function()
         vim.lsp.buf.format({ async = false, name = "clangd" })
     end,
 })
 
+-- C++
 vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "Update 'Updated:' date in C++ file header comments",
     group = cc_files_group,
