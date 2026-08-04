@@ -3,7 +3,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
 
     config = function()
-        require("todo-comments").setup{
+        require("todo-comments").setup({
             colors = {
                 error   = { "DiagnosticError", "ErrorMsg",  "#DC2626" },
                 warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
@@ -37,7 +37,7 @@ return {
                 HACK = {
                     icon = "󰶯 ",
                     color = "warning",
-                    alt = { "PATCH", "OVERRIDE" }
+                    alt = { "PATCH", "OVERRIDE" },
                 },
                 -- WARN: WARNING, CAUTION
                 WARN = {
@@ -70,7 +70,7 @@ return {
                     alt = { "FINISHED", "COMPLETED"  },
                 },
             }
-        }
+        })
     end,
 }
 
