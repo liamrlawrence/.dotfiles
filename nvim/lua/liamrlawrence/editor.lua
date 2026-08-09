@@ -131,15 +131,19 @@ local function make_scroll_above_padder()
     end
 
     return function()
-        local buf = vim.api.nvim_get_current_buf()
-        local view = vim.fn.winsaveview()
-        local count = vim.v.count1
-        local padding = pad_above_count(buf)
-        if not vim.wo.diff and view.topline == 1 and view.topfill >= padding then
-            watch_padding(buf)
-            pad_above(math.max(padding, view.topfill + count), buf)
+        if not vim.wo.diff then
+            local buf = vim.api.nvim_get_current_buf()
+            local view = vim.fn.winsaveview()
+            local padding = pad_above_count(buf)
+            local overscroll = vim.v.count1 - (view.topline - 1) + view.topfill
+            local max_padding = vim.api.nvim_win_get_height(0) - 1
+            overscroll = math.min(overscroll, max_padding)
+            if overscroll > padding then
+                watch_padding(buf)
+                pad_above(overscroll, buf)
+            end
         end
-        vim.cmd("normal! " .. count .. vim.keycode("<C-y>"))
+        vim.cmd("normal! " .. vim.v.count1 .. vim.keycode("<C-y>"))
     end
 end
 vim.keymap.set("n", "<C-y>", make_scroll_above_padder(), { desc = "Scroll above the first line" })
