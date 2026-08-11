@@ -201,8 +201,10 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = "css",
     callback = function()
         vim.bo.expandtab = false
-        vim.bo.shiftwidth = 4
-        vim.bo.tabstop = 4
+        vim.bo.shiftwidth = 2
+        vim.bo.tabstop = 2
+    end,
+})
 
 vim.api.nvim_create_autocmd("FileType", {
     desc = "JavaScript file settings",
