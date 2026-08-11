@@ -41,6 +41,7 @@ bell-audio-path = ~/.config/ghostty/bell_morse.aiff
 scrollback-limit = 10000000
 
 # Keybinds
+keybind = alt+minus=text:–
 keybind = alt+shift+minus=text:—
 
 # MacOS
