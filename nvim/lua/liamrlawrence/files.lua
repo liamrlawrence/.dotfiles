@@ -7,6 +7,7 @@ local go_files_group       = augroup("LL.files_go-group",       { clear = true }
 local rust_files_group     = augroup("LL.files_rust-group",     { clear = true })
 local html_files_group     = augroup("LL.files_html-group",     { clear = true })
 local css_files_group      = augroup("LL.files_css-group",      { clear = true })
+local js_files_group       = augroup("LL.files_js-group",       { clear = true })
 local json_files_group     = augroup("LL.files_json-group",     { clear = true })
 local make_files_group     = augroup("LL.files_make-group",     { clear = true })
 local markdown_files_group = augroup("LL.files_markdown-group", { clear = true })
@@ -202,6 +203,15 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = false
         vim.bo.shiftwidth = 4
         vim.bo.tabstop = 4
+
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "JavaScript file settings",
+    group = js_files_group,
+    pattern = "javascript",
+    callback = function()
+        vim.bo.expandtab = false
+        vim.bo.shiftwidth = 2
+        vim.bo.tabstop = 2
     end,
 })
 
