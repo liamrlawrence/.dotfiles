@@ -22,20 +22,6 @@ vim.keymap.set("n", "<Leader><S-Tab>n", "<Cmd>-tabnew<CR>",           { desc = "
 vim.keymap.set("n", "<Leader><S-Tab>f", "<Cmd>-tabnew<CR><Leader>/f", { desc = "New tab (before) with file picker", remap = true })
 
 
--- Motions
-local function wrap_aware(nowrap, wrap)
-    return function() return vim.wo.wrap and wrap or nowrap end
-end
-vim.keymap.set({ "n", "x", "o" }, "j",  wrap_aware("j",  "gj"), { expr = true, desc = "Down (screen line)" })
-vim.keymap.set({ "n", "x", "o" }, "k",  wrap_aware("k",  "gk"), { expr = true, desc = "Up (screen line)" })
-vim.keymap.set({ "n", "x", "o" }, "0",  wrap_aware("0",  "g0"), { expr = true, desc = "Start of screen line" })
-vim.keymap.set({ "n", "x", "o" }, "$",  wrap_aware("$",  "g$"), { expr = true, desc = "End of screen line" })
-vim.keymap.set({ "n", "x", "o" }, "gj", wrap_aware("gj", "j"),  { expr = true, desc = "Down (logical line)" })
-vim.keymap.set({ "n", "x", "o" }, "gk", wrap_aware("gk", "k"),  { expr = true, desc = "Up (logical line)" })
-vim.keymap.set({ "n", "x", "o" }, "g0", wrap_aware("g0", "0"),  { expr = true, desc = "Start of logical line" })
-vim.keymap.set({ "n", "x", "o" }, "g$", wrap_aware("g$", "$"),  { expr = true, desc = "End of logical line" })
-
-
 -- Line manipulation
 vim.keymap.set("x", "J", function() return ":m '>+" .. vim.v.count1     .. "<CR>gv=gv" end, { expr = true, desc = "Move line down" })
 vim.keymap.set("x", "K", function() return ":m '<-" .. vim.v.count1 + 1 .. "<CR>gv=gv" end, { expr = true, desc = "Move line up" })
