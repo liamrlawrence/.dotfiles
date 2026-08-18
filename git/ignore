@@ -1,5 +1,6 @@
 .DS_Store
 
+.session.tmux
 .session*.vim
 .session*.shada
 
