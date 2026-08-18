@@ -12,9 +12,10 @@ vim.opt.statusline = table.concat({
     "%<%f",
     " %h%m%r",
     "%=",
-    "%(0x%B %)| ",
-    "%(%l,%c%V %)| ",
-    "%P",
+    "%(0x%B %)",
+    "| %(%l,%c%V %)",
+    "| %(%P %)",
+    "%{exists('g:repossession_session') ? '| '.g:repossession_session.' ' : ''}",
 })
 vim.opt.fillchars = { vert = " ", eob = "~" }
 vim.opt.listchars = { leadmultispace = "·   ", tab = "  ", leadtab = "· " }
