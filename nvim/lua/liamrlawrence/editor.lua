@@ -329,8 +329,8 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "TextChanged", "Insert
             vim.b.mixed_indent = ""
             return
         end
-        local has_leading_tab = vim.fn.search([[^\t]], "nw") > 0
-        local has_leading_space = vim.fn.search([[^ ]], "nw") > 0
+        local has_leading_tab = vim.fn.search("^\t", "nw") > 0
+        local has_leading_space = vim.fn.search("\\v^ +[^ *#/-]", "nw") > 0
         vim.b.mixed_indent = (has_leading_tab and has_leading_space) and "[MIXED]" or ""
     end
 })
