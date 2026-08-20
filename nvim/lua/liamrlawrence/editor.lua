@@ -2,6 +2,7 @@ local augroup = vim.api.nvim_create_augroup
 local scroll_group    = augroup("LL.editor_scroll-group",    { clear = true })
 local highlight_group = augroup("LL.editor_highlight-group", { clear = true })
 local yank_group      = augroup("LL.editor_yank-group",      { clear = true })
+local info_group      = augroup("LL.editor_info-group",      { clear = true })
 
 
 
@@ -317,4 +318,20 @@ local function make_zoom_toggle()
     end
 end
 vim.keymap.set("n", "<Leader>em", make_zoom_toggle(), { desc = "Toggle window maximize" })
+
+
+-- Information
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "TextChanged", "InsertLeave" }, {
+    desc = "Show [MIXED] in statusline if buffer has mixed indentation",
+    group = info_group,
+    callback = function()
+        if vim.bo.buftype ~= "" or not vim.bo.modifiable then
+            vim.b.mixed_indent = ""
+            return
+        end
+        local has_leading_tab = vim.fn.search([[^\t]], "nw") > 0
+        local has_leading_space = vim.fn.search([[^ ]], "nw") > 0
+        vim.b.mixed_indent = (has_leading_tab and has_leading_space) and "[MIXED]" or ""
+    end
+})
 

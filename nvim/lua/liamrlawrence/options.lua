@@ -11,6 +11,7 @@ vim.opt.guicursor:append({
 vim.opt.statusline = table.concat({
     "%<%f",
     " %h%m%r",
+    "%{get(b:, 'mixed_indent', '')}",
     "%=",
     "%(0x%B %)",
     "| %(%l,%c%V %)",
