@@ -20,7 +20,15 @@ function __LazyVirtualPlugin(spec)
 end
 
 require("lazy").setup({
-    spec = "liamrlawrence.plugins",
+    spec = {
+        { import = "liamrlawrence.plugins.editing" },
+        { import = "liamrlawrence.plugins.git"     },
+        { import = "liamrlawrence.plugins.ide"     },
+        { import = "liamrlawrence.plugins.lang"    },
+        { import = "liamrlawrence.plugins.org"     },
+        { import = "liamrlawrence.plugins.project" },
+        { import = "liamrlawrence.plugins.ui"      },
+    },
     change_detection = { notify = false }
 })
 
