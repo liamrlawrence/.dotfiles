@@ -6,10 +6,6 @@ local info_group      = augroup("LL.editor_info-group",      { clear = true })
 
 
 
--- Disabled
-vim.keymap.set("n", "Q", "<Nop>", { desc = "<Nop>" })
-
-
 -- Save
 vim.keymap.set("n", "ZA", "<Cmd>confirm wqa<CR>", { desc = "Write-Quit-All" })
 
