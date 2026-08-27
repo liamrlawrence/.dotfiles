@@ -59,7 +59,36 @@ return {
                     },
                 },
             },
-            win_split_mode = { "float", 0.77 },
+
+            win_split_mode = function(name)
+                local margin_top    = 1
+                local margin_bottom = 1
+                local width_pct     = 0.80
+                local border        = "rounded"
+
+                local bufnr = vim.api.nvim_create_buf(false, false)
+                vim.api.nvim_buf_set_name(bufnr, name)
+
+                local usable = vim.o.lines - vim.o.cmdheight
+                if vim.o.laststatus == 3 then
+                    usable = usable - 1
+                end
+                local frame = (border ~= '' and border ~= 'none') and 2 or 0    -- borders adds one row above and below
+                local height = usable - margin_top - (margin_bottom + 1) - frame
+                local row = margin_top
+                local width = math.floor(vim.o.columns * width_pct)
+                local col = math.floor((vim.o.columns - width) / 2)
+
+                vim.api.nvim_open_win(bufnr, true, {
+                    relative = "editor",
+                    width = width,
+                    height = height,
+                    row = row,
+                    col = col,
+                    style = "minimal",
+                    border = border,
+                })
+            end,
 
             org_priority_highest = 1,
             org_priority_default = 3,
