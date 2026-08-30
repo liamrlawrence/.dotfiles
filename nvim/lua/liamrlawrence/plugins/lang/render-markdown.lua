@@ -3,8 +3,8 @@ return {
     ft = { "markdown" },
 
     config = function()
-        require("render-markdown").setup({})
         local render_markdown_group = vim.api.nvim_create_augroup("LL.plugins_render-markdown-group", { clear = true })
+        require("render-markdown").setup()
 
         vim.api.nvim_create_autocmd("FileType", {
             desc = "Register markdown buffer keymaps",
