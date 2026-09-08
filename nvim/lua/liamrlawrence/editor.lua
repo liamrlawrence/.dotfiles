@@ -271,8 +271,8 @@ end, { desc = "Toggle location list" })
 
 
 -- Text replace
-vim.keymap.set("n", "<Leader>s", [[:.s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Line text replace" })
-vim.keymap.set("n", "<Leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Global text replace" })
+vim.keymap.set("n", "<Leader>ss", [[:.s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Line text replace" })
+vim.keymap.set("n", "<Leader>SS", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Global text replace" })
 
 
 -- Editor
