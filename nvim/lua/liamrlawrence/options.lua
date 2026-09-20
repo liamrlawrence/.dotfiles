@@ -13,9 +13,10 @@ vim.opt.statusline = table.concat({
     " %h%m%r",
     "%{get(b:, 'mixed_indent', '')}",
     "%=",
-    "%(0x%B %)",
-    "| %(%l,%c%V %)",
-    "| %(%P %)",
+    "0x%B ",
+    "| %l,%c%V ",
+    "| %P ",
+    "| %{&filetype} ",
     "%{exists('g:repossession_session') ? '| '.g:repossession_session.' ' : ''}",
 })
 vim.opt.fillchars = { vert = " ", eob = "~" }
