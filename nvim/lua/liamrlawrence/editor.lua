@@ -183,10 +183,8 @@ vim.keymap.set("n", "<Leader><C-v>", function() highlight_visual_mode(vim.keycod
 
 
 -- Yanks
-vim.keymap.set("n",           "yY",         [[:%y<CR>]],  { desc = "Yank entire file" })
-vim.keymap.set("n",           "<Leader>yY", [[:%y+<CR>]], { desc = "Yank entire file to clipboard" })
-vim.keymap.set({ "n", "x", }, "<Leader>y",  [["+y]],      { desc = "Yank to clipboard" })
-vim.keymap.set({ "n", "x", }, "<Leader>Y",  [["+yg_]],    { desc = "Yank to clipboard" })
+vim.keymap.set({ "n", "x", }, "<Leader>y", [["+y]],   { desc = "Yank to clipboard" })
+vim.keymap.set({ "n", "x", }, "<Leader>Y", [["+yg_]], { desc = "Yank to clipboard" })
 vim.keymap.set("n",           "<Leader>yd", function()
     local diagnostics = vim.diagnostic.get(0)
     local current_line = vim.api.nvim_win_get_cursor(0)[1] - 1
