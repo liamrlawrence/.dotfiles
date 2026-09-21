@@ -142,11 +142,11 @@ vim.keymap.set("n", "<Leader>fm", "vimzf", { desc = "Fold function", remap = tru
 
 -- Highlights
 vim.keymap.set("n", "<Leader>/h", vim.cmd.noh, { desc = "Clear highlights" })   -- NOTE: Can use <C-l> instead
-vim.api.nvim_create_autocmd("TextYankPost", {
-    desc = "Highlight when yanking text",
+vim.api.nvim_create_autocmd({ "TextYankPost", "TextPutPost" }, {
+    desc = "Highlight yanked and put text",
     group = highlight_group,
     callback = function()
-        vim.hl.on_yank()
+        vim.hl.hl_op()
     end,
 })
 
