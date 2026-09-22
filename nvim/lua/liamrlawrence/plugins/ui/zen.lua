@@ -1,12 +1,6 @@
 return {
     "folke/zen-mode.nvim",
-    dependencies = {
-        {
-            "folke/twilight.nvim",
-            url = "https://github.com/SAY-5/twilight.nvim.git",
-            branch = "fix-no-parser-crash",
-        },
-    },
+    dependencies = { "folke/twilight.nvim" },
 
     config = function()
         local tw = require("twilight")
