@@ -21,6 +21,7 @@ Flags:
     --lang-go
     --lang-python
     --ghostty
+    --htop
     -h, --help
 EOF
 }
@@ -124,6 +125,9 @@ setup_ghostty() {
     create_symlink "$HOME/.config/ghostty"
 }
 
+setup_htop() {
+    create_symlink "$HOME/.config/htop"
+}
 
 # Parse flags
 DO_GIT=false
@@ -134,6 +138,7 @@ DO_LANG_CC=false
 DO_LANG_GO=false
 DO_LANG_PY=false
 DO_GHOSTTY=false
+DO_HTOP=false
 
 if [ $# -eq 0 ]; then
     # No args: do everything
@@ -145,6 +150,7 @@ if [ $# -eq 0 ]; then
     DO_LANG_GO=true
     DO_LANG_PY=true
     DO_GHOSTTY=true
+    DO_HTOP=true
 else
     while [ $# -gt 0 ]; do
         case "$1" in
@@ -156,6 +162,7 @@ else
             --lang-go)      DO_LANG_GO=true ;;
             --lang-python)  DO_LANG_PY=true ;;
             --ghostty)      DO_GHOSTTY=true ;;
+            --htop)         DO_HTOP=true ;;
             -h|--help)
                 usage
                 exit 0
@@ -180,6 +187,7 @@ $DO_LANG_CC     && setup_lang_cc
 $DO_LANG_GO     && setup_lang_go
 $DO_LANG_PY     && setup_lang_python
 $DO_GHOSTTY     && setup_ghostty
+$DO_HTOP        && setup_htop
 
 exit 0
 
