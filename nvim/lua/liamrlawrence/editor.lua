@@ -150,37 +150,6 @@ vim.api.nvim_create_autocmd({ "TextYankPost", "TextPutPost" }, {
     end,
 })
 
-local function highlight_visual_mode(key)
-    local function get_hl(name)
-        return vim.api.nvim_get_hl(0, { name = name, link = false }) --[[@as vim.api.keyset.highlight]]
-    end
-
-    local visual_modes = {
-        ["v"] = true,
-        ["V"] = true,
-        [vim.keycode("<C-v>")] = true,
-    }
-
-    local original_visual = get_hl("Visual")
-    vim.api.nvim_set_hl(0, "Visual", get_hl("IncSearch"))
-    vim.cmd("normal! " .. key)
-
-    vim.api.nvim_create_autocmd("ModeChanged", {
-        desc = "Restore Visual hl group on leaving Visual mode",
-        group = highlight_group,
-        callback = function()
-            local event = vim.v.event --[[@as {old_mode: string, new_mode: string}]]
-            if visual_modes[event.old_mode] and not visual_modes[event.new_mode] then
-                vim.api.nvim_set_hl(0, "Visual", original_visual)
-                return true -- delete autocmd
-            end
-        end,
-    })
-end
-vim.keymap.set("n", "<Leader>v",     function() highlight_visual_mode("v")                  end, { desc = "Enter visual mode with highlighting" })
-vim.keymap.set("n", "<Leader>V",     function() highlight_visual_mode("V")                  end, { desc = "Enter Visual mode with highlighting" })
-vim.keymap.set("n", "<Leader><C-v>", function() highlight_visual_mode(vim.keycode("<C-v>")) end, { desc = "Enter blockwise Visual mode with highlighting" })
-
 
 -- Yanks
 vim.keymap.set({ "n", "x", }, "<Leader>y", [["+y]],  { desc = "Yank to clipboard" })
