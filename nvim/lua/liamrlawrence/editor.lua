@@ -24,7 +24,7 @@ vim.keymap.set("n", "<Leader><S-Tab>f", "<Cmd>-tabnew<CR><Leader>/f", { desc = "
 -- Line manipulation
 vim.keymap.set("x", "J", function() return ":m '>+" .. vim.v.count1     .. "<CR>gv=gv" end, { expr = true, desc = "Move line down" })
 vim.keymap.set("x", "K", function() return ":m '<-" .. vim.v.count1 + 1 .. "<CR>gv=gv" end, { expr = true, desc = "Move line up" })
-vim.keymap.set("n", "J", function() -- "mzJ'z"
+vim.keymap.set("n", "J", function() -- "mzJ`z"
     local view = vim.fn.winsaveview()
     vim.cmd(":normal! " .. vim.v.count1 .. "J")
     vim.fn.winrestview(view)
