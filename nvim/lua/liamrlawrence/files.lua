@@ -35,11 +35,12 @@ vim.g.c_syntax_for_h = 1
 
 -- All files
 vim.api.nvim_create_autocmd("BufWritePre", {
-    desc = "Remove trailing whitespace on write",
+    desc = "Trim trailing whitespace on write",
     group = all_files_group,
     callback = function()
         local view = vim.fn.winsaveview()
-        vim.cmd([[%s/\s\+$//e]])
+        vim.cmd("silent! undojoin")
+        vim.cmd([[silent keepjumps keeppatterns %s/\s\+$//e]])
         vim.fn.winrestview(view)
     end,
 })
