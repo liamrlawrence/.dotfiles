@@ -3,11 +3,12 @@ vim.g.mapleader = " "
 
 -- UI
 vim.opt.termguicolors = true
-vim.opt.guicursor:append({
+vim.opt.guicursor = table.concat({
     "n-v-c-sm:block",
     "i-ci-ve:ver25",
     "r-cr-o:hor20",
-})
+    "t:block-blinkon500-blinkoff500-TermCursor",
+}, ",")
 vim.opt.statusline = table.concat({
     "%<%f",
     " %h%m%r",
@@ -57,7 +58,7 @@ vim.opt.undofile = true
 vim.opt.undolevels = 100000
 
 -- Sessions
-vim.opt.sessionoptions:append({
+vim.opt.sessionoptions = table.concat({
     "blank",
     "curdir",
     "folds",
@@ -65,8 +66,7 @@ vim.opt.sessionoptions:append({
     "tabpages",
     "winsize",
     "terminal",
-    "localoptions",
-})
+}, ",")
 vim.opt.shadafile = "NONE"
 
 -- Performance
