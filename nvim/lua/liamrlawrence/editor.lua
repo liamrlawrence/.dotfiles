@@ -276,6 +276,30 @@ vim.keymap.set("n", "<Leader>eucc", function()
     vim.notify("Colorcolumn: " .. (on and "on" or "off"))
 end, { desc = "Toggle colorcolumn" })
 
+vim.keymap.set("n", "<Leader>eug", function()
+    local gutter_hidden = {
+        number = false,
+        relativenumber = false,
+        signcolumn = "no",
+        foldcolumn = "0",
+        statuscolumn = "",
+    }
+    local saved = vim.w.saved_gutter
+    if saved then
+        for name, value in pairs(saved) do
+            vim.wo[name] = value
+        end
+        vim.w.saved_gutter = nil
+    else
+        saved = {}
+        for name, hidden in pairs(gutter_hidden) do
+            saved[name] = vim.wo[name]
+            vim.wo[name] = hidden
+        end
+        vim.w.saved_gutter = saved
+    end
+end, { desc = "Toggle gutter (window-local)" })
+
 local function make_window_separator_highlight_toggle()
     local saved_sep = nil
 
