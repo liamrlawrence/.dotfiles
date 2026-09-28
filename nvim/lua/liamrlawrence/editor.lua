@@ -276,6 +276,33 @@ vim.keymap.set("n", "<Leader>eucc", function()
     vim.notify("Colorcolumn: " .. (on and "on" or "off"))
 end, { desc = "Toggle colorcolumn" })
 
+local function make_window_separator_highlight_toggle()
+    local saved_sep = nil
+
+    local function apply()
+        saved_sep = vim.api.nvim_get_hl(0, { name = "WinSeparator", link = true })
+        local c = vim.api.nvim_get_hl(0, { name = "FloatBorder", link = false }).fg or "#FF9E64"
+        vim.api.nvim_set_hl(0, "WinSeparator", { fg = c, bg = c })
+    end
+
+    local function restore()
+        if saved_sep then vim.api.nvim_set_hl(0, "WinSeparator", saved_sep) end
+        saved_sep = nil
+    end
+
+    vim.api.nvim_create_autocmd("ColorScheme", {
+        desc = "Update separator highlight if enabled and colorscheme changes",
+        group = highlight_group,
+        callback = function() if saved_sep then apply() end end,
+    })
+
+    return function()
+        if saved_sep then restore() else apply() end
+        vim.notify("Window separator highlights: " .. (saved_sep and "on" or "off"))
+    end
+end
+vim.keymap.set("n", "<Leader>euws", make_window_separator_highlight_toggle(), { desc = "Toggle window separator highlighting" })
+
 local function make_zoom_toggle()
     local zoom_restore = {}
     return function()
