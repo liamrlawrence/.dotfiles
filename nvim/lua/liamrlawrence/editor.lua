@@ -249,11 +249,6 @@ vim.keymap.set("n", "<Leader>ewl", function()
     vim.notify("Line wrap: " .. (vim.wo.wrap and "on" or "off"))
 end, { desc = "Toggle line wrapping" })
 
-vim.keymap.set("n", "<Leader>er", function()
-    vim.wo.nu = true
-    vim.wo.relativenumber = not vim.wo.relativenumber
-end, { desc = "Toggle relative line numbers" })
-
 vim.keymap.set("n", "<Leader>e=", function()    -- "mzgg=G'z"
     local view = vim.fn.winsaveview()
     vim.cmd("normal! ==gg=G")                   -- NOTE: == prevents undo/redo from jumping to the top of the file
@@ -269,6 +264,11 @@ vim.keymap.set("n", "<Leader>et", function()
         vim.notify((vim.bo.expandtab and "shiftwidth=" or "tabstop=") .. num, vim.log.levels.INFO)
     end
 end, { desc = "Set tabstop" })
+
+vim.keymap.set("n", "<Leader>eur", function()
+    vim.wo.nu = true
+    vim.wo.relativenumber = not vim.wo.relativenumber
+end, { desc = "Toggle relative line numbers" })
 
 local function make_zoom_toggle()
     local zoom_restore = {}
