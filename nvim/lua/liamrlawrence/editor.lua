@@ -270,6 +270,12 @@ vim.keymap.set("n", "<Leader>eur", function()
     vim.wo.relativenumber = not vim.wo.relativenumber
 end, { desc = "Toggle relative line numbers" })
 
+vim.keymap.set("n", "<Leader>eucc", function()
+    local on = vim.wo.colorcolumn == ""
+    vim.wo.colorcolumn = on and "81,121" or ""
+    vim.notify("Colorcolumn: " .. (on and "on" or "off"))
+end, { desc = "Toggle colorcolumn" })
+
 local function make_zoom_toggle()
     local zoom_restore = {}
     return function()
