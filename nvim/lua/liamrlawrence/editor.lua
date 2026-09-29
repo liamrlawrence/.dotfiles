@@ -247,6 +247,10 @@ local function make_zoom_toggle()
 end
 vim.keymap.set("n", "<Leader>ewz", make_zoom_toggle(), { desc = "Toggle window maximize" })
 
+vim.keymap.set("n", "<Leader>ewc", function()
+    local words = vim.fn.wordcount().words
+    vim.notify(("Word count: %d"):format(words))
+end, { desc = "Word count" })
 
 
 -- Scrolling
