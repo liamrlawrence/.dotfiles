@@ -340,5 +340,5 @@ local function make_zoom_toggle()
         end
     end
 end
-vim.keymap.set("n", "<Leader>em", make_zoom_toggle(), { desc = "Toggle window maximize" })
+vim.keymap.set("n", "<Leader>ewz", make_zoom_toggle(), { desc = "Toggle window maximize" })
 
