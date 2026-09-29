@@ -12,7 +12,7 @@ vim.opt.guicursor = table.concat({
 vim.opt.statusline = table.concat({
     "%<%f",
     " %h%m%r",
-    "%{get(b:, 'mixed_indent', '')}",
+    "%{exists('b:mixed_indent') ? '[MI]' : ''}",
     "%=",
     "0x%B ",
     "| %l,%c%V ",
