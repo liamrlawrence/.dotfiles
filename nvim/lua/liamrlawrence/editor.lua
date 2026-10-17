@@ -177,7 +177,6 @@ end, { desc = "Toggle relative line numbers" })
 vim.keymap.set("n", "<Leader>eucc", function()
     local on = vim.wo.colorcolumn == ""
     vim.wo.colorcolumn = on and "81,121" or ""
-    vim.notify("Colorcolumn: " .. (on and "on" or "off"))
 end, { desc = "Toggle colorcolumn" })
 
 vim.keymap.set("n", "<Leader>eug", function()
@@ -226,7 +225,6 @@ local function make_window_separator_highlight_toggle()
 
     return function()
         if saved_sep then restore() else apply() end
-        vim.notify("Window separator highlights: " .. (saved_sep and "on" or "off"))
     end
 end
 vim.keymap.set("n", "<Leader>euws", make_window_separator_highlight_toggle(), { desc = "Toggle window separator highlighting" })
