@@ -72,7 +72,7 @@ return __LazyVirtualPlugin({
             end
             set_lead()
             mark_blanks(buf, enabled)
-        end, { desc = "Toggle blank-line tildes + list" })
+        end, { desc = "Toggle show-space: indentation dots & blank-line tildes" })
     end,
 
     keys = { "<Leader>eus" },
