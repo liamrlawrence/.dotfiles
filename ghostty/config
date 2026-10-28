@@ -38,7 +38,7 @@ cursor-style-blink = false
 shell-integration-features = sudo, no-cursor, no-title
 bell-features = audio, no-system
 bell-audio-path = ~/.config/ghostty/bell_morse.aiff
-scrollback-limit = 10000000
+scrollback-limit-lines = 100000
 
 # Keybinds
 keybind = alt+minus=text:–
