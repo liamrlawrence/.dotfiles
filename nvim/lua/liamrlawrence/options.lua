@@ -11,14 +11,14 @@ vim.opt.guicursor = table.concat({
 }, ",")
 vim.opt.statusline = table.concat({
     "%<%f",
-    " %h%m%r",
-    "%{exists('b:mixed_indent') ? '[MI]' : ''}",
+    " ",
+    "%h%m%r", "%{exists('b:mixed_indent') ? '[MI]' : ''}",
     "%=",
     "0x%B ",
     "| %l,%c%V ",
     "| %P ",
-    "| %{&filetype} ",
-    "%{exists('g:repossession_session') ? '| '.g:repossession_session.' ' : ''}",
+    "| %Y ",
+    "%{exists('g:repossession_session') ? '| '..g:repossession_session..' ' : ''}",
 })
 vim.opt.fillchars = { vert = " ", eob = "~" }
 vim.opt.listchars = { leadmultispace = "·   ", tab = "  ", leadtab = "· " }
