@@ -115,13 +115,11 @@ vim.keymap.set("x",           "<Leader>p", [["_dP]], { desc = "Don't save delete
 vim.keymap.set("n", "<C-j>", "<Cmd>cnext<CR>zz", { desc = "Next quickfix" })
 vim.keymap.set("n", "<C-k>", "<Cmd>cprev<CR>zz", { desc = "Prev quickfix" })
 vim.keymap.set("n", "<C-q>", function()
-    for _, win in pairs(vim.fn.getwininfo()) do
-        if win["quickfix"] == 1 then
-            vim.cmd("cclose")
-            return
-        end
+    if vim.fn.getqflist({ winid = 0 }).winid ~= 0 then
+        vim.cmd("cclose")
+    else
+        vim.cmd("copen")
     end
-    vim.cmd("copen")
 end, { desc = "Toggle quickfix list" })
 
 
@@ -129,14 +127,13 @@ end, { desc = "Toggle quickfix list" })
 vim.keymap.set("n", "<M-j>", "<Cmd>lnext<CR>zz", { desc = "Next location list" })
 vim.keymap.set("n", "<M-k>", "<Cmd>lprev<CR>zz", { desc = "Prev location list" })
 vim.keymap.set("n", "<M-q>", function()
-    for _, win in pairs(vim.fn.getwininfo()) do
-        if win["loclist"] == 1 then
-            vim.cmd("lclose")
-            return
+    if vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 then
+        vim.cmd("lclose")
+    else
+        local ok = pcall(vim.api.nvim_command, "lopen")
+        if not ok then  -- lopen errors with E776 if the window has no location list
+            vim.notify("No location list")
         end
-    end
-    if vim.fn.getloclist(0, { nr = 0 }).nr ~= 0 then
-        vim.cmd("lopen")
     end
 end, { desc = "Toggle location list" })
 
