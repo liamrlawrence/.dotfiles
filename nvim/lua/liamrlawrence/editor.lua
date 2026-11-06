@@ -82,7 +82,7 @@ vim.keymap.set("n",           "<Leader>yd", function()
             end
         end)
     end
-end, { desc = "Yank diagnostics from current line to clipboard" })
+end,                                                 { desc = "Yank diagnostics from current line to clipboard" })
 
 local function make_yank_guard()
     local last_yank = { content = vim.fn.getreg('"'), regtype = vim.fn.getregtype('"') }
