@@ -52,9 +52,9 @@ return {
             group = fugitive_group,
             pattern = "fugitive",
             callback = function(args)
-                vim.keymap.set("n", "<Leader>p", function() vim.cmd.Git("push")                 end, { buffer = args.buf, desc = "Git push" })
-                vim.keymap.set("n", "<Leader>P", function() vim.cmd.Git({ "pull", "--rebase" }) end, { buffer = args.buf, desc = "Git pull" })
-                vim.keymap.set("n", "<Leader>t", ":Git push -u origin ",                             { buffer = args.buf, desc = "Git push new branch & set upstream tracking" })
+                vim.keymap.set("n", "<Leader>gp", function() vim.cmd.Git("push")                 end, { buffer = args.buf, desc = "Git push" })
+                vim.keymap.set("n", "<Leader>gP", function() vim.cmd.Git({ "pull", "--rebase" }) end, { buffer = args.buf, desc = "Git pull" })
+                vim.keymap.set("n", "<Leader>gt", ":Git push -u origin ",                             { buffer = args.buf, desc = "Git push new branch & set upstream tracking" })
             end,
         })
         vim.keymap.set("n", "<Leader>gs", vim.cmd.Git, { desc = "Git status" })
