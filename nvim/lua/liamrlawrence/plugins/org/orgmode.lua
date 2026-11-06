@@ -17,7 +17,7 @@ return {
                 "ONGOING(g)", "IN-PROGRESS(i)", "PAUSED(o)",
                 "|",
                 "DONE(d)", "PARTIAL(p)", "CANCELLED(c)",
-                "ABANDONED(a)", "LAPSED(l)",
+                "LAPSED(l)", "ABANDONED(a)",
             },
             org_todo_keyword_faces = {
                 ["TODO"]        = ":foreground #F71040 :weight bold",               -- Captured but not yet started
@@ -29,9 +29,9 @@ return {
                 ["PAUSED"]      = ":foreground #C28A4E :weight bold :underline on", -- Was active; deliberately set aside
                 ["DONE"]        = ":foreground #26A65B :weight bold",               -- Completed
                 ["PARTIAL"]     = ":foreground #8FAE3C :weight bold",               -- Completed enough; closed with loose ends
-                ["CANCELLED"]   = ":foreground #5A8FB0 :weight bold",               -- Deliberately stopped; will not finish
+                ["CANCELLED"]   = ":foreground #6E7B8B :weight bold",               -- Deliberately stopped; will not finish
+                ["LAPSED"]      = ":foreground #5A8FB0 :weight bold",               -- Window closed; no longer possible
                 ["ABANDONED"]   = ":foreground #A53A0C :weight bold",               -- Neglected until it decayed
-                ["LAPSED"]      = ":foreground #6E7B8B :weight bold",               -- Window closed; no longer possible
             },
 
             org_agenda_custom_commands = {
