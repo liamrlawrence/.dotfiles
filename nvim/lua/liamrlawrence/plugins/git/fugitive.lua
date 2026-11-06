@@ -52,24 +52,17 @@ return {
             group = fugitive_group,
             pattern = "fugitive",
             callback = function(args)
-                vim.keymap.set("n", "<Leader>p", function()
-                    vim.cmd.Git("push")
-                end, { buffer = args.buf, desc = "Git push" })
-
-                vim.keymap.set("n", "<Leader>P", function()
-                    vim.cmd.Git({ "pull",  "--rebase" })
-                end, { buffer = args.buf, desc = "Git pull" })  -- rebase always
-
-                vim.keymap.set("n", "<Leader>t", ":Git push -u origin ",
-                    { buffer = args.buf, desc = "Git push new branch & set upstream tracking" })
+                vim.keymap.set("n", "<Leader>p", function() vim.cmd.Git("push")                 end, { buffer = args.buf, desc = "Git push" })
+                vim.keymap.set("n", "<Leader>P", function() vim.cmd.Git({ "pull", "--rebase" }) end, { buffer = args.buf, desc = "Git pull" })
+                vim.keymap.set("n", "<Leader>t", ":Git push -u origin ",                             { buffer = args.buf, desc = "Git push new branch & set upstream tracking" })
             end,
         })
-
         vim.keymap.set("n", "<Leader>gs", vim.cmd.Git, { desc = "Git status" })
         vim.keymap.set("n", "<Leader>gD", function()
             if vim.wo.diff then return end
 
-            local unmerged = vim.fn.systemlist({ "git", "ls-files", "-u", "--", vim.fn.expand("%:p") })
+            local file_buf = vim.api.nvim_get_current_buf()
+            local unmerged = vim.fn.systemlist({ "git", "ls-files", "-u", "--", vim.api.nvim_buf_get_name(file_buf) })
             if vim.v.shell_error ~= 0 or #unmerged == 0 then
                 vim.notify("No merge conflict for this file", vim.log.levels.INFO)
                 return
@@ -79,30 +72,31 @@ return {
             -- one sub-hunk at a time; disable it globally for whole-hunk diffget
             -- (see: neovim/issues/22696)
             vim.opt.diffopt:remove("linematch:40")
+            local ok, err = pcall(vim.api.nvim_command, "Gvdiffsplit!")
+            if not ok then
+                vim.opt.diffopt:append("linematch:40")
+                vim.notify(err, vim.log.levels.ERROR)
+                return
+            end
+
+            -- Merge-only keymaps, local to the working file
+            vim.keymap.set("n", "gh", "<Cmd>diffget //2<CR>", { buffer = file_buf, desc = "Diffget left (ours)" })
+            vim.keymap.set("n", "gl", "<Cmd>diffget //3<CR>", { buffer = file_buf, desc = "Diffget right (theirs)" })
+
             vim.api.nvim_create_autocmd("BufWinLeave", {
-                desc = "Restore linematch option after leaving diffview",
+                desc = "Tear down 3-way merge: restore linematch, remove diffget maps",
                 group = fugitive_group,
                 pattern = "fugitive://*",
                 once = true,
                 callback = function()
                     vim.opt.diffopt:append("linematch:40")
+                    if vim.api.nvim_buf_is_valid(file_buf) then
+                        pcall(vim.keymap.del, "n", "gh", { buffer = file_buf })
+                        pcall(vim.keymap.del, "n", "gl", { buffer = file_buf })
+                    end
                 end,
             })
-
-            vim.cmd("Gvdiffsplit!")
         end, { desc = "Git diff (3-way merge)" })
-
-        local function diffget(spec)
-            return function()
-                if not vim.wo.diff then
-                    vim.notify("Not in a diff", vim.log.levels.WARN)
-                    return
-                end
-                vim.cmd("diffget " .. spec)
-            end
-        end
-        vim.keymap.set("n", "gh", diffget("//2"), { desc = "Diffget left" })
-        vim.keymap.set("n", "gl", diffget("//3"), { desc = "Diffget right" })
     end,
 }
 
