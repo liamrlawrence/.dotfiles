@@ -43,6 +43,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         vim.cmd([[silent keepjumps keeppatterns %s/\s\+$//e]])
         vim.fn.winrestview(view)
     end,
+    -- command = [[%s/\s\+$//e]],
 })
 
 
