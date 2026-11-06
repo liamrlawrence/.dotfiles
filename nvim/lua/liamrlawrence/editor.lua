@@ -164,10 +164,11 @@ vim.keymap.set("n", "<Leader>et", function()
     if num and num >= 1 and num <= 9 then
         vim.opt_local.tabstop = num
         vim.opt_local.shiftwidth = num
-        vim.notify((vim.bo.expandtab and "shiftwidth=" or "tabstop=") .. num, vim.log.levels.INFO)
+        vim.notify((vim.bo.expandtab and "shiftwidth=" or "tabstop=") .. num)
     end
 end, { desc = "Set tabstop" })
 
+-- Editor — UI
 vim.keymap.set("n", "<Leader>eur", function()
     vim.wo.nu = true
     vim.wo.relativenumber = not vim.wo.relativenumber
@@ -200,7 +201,7 @@ vim.keymap.set("n", "<Leader>eug", function()
         end
         vim.w.saved_gutter = saved
     end
-end, { desc = "Toggle gutter (window-local)" })
+end, { desc = "Toggle gutter" })
 
 local function make_zoom_toggle()
     local zoom_restore = {}
@@ -218,7 +219,8 @@ local function make_zoom_toggle()
 end
 vim.keymap.set("n", "<Leader>euz", make_zoom_toggle(), { desc = "Toggle window maximize" })
 
-vim.keymap.set("n", "<Leader>ewc", function()
+-- Editor — Stats
+vim.keymap.set("n", "<Leader>eswc", function()
     local words = vim.fn.wordcount().words
     vim.notify(("Word count: %d"):format(words))
 end, { desc = "Word count" })
