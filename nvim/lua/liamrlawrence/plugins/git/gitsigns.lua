@@ -12,7 +12,7 @@ return {
             end,
         })
 
-        vim.keymap.set("n", "<Leader>gg", "<Cmd>Gitsigns toggle_signs<CR>", { desc = "Toggle Git signs" })
+        vim.keymap.set("n", "<Leader>eugs", "<Cmd>Gitsigns toggle_signs<CR>", { desc = "Toggle Git signs" })
     end,
 }
 

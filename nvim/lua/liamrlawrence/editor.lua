@@ -177,7 +177,7 @@ vim.keymap.set("n", "<Leader>eucc", function()
     vim.wo.colorcolumn = on and "81,121" or ""
 end, { desc = "Toggle colorcolumn" })
 
-vim.keymap.set("n", "<Leader>eug", function()
+vim.keymap.set("n", "<Leader>eugg", function()
     local gutter_hidden = {
         number = false,
         relativenumber = false,
