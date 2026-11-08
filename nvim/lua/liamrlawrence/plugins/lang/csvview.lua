@@ -1,5 +1,6 @@
 return {
     "hat0uma/csvview.nvim",
+    ft = { "csv" },
 
     config = function()
         local csvview_group = vim.api.nvim_create_augroup("LL.plugins_csvview-group", { clear = true })
