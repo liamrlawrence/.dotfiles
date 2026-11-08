@@ -17,7 +17,7 @@ vim.opt.statusline = table.concat({
     "0x%B ",
     "| %l,%c%V ",
     "| %P ",
-    "| %Y ",
+    "%{&filetype !=# '' ? '| ' .. toupper(&filetype) .. ' ' : '| ... '}",
     "%{exists('g:repossession_session') ? '| '..g:repossession_session..' ' : ''}",
 })
 vim.opt.fillchars = { vert = " ", eob = "~" }
