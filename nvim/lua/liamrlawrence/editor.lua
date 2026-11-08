@@ -44,6 +44,7 @@ vim.keymap.set("n", "<Leader>fm", "vimzf", { desc = "Fold function", remap = tru
 
 
 -- Highlights
+vim.keymap.set("n", "<Leader>vb", "<C-v>",     { desc = "Visual Block Mode" })
 vim.keymap.set("n", "<Leader>/h", vim.cmd.noh, { desc = "Clear highlights" })   -- NOTE: Can use <C-l> instead
 vim.api.nvim_create_autocmd({ "TextYankPost", "TextPutPost" }, {
     desc = "Highlight yanked and put text",
