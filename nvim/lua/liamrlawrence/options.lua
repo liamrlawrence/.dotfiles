@@ -20,7 +20,7 @@ vim.opt.statusline = table.concat({
     "%{&filetype !=# '' ? '| ' .. toupper(&filetype) .. ' ' : '| ... '}",
     "%{exists('g:repossession_session') ? '| '..g:repossession_session..' ' : ''}",
 })
-vim.opt.fillchars = { vert = " ", eob = "~" }
+vim.opt.fillchars = { vert = " ", fold = "·", eob = "~" }
 vim.opt.listchars = { leadmultispace = "·   ", tab = "  ", leadtab = "· " }
 vim.opt.list = false
 vim.opt.colorcolumn = "81,121"
@@ -42,6 +42,10 @@ vim.opt.expandtab = true
 -- Wrapping
 vim.opt.wrap = false
 vim.opt.linebreak = true
+
+-- Folds
+vim.opt.foldmethod = "manual"
+vim.opt.foldtext = "v:lua.require'LL.folds'.foldtext()"
 
 -- Search
 vim.opt.hlsearch = true

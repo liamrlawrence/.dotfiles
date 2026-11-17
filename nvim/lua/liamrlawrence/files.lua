@@ -126,8 +126,6 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = true
         vim.bo.shiftwidth = 4
         vim.bo.tabstop = 4
-
-        vim.keymap.set("n", "<Leader>fm", "vimjhzf", { desc = "Fold function (lua)", remap = true, buffer = true }) -- OVERRIDE:
     end,
 })
 

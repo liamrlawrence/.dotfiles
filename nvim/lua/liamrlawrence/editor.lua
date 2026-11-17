@@ -38,9 +38,8 @@ vim.keymap.set("n", "<C-i>", "<C-i>",   { desc = "Jump forward in jumplist" })  
                                                                                 -- once the kitty protocol disambiguates them, mapping <Tab>
                                                                                 -- clobbers <C-i>, so manually reassert it.
 -- Folds
-vim.keymap.set("n", "zR",         "zRzz",  { desc = "Open all folds in file" })
-vim.keymap.set("n", "zM",         "zMzz",  { desc = "Close all folds in file" })
-vim.keymap.set("n", "<Leader>fm", "vimzf", { desc = "Fold function", remap = true })
+vim.keymap.set("n", "zR", "zRzz", { desc = "Open all folds in file" })
+vim.keymap.set("n", "zM", "zMzz", { desc = "Close all folds in file" })
 
 
 -- Highlights
