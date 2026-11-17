@@ -168,7 +168,7 @@ vim.keymap.set("n", "<Leader>et", function()
     end
 end, { desc = "Set tabstop" })
 
--- Editor — UI
+-- Editor – UI
 vim.keymap.set("n", "<Leader>eur", function()
     vim.wo.nu = true
     vim.wo.relativenumber = not vim.wo.relativenumber
@@ -219,7 +219,7 @@ local function make_zoom_toggle()
 end
 vim.keymap.set("n", "<Leader>euz", make_zoom_toggle(), { desc = "Toggle window maximize" })
 
--- Editor — Stats
+-- Editor – Stats
 vim.keymap.set("n", "<Leader>eswc", function()
     local words = vim.fn.wordcount().words
     vim.notify(("Word count: %d"):format(words))

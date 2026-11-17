@@ -2,8 +2,8 @@ return __LazyVirtualPlugin({
     "liamrlawrence/show-space.nvim",
 
     config = function()
-        local show_space_ns = vim.api.nvim_create_namespace("LL.plugins_show-space-ns")
         local show_space_group = vim.api.nvim_create_augroup("LL.plugins_show-space-group", { clear = true })
+        local show_space_ns = vim.api.nvim_create_namespace("LL.plugins_show-space-ns")
 
         local function set_lead()
             if not vim.b.blank_line then
